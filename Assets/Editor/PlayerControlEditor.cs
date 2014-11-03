@@ -22,6 +22,7 @@ public class PlayerControlEditor : Editor
 		{
 			script.m_gravity    = EditorGUILayout.FloatField("Gravity", script.m_gravity);
 			script.m_jump		= EditorGUILayout.FloatField("Jump Impulse", script.m_jump);
+			script.m_kickBackY  = EditorGUILayout.FloatField("Punch Kickback", script.m_kickBackY);
 			script.m_maxGravity = EditorGUILayout.FloatField("Max Falling Speed", script.m_maxGravity);
 		}
 
@@ -42,7 +43,8 @@ public class PlayerControlEditor : Editor
 			EditorGUILayout.Separator();
 
 			//Other settings
-			script.m_maxVelX  = EditorGUILayout.FloatField("Max Speed", script.m_maxVelX);
+			script.m_kickBackX = EditorGUILayout.FloatField("Punch Kickback", script.m_kickBackX);
+			script.m_maxVelX   = EditorGUILayout.FloatField("Max Speed", script.m_maxVelX);
 		}
 
 		//Apply changes

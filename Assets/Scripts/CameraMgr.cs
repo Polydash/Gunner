@@ -10,6 +10,6 @@ public class CameraMgr : MonoBehaviour
         camera.orthographicSize = GameMgr.instance.m_levelSize;
 
         //Set position
-		transform.position = new Vector3(GameMgr.instance.m_levelSize * 4/3, GameMgr.instance.m_levelSize, -10);
+		transform.position = new Vector3(GameMgr.instance.m_levelSize * 16/9, GameMgr.instance.m_levelSize, -10);
     }
 }

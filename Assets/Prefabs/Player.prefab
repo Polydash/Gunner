@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.71384192, y: 5, z: 0}
+  m_LocalPosition: {x: 7, y: 11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,11 +72,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gravity: 100
   m_jump: 25
+  m_kickBackY: 17
   m_maxGravity: 20
   m_inAirAccelX: 75
   m_inAirDeaccelX: 20
-  m_accelX: 75
-  m_deaccelX: 20
+  m_accelX: 100
+  m_deaccelX: 75
+  m_kickBackX: 12
   m_maxVelX: 12
 --- !u!114 &11400002
 MonoBehaviour:
@@ -90,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hitbox:
-    m_center: {x: .5, y: .349999994}
+    m_center: {x: .5, y: .360000014}
     m_size: {x: .400000006, y: .699999988}
 --- !u!212 &21200000
 SpriteRenderer:
