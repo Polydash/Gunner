@@ -78,7 +78,7 @@ MonoBehaviour:
   m_inAirDeaccelX: 20
   m_accelX: 100
   m_deaccelX: 75
-  m_kickBackX: 12
+  m_kickBackX: 17
   m_maxVelX: 12
 --- !u!114 &11400002
 MonoBehaviour:

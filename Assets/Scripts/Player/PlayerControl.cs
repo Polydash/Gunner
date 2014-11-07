@@ -83,10 +83,7 @@ public class PlayerControl : MonoBehaviour
 		Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis ("Vertical"));
 		moveInput.x *= accelX;
 
-		//Apply horizontal input
-		rigidbody2D.velocity += new Vector2(moveInput.x * Time.deltaTime, 0.0f);
-
-		if(Mathf.Abs(moveInput.x) < 0.01f)
+		if(Mathf.Abs(moveInput.x) < 0.01f || Mathf.Abs(rigidbody2D.velocity.x) > m_maxVelX)
 		{
 			//Apply horizontal deacceleration
 			if(rigidbody2D.velocity.x > deaccelX * Time.deltaTime)
@@ -101,6 +98,18 @@ public class PlayerControl : MonoBehaviour
 			{
 				rigidbody2D.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
 			}
+		}
+		else if(moveInput.x * rigidbody2D.velocity.x > 0.0f)
+		{
+			//Apply horizontal input, considering max speed
+			rigidbody2D.velocity += new Vector2(Mathf.Clamp(moveInput.x * Time.deltaTime,
+			                                                Mathf.Min(0.0f, -m_maxVelX - rigidbody2D.velocity.x),
+			                                                Mathf.Max(0.0f, m_maxVelX - rigidbody2D.velocity.x)), 0.0f);
+		}
+		else
+		{
+			//Apply horizontal input
+			rigidbody2D.velocity += new Vector2(moveInput.x * Time.deltaTime, 0.0f);
 		}
 
 		//Check jump
@@ -124,7 +133,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			if(!m_isGrounded)
 			{
-				rigidbody2D.velocity -= new Vector2(0, m_kickBackY);
+				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, -m_kickBackY);
 			}
 
 			m_upPunchPressed = false;
@@ -133,23 +142,27 @@ public class PlayerControl : MonoBehaviour
 		//Check left punch
 		if(m_leftPunchPressed)
 		{
-			rigidbody2D.velocity = new Vector2(-m_kickBackX, rigidbody2D.velocity.y);
+			rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
 			m_leftPunchPressed = false;
 		}
 
 		//Check right punch
 		if(m_rightPunchPressed)
 		{
-			rigidbody2D.velocity = new Vector2(m_kickBackX, rigidbody2D.velocity.y);
+			rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
 			m_rightPunchPressed = false;
 		}
 
 		//Apply gravity
 		rigidbody2D.velocity -= new Vector2(0.0f, m_gravity * Time.deltaTime);
 
+		//Only clamp vertical velocity
+		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,
+		                                   Mathf.Max(rigidbody2D.velocity.y, -m_maxGravity));
+
 		//Clamp velocity to maximum values
-		rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -m_maxVelX, m_maxVelX),
-		                         		   Mathf.Max(rigidbody2D.velocity.y, -m_maxGravity));
+		//rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -m_maxVelX, m_maxVelX),
+		//                         		   Mathf.Max(rigidbody2D.velocity.y, -m_maxGravity));
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
