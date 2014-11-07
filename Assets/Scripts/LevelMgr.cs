@@ -3,8 +3,11 @@ using System.Collections;
 
 public class LevelMgr : MonoBehaviour
 {
-    //Level size (must be a multiple of 3)
+    //Level size (must be a multiple of 9)
     public int m_levelSize = 9;
+
+	//Level structure
+	public bool[] m_level;
 
     //Singleton variable
     private static LevelMgr s_instance = null;
