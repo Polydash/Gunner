@@ -205,7 +205,7 @@ GameObject:
   - 4: {fileID: 1001737361}
   - 114: {fileID: 1001737362}
   m_Layer: 0
-  m_Name: GameMgr
+  m_Name: LevelMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

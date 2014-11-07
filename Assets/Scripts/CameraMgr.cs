@@ -7,9 +7,9 @@ public class CameraMgr : MonoBehaviour
     {
         //Get camera component and set ortho size
         Camera camera = GetComponent("Camera") as Camera;
-        camera.orthographicSize = GameMgr.instance.m_levelSize;
+        camera.orthographicSize = LevelMgr.instance.m_levelSize;
 
         //Set position
-		transform.position = new Vector3(GameMgr.instance.m_levelSize * 16/9, GameMgr.instance.m_levelSize, -10);
+		transform.position = new Vector3(LevelMgr.instance.m_levelSize * 16/9, LevelMgr.instance.m_levelSize, -10);
     }
 }

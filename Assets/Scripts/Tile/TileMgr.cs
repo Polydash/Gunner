@@ -38,7 +38,7 @@ public class TileMgr : MonoBehaviour
 	//TEMPORARY FUNCTION
 	private void InstantiateBorders()
 	{
-		m_height = (uint) GameMgr.instance.m_levelSize * 2;
+		m_height = (uint) LevelMgr.instance.m_levelSize * 2;
 		m_width  = (uint) m_height * 16 / 9;
 
 		for(int i=0; i<m_width; ++i)
@@ -57,7 +57,7 @@ public class TileMgr : MonoBehaviour
     private void Awake()
     {
         //Init tilemap size
-		m_height = (uint) GameMgr.instance.m_levelSize * 2;
+		m_height = (uint) LevelMgr.instance.m_levelSize * 2;
 		m_width  = (uint) m_height * 16 / 9;
 
         //Init tile array

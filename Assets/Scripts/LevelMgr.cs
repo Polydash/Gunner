@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameMgr : MonoBehaviour
+public class LevelMgr : MonoBehaviour
 {
     //Level size (must be a multiple of 3)
     public int m_levelSize = 9;
 
     //Singleton variable
-    private static GameMgr s_instance = null;
+    private static LevelMgr s_instance = null;
 
     //GameManager singleton declaration
-    public static GameMgr instance
+    public static LevelMgr instance
     {
         get
         {
             //Get instance in current scene
             if (s_instance == null)
             {
-                s_instance = FindObjectOfType(typeof(GameMgr)) as GameMgr;
+                s_instance = FindObjectOfType(typeof(LevelMgr)) as LevelMgr;
             }
 
             return s_instance;
