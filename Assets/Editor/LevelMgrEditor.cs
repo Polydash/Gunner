@@ -1,10 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 using UnityEditor;
 
 [CustomEditor(typeof(LevelMgr))]
 public class LevelMgrEditor : Editor
 {
+	private void ResizeLevel(LevelMgr script, int oldSize, int newSize, bool copyOldData = false)
+	{
+		//Get level size
+		script.m_levelSize = newSize;
+		
+		//Compute area size
+		uint height = (uint) script.m_levelSize * 2;
+		uint width  = (uint) height * 16 / 9;
+		
+		if(script.m_level == null || (oldSize != script.m_levelSize && script.m_levelSize > 0))
+		{
+			//Allocate array
+			bool[] newLevel = new bool[height * width]; 
+
+			if(copyOldData)
+			{
+				//Copy as much data as possible
+				for(int i=0; i<height*width && i<script.m_level.Length; ++i)
+				{
+					newLevel[i] = script.m_level[i];
+				}
+			}
+			
+			//Assign new array
+			script.m_level = newLevel;
+		}
+	}
+
 	public override void OnInspectorGUI()
 	{
 		//Get associated script
@@ -20,21 +49,10 @@ public class LevelMgrEditor : Editor
 		uint height = (uint) script.m_levelSize * 2;
 		uint width  = (uint) height * 16 / 9;
 
-		if(script.m_level == null || (oldSize != script.m_levelSize && script.m_levelSize > 0))
-		{
-			//Allocate array
-			bool[] newLevel = new bool[height * width]; 
+		//Resize level if necessary
+		ResizeLevel(script, oldSize, script.m_levelSize, true);
 
-			//Copy as much data as possible
-			for(int i=0; i<height*width && i<script.m_level.Length; ++i)
-			{
-				newLevel[i] = script.m_level[i];
-			}
-
-			//Assign new array
-			script.m_level = newLevel;
-		}
-
+		//Draw checkboxes
 		for(int i=0; i<height; ++i)
 		{
 			EditorGUILayout.BeginHorizontal();
@@ -48,11 +66,69 @@ public class LevelMgrEditor : Editor
 		EditorGUILayout.Separator();
 
 		//Clear button
-		if(GUILayout.Button("Clear",  GUILayout.Width(50.0f)))
+		if(GUILayout.Button("Clear", GUILayout.Width(50.0f)))
 		{
 			for(int i=0; i<height*width; ++i)
 			{
 				script.m_level[i] = false;
+			}
+		}
+
+		//Save button
+		if(GUILayout.Button("Save", GUILayout.Width(50.0f)))
+		{
+			string path = EditorUtility.SaveFilePanelInProject("Save level", "level", "lvl", "Please enter a level name");
+
+			if(path.Length > 0)
+			{
+				string content = "";
+				content += script.m_levelSize.ToString() + "\n";
+
+				for(int i=0; i<height*width; ++i)
+				{
+					if(script.m_level[i])
+					{
+						content += "1";
+					}
+					else
+					{
+						content += "0";
+					}
+				}
+
+				File.WriteAllText(path, content);
+				AssetDatabase.Refresh();
+			}
+		}
+
+		//Load button
+		if(GUILayout.Button("Load", GUILayout.Width(50.0f)))
+		{
+			string path = EditorUtility.OpenFilePanel("Load level", Application.dataPath, "lvl");
+	
+			if(path.Length > 0)
+			{
+				string[] content = File.ReadAllLines(path);
+
+				oldSize = script.m_levelSize;
+				script.m_levelSize = int.Parse(content[0]);
+
+				ResizeLevel(script, oldSize, script.m_levelSize);
+
+				height = (uint) script.m_levelSize * 2;
+				width  = (uint) height * 16 / 9;
+
+				for(int i=0; i<height*width; ++i)
+				{
+					if(content[1][i] == '1')
+					{
+						script.m_level[i] = true;
+					}
+					else
+					{
+						script.m_level[i] = false;
+					}
+				}
 			}
 		}
 
