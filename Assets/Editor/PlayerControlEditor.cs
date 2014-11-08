@@ -22,6 +22,7 @@ public class PlayerControlEditor : Editor
 		{
 			script.m_gravity    = EditorGUILayout.FloatField("Gravity", script.m_gravity);
 			script.m_jump		= EditorGUILayout.FloatField("Jump Impulse", script.m_jump);
+			script.m_analog		= EditorGUILayout.FloatField("Analogic Jump Impulse", script.m_analog);
 			script.m_kickBackY  = EditorGUILayout.FloatField("Punch Kickback", script.m_kickBackY);
 			script.m_maxGravity = EditorGUILayout.FloatField("Max Falling Speed", script.m_maxGravity);
 		}

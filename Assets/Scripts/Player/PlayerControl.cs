@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 	//Vertical velocity
 	public float m_gravity	     = 100.0f;
 	public float m_jump		     = 25.0f;
+	public float m_analog		 = 20.0f;
 	public float m_kickBackY	 = 17.0f;
 	public float m_maxGravity    = 20.0f;
 
@@ -19,9 +20,11 @@ public class PlayerControl : MonoBehaviour
 	
 	//Player State
 	private bool m_isGrounded = false;
+	private bool m_analogJump = false;
 
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;
+	private bool m_jumpReleased		 = false;
 	private bool m_leftPunchPressed  = false;
 	private bool m_rightPunchPressed = false;
 	private bool m_upPunchPressed	 = false;
@@ -37,21 +40,29 @@ public class PlayerControl : MonoBehaviour
 		//Check inputs (for some reason, GetButtonDown does not
 		//respond properly in FixedUpdate())
 
+		//Check jump button
 		if(Input.GetButtonDown("Fire1"))
 		{
 			m_jumpPressed = true;
 		}
+		else if(Input.GetButtonUp("Fire1"))
+		{
+			m_jumpReleased = true;
+		}
 
+		//Check left button
 		if(Input.GetButtonDown("Fire2"))
 		{
 			m_leftPunchPressed = true;
 		}
 
+		//Check right button
 		if(Input.GetButtonDown("Fire3"))
 		{
 			m_rightPunchPressed = true;
 		}
 
+		//Check up button
 		if(Input.GetButtonDown("Jump"))
 		{
 			m_upPunchPressed = true;
@@ -83,6 +94,7 @@ public class PlayerControl : MonoBehaviour
 		Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis ("Vertical"));
 		moveInput.x *= accelX;
 
+		//If player is not moving, or if current velocity is above max value
 		if(Mathf.Abs(moveInput.x) < 0.01f || Mathf.Abs(rigidbody2D.velocity.x) > m_maxVelX)
 		{
 			//Apply horizontal deacceleration
@@ -119,6 +131,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_jump);
 				m_isGrounded = false;
+				m_analogJump = true;
 			}
 			else
 			{
@@ -126,6 +139,24 @@ public class PlayerControl : MonoBehaviour
 			}
 
 			m_jumpPressed = false;
+		}
+		else if(m_jumpReleased)
+		{
+			m_analogJump = false;
+			m_jumpReleased = false;
+		}
+
+		//Check analogic jump
+		if(m_analogJump)
+		{
+			if(rigidbody2D.velocity.y > 0.0f)
+			{
+				rigidbody2D.velocity += new Vector2(0.0f, m_analog * Time.deltaTime);
+			}
+			else
+			{
+				m_analogJump = false;
+			}
 		}
 
 		//Check up punch
