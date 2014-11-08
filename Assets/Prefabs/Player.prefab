@@ -58,7 +58,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -184,15 +184,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hitbox:
-    m_center: {x: .5, y: .310000002}
-    m_size: {x: .400000006, y: .600000024}
+    m_center: {x: .5, y: .360000014}
+    m_size: {x: .400000006, y: .699999988}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b26da272dc114f47a52cc78b9f16885, type: 3}
   m_Name: 
