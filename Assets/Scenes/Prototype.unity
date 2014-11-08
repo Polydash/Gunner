@@ -1214,6 +1214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gravity: 100
   m_jump: 25
+  m_analog: 45
   m_kickBackY: 17
   m_maxGravity: 20
   m_inAirAccelX: 75
@@ -1321,6 +1322,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_levelSize: 9
   m_level: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010100000000000000000000010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000001010000000000000101010101010101010101010101010101010000000000000101000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000010101010101010101000000000000000000000000000000000101010101010101
+<<<<<<< HEAD
+=======
+--- !u!1001 &1203756901
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 6.25465298
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.2765694
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_jump
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_analog
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_gravity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+      propertyPath: m_kickBackY
+      value: 17
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+  m_RootGameObject: {fileID: 981533142}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+>>>>>>> origin/master
 --- !u!1 &1850830204
 GameObject:
   m_ObjectHideFlags: 0
