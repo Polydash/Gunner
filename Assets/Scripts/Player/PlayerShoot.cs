@@ -3,54 +3,92 @@ using System.Collections;
 
 public class PlayerShoot : MonoBehaviour {
 
-    public GameObject m_directionArrow;
-    public GameObject m_bullet;
 
-    public float m_BulletSpawnDistanceFromPlayer = 3.0f;
-    public float m_initialBulletForce = 100.0f;
-    public int m_numberOfBullets = 3;
-    public float m_shootAngle = 10.0f; //In Degrees
+    public GameObject m_Glove;
+    public float m_force = 5.0f;
 
+    private PlayerControl scriptPC;
 
     private bool shooted = false;
 
+    //Input helper variables
+    private bool m_jumpPressed = false;
+    private bool m_leftPunchPressed = false;
+    private bool m_rightPunchPressed = false;
+    private bool m_upPunchPressed = false;
+
+    void Awake()
+    {
+        scriptPC = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        if(!scriptPC)
+        {
+            Debug.Log("Error PlayerShoot Get PlayerControl");
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
+
 	}
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            m_jumpPressed = true;
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            m_leftPunchPressed = true;
+        }
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            m_rightPunchPressed = true;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            m_upPunchPressed = true;
+        }
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-        //Set The Arrow At the good position and rotation
+       //Set The Arrow At the good position and rotation
        // m_directionArrow.transform.position = transform.position;
         Vector2 DirectionInput = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical"));//Get the Right Stick Direction
-        DirectionInput.Normalize();//Normalize it
 
-        float angle = Vector2.Angle(new Vector2(1, 0), DirectionInput);
-        float sign = Mathf.Sign(Vector3.Dot(Vector3.forward, Vector3.Cross(new Vector2(1, 0), DirectionInput)));
-        angle = ((angle * sign) + 180) % 360;// Put the angle between 0 and 360 degrees
+       if (m_rightPunchPressed)
+       {
+           m_Glove.rigidbody2D.AddRelativeForce(new Vector2(-1, 0) * m_force);
 
-        if (DirectionInput.sqrMagnitude > 0.1)
-        {
-             m_directionArrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+           m_rightPunchPressed = false;
 
-            if(!shooted)
-            {
-                shooted = true;
-                Debug.Log(DirectionInput);
-                for(int i = 0; i < m_numberOfBullets; ++i)
-                {
-                    Vector2 newPosition = new Vector2(transform.position.x + (DirectionInput.x * m_BulletSpawnDistanceFromPlayer) ,transform.position.y + (DirectionInput.y * m_BulletSpawnDistanceFromPlayer ));
-                    GameObject newBullet = Object.Instantiate(m_bullet, -newPosition, Quaternion.identity) as GameObject;
-                    //newBullet.rigidbody2D.AddRelativeForce(DirectionInput * m_initialBulletForce);
-                }
+       }
+        else if (m_leftPunchPressed)
+       {
+           m_Glove.rigidbody2D.AddRelativeForce(new Vector2(1, 0) * m_force);
+
+           m_leftPunchPressed = false;
+       }
+
+        //TODO UP and DOWN
+
+        //if (DirectionInput.sqrMagnitude > 0.1)
+        //{
+        //    if(!shooted)
+        //    {
+        //        shooted = true;
+        //        
                
-
-            }
-        }
-        else//if Sqrmagnitude == 0
-        {
-            shooted = false;
-        }
+        //    }
+        //}
+        //else//if Sqrmagnitude == 0
+        //{
+        //    shooted = false;
+        //}
  
  
 
