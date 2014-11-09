@@ -132,6 +132,10 @@ MonoBehaviour:
   m_deaccelX: 75
   m_kickBackX: 15
   m_maxVelX: 12
+  m_time: 3
+  m_speedMin: 0
+  m_speedMax: 1
+  m_returnRatio: .5
 --- !u!114 &9886708
 MonoBehaviour:
   m_ObjectHideFlags: 0
