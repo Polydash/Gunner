@@ -51,13 +51,13 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Check left button
-		if(Input.GetButtonDown("Fire2"))
+		if(Input.GetButtonDown("Fire3"))
 		{
 			m_leftPunchPressed = true;
 		}
 
 		//Check right button
-		if(Input.GetButtonDown("Fire3"))
+		if(Input.GetButtonDown("Fire2"))
 		{
 			m_rightPunchPressed = true;
 		}
@@ -173,14 +173,14 @@ public class PlayerControl : MonoBehaviour
 		//Check left punch
 		if(m_leftPunchPressed)
 		{
-			rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
+			rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
 			m_leftPunchPressed = false;
 		}
 
 		//Check right punch
 		if(m_rightPunchPressed)
 		{
-			rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
+			rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
 			m_rightPunchPressed = false;
 		}
 

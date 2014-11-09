@@ -35,6 +35,7 @@ GameObject:
   - 199: {fileID: 19900000}
   - 231: {fileID: 23100000}
   - 61: {fileID: 6100000}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: Glove
   m_TagString: Bullet
@@ -62,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.29425049e-05, y: -.0113010406, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -88,10 +89,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Mass: 9.99999975e-05
-  m_LinearDrag: 20
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -103,9 +104,9 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Material: {fileID: 6200000, guid: 95bce2a00df79624a966fded8cd70c8d, type: 2}
+  m_IsTrigger: 0
   m_Size: {x: .5, y: .5}
   m_Center: {x: 0, y: 0}
 --- !u!68 &6800000
@@ -162,13 +163,27 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b26da272dc114f47a52cc78b9f16885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Glove: {fileID: 100004}
   m_force: .5
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae762ee0cdd7816488a8330e182001c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_time: .119999997
+  m_speedMin: 20
+  m_speedMax: 75
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1303,7 +1318,7 @@ SpringJoint2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CollideConnected: 0
   m_ConnectedRigidBody: {fileID: 5000000}
   m_Anchor: {x: 0, y: 0}
