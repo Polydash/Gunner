@@ -87,7 +87,6 @@ GameObject:
   - 68: {fileID: 9886709}
   - 114: {fileID: 9886708}
   - 114: {fileID: 9886707}
-  - 114: {fileID: 9886705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -95,20 +94,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &9886705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: e9d98ca97af9f5f4e916bd8cd59d1b90,
-    type: 2}
-  m_PrefabInternal: {fileID: 848127970}
-  m_GameObject: {fileID: 9886704}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b26da272dc114f47a52cc78b9f16885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Glove: {fileID: 144451279}
-  m_force: .5
 --- !u!114 &9886707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,10 +117,12 @@ MonoBehaviour:
   m_deaccelX: 75
   m_kickBackX: 15
   m_maxVelX: 12
-  m_time: 3
-  m_speedMin: 0
-  m_speedMax: 1
-  m_returnRatio: .5
+  m_punchTime: .119999997
+  m_punchMinVel: 20
+  m_punchMaxVel: 100
+  m_punchReturnRatio: .5
+  m_punchLaunched: 0
+  m_punchReturning: 0
 --- !u!114 &9886708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,7 +1373,7 @@ SpriteRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 848127970}
   m_GameObject: {fileID: 144451279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_LightmapIndex: 255
@@ -1414,10 +1401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae762ee0cdd7816488a8330e182001c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_time: .119999997
-  m_speedMin: 20
-  m_speedMax: 75
-  m_returnRatio: .400000006
 --- !u!1001 &448727015
 Prefab:
   m_ObjectHideFlags: 0

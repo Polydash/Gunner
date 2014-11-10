@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+	//Enumeration defining a punch direction
 	private enum ePunchDirection
 	{
 		RIGHT,
@@ -27,24 +28,23 @@ public class PlayerControl : MonoBehaviour
 	public float m_maxVelX       = 12.0f;
 
 	//Punch velocity
-	private float m_time          = 0.12f;
-	private float m_speedMin      = 20.0f;
-	private float m_speedMax	     = 100.0f;
-	private float m_returnRatio   = 0.5f;
-
+	public float m_punchTime   	    = 0.12f;
+	public float m_punchMinVel 	    = 20.0f;
+	public float m_punchMaxVel      = 100.0f;
+	public float m_punchReturnRatio = 0.5f;
+	
 	//Reference to player glove
 	private Transform m_glove = null;
 
 	//Player State
-	private bool m_isGrounded 	  = false;
-	private bool m_analogJump 	  = false;
+	private bool m_isGrounded 	 = false;
+	private bool m_analogJump 	 = false;
 
-	//==== EVIL ====
-	public bool m_punchLaunched   = false;
-	public bool m_punchReturning  = false;
-
-	private float m_punchElapsed  = 0.0f;
+	//Punch State
+	private float m_punchElapsed = 0.0f;
 	private Vector2 m_punchDirection;
+	public bool m_punchLaunched  {get; set;}
+	public bool m_punchReturning {get; set;}
 
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;
@@ -204,48 +204,31 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Check left punch
-		if(m_leftPunchPressed && !m_punchLaunched && !m_punchReturning)
+		if(m_leftPunchPressed)
 		{
-			m_punchDirection = LaunchPunch(ePunchDirection.LEFT);
-			rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
+			if(!m_punchLaunched && !m_punchReturning)
+			{
+				m_punchDirection = LaunchPunch(ePunchDirection.LEFT);
+				rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
+			}
+
 			m_leftPunchPressed = false;
 		}
 
 		//Check right punch
-		if(m_rightPunchPressed && !m_punchLaunched && !m_punchReturning)
+		if(m_rightPunchPressed)
 		{
-			m_punchDirection = LaunchPunch(ePunchDirection.RIGHT);
-			rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
+			if(!m_punchLaunched && !m_punchReturning)
+			{
+				m_punchDirection = LaunchPunch(ePunchDirection.RIGHT);
+				rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
+			}
+
 			m_rightPunchPressed = false;
 		}
 
-		//Update punch
-		if(m_punchLaunched && m_punchElapsed > m_time)
-		{
-			m_punchLaunched = false;
-			m_punchReturning = true;
-			m_glove.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
-			m_glove.collider2D.enabled = false;
-		}
-		
-		if(m_punchLaunched)
-		{
-			m_punchElapsed += Time.deltaTime;
-			float speed = Mathf.Lerp(m_speedMin, m_speedMax, 1.0f - m_punchElapsed / m_time);
-			Debug.Log(speed);
-			m_glove.rigidbody2D.velocity = speed * m_punchDirection;
-		}
-		
-		if(m_punchReturning && m_glove.transform.localPosition.sqrMagnitude < 0.1f)
-		{
-			m_punchReturning = false;
-			m_glove.renderer.enabled = false;
-		}
-		
-		if(m_punchReturning)
-		{
-			m_glove.transform.localPosition -= m_returnRatio * m_glove.transform.localPosition;
-		}
+		//Update punch movement
+		UpdatePunch();
 
 		//Apply gravity
 		rigidbody2D.velocity -= new Vector2(0.0f, m_gravity * Time.deltaTime);
@@ -273,10 +256,51 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
+	//This method updates the punch velocity, and should only be used in FixedUpdate
+	private void UpdatePunch()
+	{
+		//If punch is launched
+		if(m_punchLaunched)
+		{
+			//Update its speed if it is not done
+			if(m_punchElapsed < m_punchTime)
+			{
+				m_punchElapsed += Time.deltaTime;
+				float speed = Mathf.Lerp(m_punchTime, m_punchMaxVel, 1.0f - m_punchElapsed / m_punchTime);
+				m_glove.rigidbody2D.velocity = speed * m_punchDirection;
+			}
+			//Or make it return back to the player
+			else
+			{
+				m_punchLaunched = false;
+				m_punchReturning = true;
+				m_glove.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
+				m_glove.collider2D.enabled = false;
+			}
+		}
+
+		//If punch is returning
+		if(m_punchReturning)
+		{
+			//Update its position if it is not done
+			if(m_glove.transform.localPosition.sqrMagnitude > 0.1f)
+			{
+				m_glove.transform.localPosition -= m_punchReturnRatio * m_glove.transform.localPosition;
+			}
+			//Or make it available to the player for another shot
+			else
+			{
+				m_punchReturning = false;
+				m_glove.renderer.enabled = false;
+			}
+		}
+	}
+
 	private Vector2 LaunchPunch(ePunchDirection direction)
 	{
 		Vector2 speedDirection = new Vector2();
 
+		//Determine punch direction and local position
 		switch(direction)
 		{
 		case ePunchDirection.DOWN :
@@ -303,6 +327,7 @@ public class PlayerControl : MonoBehaviour
 			break;
 		}
 
+		//Init punch parameters
 		m_punchElapsed = 0.0f;
 		m_punchLaunched = true;
 		m_glove.renderer.enabled = true;

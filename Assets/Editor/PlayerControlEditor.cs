@@ -9,6 +9,7 @@ public class PlayerControlEditor : Editor
 	//Variables indicating folder states
 	private bool m_vertical   = false;
 	private bool m_horizontal = false;
+	private bool m_punch	  = false;
 
 	public override void OnInspectorGUI()
 	{
@@ -49,6 +50,16 @@ public class PlayerControlEditor : Editor
 			script.m_maxVelX   = EditorGUILayout.FloatField("Max Speed", script.m_maxVelX);
 		}
 
+		//Punch settings folder
+		m_punch = EditorGUILayout.Foldout(m_punch, "Punch");
+		if(m_punch)
+		{
+			script.m_punchTime   	  = EditorGUILayout.FloatField("Punch Time", script.m_punchTime);
+			script.m_punchMinVel 	  = EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
+			script.m_punchMaxVel      = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
+			script.m_punchReturnRatio = EditorGUILayout.FloatField("Return ratio", script.m_punchReturnRatio);
+		}
+
 		//Save button
 		if(GUILayout.Button("Save", GUILayout.Width(50.0f)))
 		{
@@ -68,7 +79,11 @@ public class PlayerControlEditor : Editor
 				content += script.m_accelX.ToString() + " ";
 				content += script.m_deaccelX.ToString() + " ";
 				content += script.m_kickBackX.ToString() + " ";
-				content += script.m_maxVelX.ToString();
+				content += script.m_maxVelX.ToString() + " ";
+				content += script.m_punchTime.ToString() + " ";
+				content += script.m_punchMinVel.ToString() + " ";
+				content += script.m_punchMaxVel.ToString() + " ";
+				content += script.m_punchReturnRatio.ToString();
 
 				File.WriteAllText(path, content);
 				AssetDatabase.Refresh();
@@ -85,17 +100,21 @@ public class PlayerControlEditor : Editor
 				string[] content = File.ReadAllLines(path);
 				content = content[0].Split(' ');
 
-				script.m_gravity       = float.Parse(content[0]);
-				script.m_jump          = float.Parse(content[1]);
-				script.m_analog        = float.Parse(content[2]);
-				script.m_kickBackY     = float.Parse(content[3]);
-				script.m_maxGravity    = float.Parse(content[4]);
-				script.m_inAirAccelX   = float.Parse(content[5]);
-				script.m_inAirDeaccelX = float.Parse(content[6]);
-				script.m_accelX		   = float.Parse(content[7]);
-				script.m_deaccelX	   = float.Parse(content[8]);
-				script.m_kickBackX	   = float.Parse(content[9]);
-				script.m_maxVelX	   = float.Parse(content[10]);
+				script.m_gravity       	  = float.Parse(content[0]);
+				script.m_jump          	  = float.Parse(content[1]);
+				script.m_analog        	  = float.Parse(content[2]);
+				script.m_kickBackY     	  = float.Parse(content[3]);
+				script.m_maxGravity    	  = float.Parse(content[4]);
+				script.m_inAirAccelX   	  = float.Parse(content[5]);
+				script.m_inAirDeaccelX 	  = float.Parse(content[6]);
+				script.m_accelX		   	  = float.Parse(content[7]);
+				script.m_deaccelX	   	  = float.Parse(content[8]);
+				script.m_kickBackX	   	  = float.Parse(content[9]);
+				script.m_maxVelX	   	  = float.Parse(content[10]);
+				script.m_punchTime		  = float.Parse(content[11]);
+				script.m_punchMinVel	  = float.Parse(content[12]);
+				script.m_punchMaxVel	  = float.Parse(content[13]);
+				script.m_punchReturnRatio = float.Parse(content[14]);
 			}
 		}
 
