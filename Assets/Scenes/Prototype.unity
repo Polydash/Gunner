@@ -121,8 +121,6 @@ MonoBehaviour:
   m_punchMinVel: 20
   m_punchMaxVel: 100
   m_punchReturnRatio: .5
-  m_punchLaunched: 0
-  m_punchReturning: 0
 --- !u!114 &9886708
 MonoBehaviour:
   m_ObjectHideFlags: 0

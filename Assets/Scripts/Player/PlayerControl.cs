@@ -304,7 +304,7 @@ public class PlayerControl : MonoBehaviour
 		switch(direction)
 		{
 		case ePunchDirection.DOWN :
-			m_glove.transform.localPosition = new Vector2(0.0f, -1.0f);
+			m_glove.transform.localPosition = new Vector2(0.0f, -1.5f);
 			speedDirection = new Vector2(0.0f, -1.0f);
 			break;
 
