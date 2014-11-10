@@ -28,10 +28,10 @@ public class PlayerControl : MonoBehaviour
 	public float m_maxVelX       = 12.0f;
 
 	//Punch velocity
-	public float m_punchTime   	    = 0.12f;
-	public float m_punchMinVel 	    = 20.0f;
-	public float m_punchMaxVel      = 100.0f;
-	public float m_punchReturnRatio = 0.5f;
+	public float m_punchTime   	  = 0.12f;
+	public float m_punchMinVel 	  = 500.0f;
+	public float m_punchMaxVel    = 2000.0f;
+	public float m_punchReturnVel = 50.0f;
 	
 	//Reference to player glove
 	private Transform m_glove = null;
@@ -266,8 +266,8 @@ public class PlayerControl : MonoBehaviour
 			if(m_punchElapsed < m_punchTime)
 			{
 				m_punchElapsed += Time.deltaTime;
-				float speed = Mathf.Lerp(m_punchTime, m_punchMaxVel, 1.0f - m_punchElapsed / m_punchTime);
-				m_glove.rigidbody2D.velocity = speed * m_punchDirection;
+				float speed = Mathf.Lerp(m_punchMinVel, m_punchMaxVel, 1.0f - m_punchElapsed / m_punchTime);
+				m_glove.rigidbody2D.velocity = speed * m_punchDirection * Time.deltaTime;
 			}
 			//Or make it return back to the player
 			else
@@ -283,9 +283,9 @@ public class PlayerControl : MonoBehaviour
 		if(m_punchReturning)
 		{
 			//Update its position if it is not done
-			if(m_glove.transform.localPosition.sqrMagnitude > 0.1f)
+			if(m_punchReturnVel * Time.deltaTime < m_glove.transform.localPosition.magnitude)
 			{
-				m_glove.transform.localPosition -= m_punchReturnRatio * m_glove.transform.localPosition;
+				m_glove.transform.localPosition -= m_punchReturnVel * Time.deltaTime * Vector3.Normalize(m_glove.transform.localPosition);
 			}
 			//Or make it available to the player for another shot
 			else

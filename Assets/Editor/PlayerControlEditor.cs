@@ -54,10 +54,10 @@ public class PlayerControlEditor : Editor
 		m_punch = EditorGUILayout.Foldout(m_punch, "Punch");
 		if(m_punch)
 		{
-			script.m_punchTime   	  = EditorGUILayout.FloatField("Punch Time", script.m_punchTime);
-			script.m_punchMinVel 	  = EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
-			script.m_punchMaxVel      = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
-			script.m_punchReturnRatio = EditorGUILayout.FloatField("Return ratio", script.m_punchReturnRatio);
+			script.m_punchTime   	= EditorGUILayout.FloatField("Punch Time", script.m_punchTime);
+			script.m_punchMinVel 	= EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
+			script.m_punchMaxVel    = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
+			script.m_punchReturnVel = EditorGUILayout.FloatField("Return Speed", script.m_punchReturnVel);
 		}
 
 		//Save button
@@ -83,7 +83,7 @@ public class PlayerControlEditor : Editor
 				content += script.m_punchTime.ToString() + " ";
 				content += script.m_punchMinVel.ToString() + " ";
 				content += script.m_punchMaxVel.ToString() + " ";
-				content += script.m_punchReturnRatio.ToString();
+				content += script.m_punchReturnVel.ToString();
 
 				File.WriteAllText(path, content);
 				AssetDatabase.Refresh();
@@ -114,7 +114,7 @@ public class PlayerControlEditor : Editor
 				script.m_punchTime		  = float.Parse(content[11]);
 				script.m_punchMinVel	  = float.Parse(content[12]);
 				script.m_punchMaxVel	  = float.Parse(content[13]);
-				script.m_punchReturnRatio = float.Parse(content[14]);
+				script.m_punchReturnVel	  = float.Parse(content[14]);
 			}
 		}
 

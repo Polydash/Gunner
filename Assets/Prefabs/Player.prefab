@@ -106,7 +106,7 @@ BoxCollider2D:
   m_Enabled: 0
   m_Material: {fileID: 6200000, guid: 95bce2a00df79624a966fded8cd70c8d, type: 2}
   m_IsTrigger: 0
-  m_Size: {x: .5, y: .5}
+  m_Size: {x: .300000012, y: .300000012}
   m_Center: {x: 0, y: 0}
 --- !u!68 &6800000
 EdgeCollider2D:
@@ -146,8 +146,6 @@ MonoBehaviour:
   m_punchMinVel: 20
   m_punchMaxVel: 100
   m_punchReturnRatio: .5
-  m_punchLaunched: 0
-  m_punchReturning: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
