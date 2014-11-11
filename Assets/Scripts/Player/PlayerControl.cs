@@ -32,9 +32,13 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchMinVel 	  = 500.0f;
 	public float m_punchMaxVel    = 2000.0f;
 	public float m_punchReturnVel = 50.0f;
-	
+	public float m_punchForce	  = 2000.0f;
+
 	//Reference to player glove
 	private Transform m_glove = null;
+
+	//Player ID
+	private int m_playerID = 0;
 
 	//Player State
 	private bool m_isGrounded 	 = false;
@@ -60,6 +64,9 @@ public class PlayerControl : MonoBehaviour
 
 		//Init reference to player glove
 		m_glove = transform.GetChild(0);
+
+		//Init player ID
+		m_playerID = GetComponent<PlayerID>().GetPlayerID();
 	}
 
 	private void Update()
@@ -68,29 +75,29 @@ public class PlayerControl : MonoBehaviour
 		//respond properly in FixedUpdate())
 
 		//Check jump button
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
 		{
 			m_jumpPressed = true;
 		}
-		else if(Input.GetButtonUp("Fire1"))
+		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
 		{
 			m_jumpReleased = true;
 		}
 
 		//Check left button
-		if(Input.GetButtonDown("Fire3"))
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
 		{
 			m_leftPunchPressed = true;
 		}
 
 		//Check right button
-		if(Input.GetButtonDown("Fire2"))
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
 		{
 			m_rightPunchPressed = true;
 		}
 
 		//Check up button
-		if(Input.GetButtonDown("Jump"))
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
 		{
 			m_upPunchPressed = true;
 		}
@@ -118,7 +125,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Check horizontal input
-		Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis ("Vertical"));
+		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " Horizontal"), 0.0f);
 		moveInput.x *= accelX;
 
 		//If player is not moving, or if current velocity is above max value

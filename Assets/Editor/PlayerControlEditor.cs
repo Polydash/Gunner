@@ -58,6 +58,7 @@ public class PlayerControlEditor : Editor
 			script.m_punchMinVel 	= EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
 			script.m_punchMaxVel    = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
 			script.m_punchReturnVel = EditorGUILayout.FloatField("Return Speed", script.m_punchReturnVel);
+			script.m_punchForce 	= EditorGUILayout.FloatField("Punch Force", script.m_punchForce);
 		}
 
 		//Save button
@@ -83,7 +84,8 @@ public class PlayerControlEditor : Editor
 				content += script.m_punchTime.ToString() + " ";
 				content += script.m_punchMinVel.ToString() + " ";
 				content += script.m_punchMaxVel.ToString() + " ";
-				content += script.m_punchReturnVel.ToString();
+				content += script.m_punchReturnVel.ToString() + " ";
+				content += script.m_punchForce.ToString();
 
 				File.WriteAllText(path, content);
 				AssetDatabase.Refresh();
@@ -115,6 +117,7 @@ public class PlayerControlEditor : Editor
 				script.m_punchMinVel	  = float.Parse(content[12]);
 				script.m_punchMaxVel	  = float.Parse(content[13]);
 				script.m_punchReturnVel	  = float.Parse(content[14]);
+				script.m_punchForce		  = float.Parse(content[15]);
 			}
 		}
 

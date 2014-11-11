@@ -9,10 +9,11 @@ public class PlayerID : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
     {
         m_scriptPM = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
         m_playerID = m_scriptPM.GetID();//Get the id
+
         if(m_playerID == 0)//If the ID is wrong, delete the gameobject
         {
             Object.Destroy(gameObject);
