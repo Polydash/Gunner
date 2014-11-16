@@ -45,10 +45,10 @@ public class PlayerControl : MonoBehaviour
 	private bool m_analogJump 	 = false;
 
 	//Punch State
-	private float m_punchElapsed = 0.0f;
-	private Vector2 m_punchDirection;
-	public bool m_punchLaunched  {get; set;}
-	public bool m_punchReturning {get; set;}
+	private float  m_punchElapsed = 0.0f;
+	public Vector2 m_punchDirection {get; set;}
+	public bool    m_punchLaunched  {get; set;}
+	public bool    m_punchReturning {get; set;}
 
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;

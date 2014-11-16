@@ -153,6 +153,7 @@ MonoBehaviour:
   m_punchMinVel: 500
   m_punchMaxVel: 2000
   m_punchReturnVel: 50
+  m_punchForce: 2000
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

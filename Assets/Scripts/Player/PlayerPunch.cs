@@ -7,7 +7,7 @@ public class PlayerPunch : MonoBehaviour
 
 	private void Start()
 	{
-		//Get PlayerControl script
+		//Get PlayerControl script and get parameter
 		PlayerControl script = GetComponentInParent<PlayerControl>();
 		m_punchForce = script.m_punchForce;
 	}
@@ -30,9 +30,9 @@ public class PlayerPunch : MonoBehaviour
 		if(script.m_punchLaunched && collision.collider.tag == "Player")
 		{
 			//Hit him
-			Vector2 velocity = rigidbody2D.velocity;
-			velocity.Normalize();
-			collision.collider.rigidbody2D.AddForce(velocity * 2000.0f);
+			Vector2 direction = script.m_punchDirection;
+			direction.Normalize();
+			collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
 			
 			script.m_punchLaunched = false;
 			script.m_punchReturning = true;
