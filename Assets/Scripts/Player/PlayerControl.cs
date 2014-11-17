@@ -45,10 +45,11 @@ public class PlayerControl : MonoBehaviour
 	private bool m_analogJump 	 = false;
 
 	//Punch State
-	private float  m_punchElapsed = 0.0f;
-	public Vector2 m_punchDirection {get; set;}
-	public bool    m_punchLaunched  {get; set;}
-	public bool    m_punchReturning {get; set;}
+	private float   m_punchElapsed = 0.0f;
+	private float   m_punchInertia;
+	public  Vector2 m_punchDirection {get; set;}
+	public  bool    m_punchLaunched  {get; set;}
+	public  bool    m_punchReturning {get; set;}
 
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;
@@ -274,7 +275,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				m_punchElapsed += Time.deltaTime;
 				float speed = Mathf.Lerp(m_punchMinVel, m_punchMaxVel, 1.0f - m_punchElapsed / m_punchTime);
-				m_glove.rigidbody2D.velocity = speed * m_punchDirection * Time.deltaTime;
+				m_glove.rigidbody2D.velocity = new Vector2(m_punchInertia, 0.0f) + speed * m_punchDirection * Time.deltaTime;
 			}
 			//Or make it return back to the player
 			else
@@ -335,7 +336,9 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Init punch parameters
-		m_punchElapsed = 0.0f;
+		m_punchElapsed  = 0.0f;
+		Vector2 inertia = Vector2.Dot(rigidbody2D.velocity, speedDirection) * speedDirection;
+		m_punchInertia  = inertia.x;
 		m_punchLaunched = true;
 		m_glove.renderer.enabled = true;
 		m_glove.collider2D.enabled = true;

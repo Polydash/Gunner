@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerPunch : MonoBehaviour
 {
-	private float m_punchForce = 0.0f;
+	private float m_punchForce;
 
 	private void Start()
 	{
