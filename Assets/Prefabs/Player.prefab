@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.6847019, y: 14.4562759, z: 0}
+  m_LocalPosition: {x: 17.3792782, y: 14.5092316, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -140,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_controlType: 0
+  m_invertKickback: 0
   m_gravity: 100
   m_jump: 25
   m_analog: 45
@@ -205,6 +207,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   twinkleDuration: 1.5
   twinkleSpeed: 40
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5338a927ca9eb9a4fb090ca598970cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yDeath: -20
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

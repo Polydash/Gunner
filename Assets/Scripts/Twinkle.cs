@@ -11,7 +11,7 @@ public class Twinkle : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () 
+    void OnEnable() 
     {
         twinkleTime = 0.0f;
         time = 0.0f;

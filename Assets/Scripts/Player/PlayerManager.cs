@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
         if(!Debug && m_needIDGeneration && m_inGame)
         {
             m_needIDGeneration = false;
-
+            
             //Get the spawners
             m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
 
@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
                     //return i + 1;//Return the id of the player
                 }
             }
+            GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
         }
     }
 
