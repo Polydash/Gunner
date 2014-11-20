@@ -66,6 +66,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void ResetToMenu()
+    {
+        m_inGame = false;
+        m_needIDGeneration = true;
+
+    }
+
     public bool[] GetPlayerTab()
     {
         return m_playersIDs;

@@ -15,8 +15,6 @@ public class MenuPause : MonoBehaviour {
         if (!m_playerManager)
         {
             Debug.Log("Can't get PlayerManager in MenuPause");
-            m_playerManager = GameObject.Find("DEBUGPlayerManager").GetComponent<PlayerManager>();
-
         }
 
         m_maxPlayers = m_playerManager.GetMaxPlayer();// = 2 for the moment
@@ -27,20 +25,22 @@ public class MenuPause : MonoBehaviour {
     {
         for (int i = 0; i < m_maxPlayers; ++i)
         {
-            if (Input.GetButtonUp("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
+            if (Input.GetButtonDown("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
             {
                 m_paused = !m_paused;
             }
 
             if(m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " A") && m_playerManager.GetPlayerTab()[i])
             {
-                m_paused = false;
+                m_paused = !m_paused;
             }
 
             if (m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " B") && m_playerManager.GetPlayerTab()[i])
             {
-                m_paused = false;
-                Application.LoadLevel(0);
+                m_paused = !m_paused;
+                m_playerManager.ResetToMenu();
+                Application.LoadLevel("Menu");
+                
             }
         }
 
@@ -59,7 +59,7 @@ public class MenuPause : MonoBehaviour {
     {
          if (m_paused)
          {
-             GUI.Box(new Rect(Screen.width / 2.0f - 200.0f / 2.0f, Screen.height/2.0f - 30.0f/2.0f, 200, 30), "Press A to Continue\nPress B to Quit");
+             GUI.Box(new Rect(Screen.width / 2.0f - 200.0f / 2.0f, Screen.height/2.0f - 100.0f/2.0f, 200, 100), "Press A to Continue\nPress B to Quit");
          }
     }
 
