@@ -33,7 +33,7 @@ public class MenuPlayerSelection : MonoBehaviour {
             if (Input.GetButton("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
             {
                 m_playerManager.SetInGame(true);
-                Application.LoadLevel("Prototype");
+                Application.LoadLevel("Game");
             }
         }
        
