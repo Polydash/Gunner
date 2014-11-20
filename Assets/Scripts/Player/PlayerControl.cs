@@ -23,6 +23,10 @@ public class PlayerControl : MonoBehaviour
 	//Defines a control type
 	public eControlType m_controlType;
 
+	//Invert kickback helpers
+	public bool m_invertKickback = false;
+	private float m_kickbackScale = 1.0f;
+	
 	//Vertical velocity
 	public float m_gravity	     = 100.0f;
 	public float m_jump		     = 25.0f;
@@ -73,6 +77,12 @@ public class PlayerControl : MonoBehaviour
 
 	private void Start()
 	{
+		//Invert kickback
+		if(m_invertKickback)
+		{
+			m_kickbackScale = -1.0f;
+		}
+
 		//Keep the player from rotating with physics
 		rigidbody2D.fixedAngle = true;
 
@@ -335,7 +345,7 @@ public class PlayerControl : MonoBehaviour
 			if(!m_isGrounded && !m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.DOWN);
-				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickBackY);
+				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickbackScale * m_kickBackY);
 			}
 
 			m_downPunchPressed = false;
@@ -350,7 +360,7 @@ public class PlayerControl : MonoBehaviour
 
 				if(!m_isGrounded)
 				{
-					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, -m_kickBackY);
+					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickbackScale * -m_kickBackY);
 				}
 			}
 
@@ -363,7 +373,7 @@ public class PlayerControl : MonoBehaviour
 			if(!m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.LEFT);
-				rigidbody2D.velocity += new Vector2(m_kickBackX, 0.0f);
+				rigidbody2D.velocity += new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
 			}
 
 			m_leftPunchPressed = false;
@@ -375,7 +385,7 @@ public class PlayerControl : MonoBehaviour
 			if(!m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.RIGHT);
-				rigidbody2D.velocity -= new Vector2(m_kickBackX, 0.0f);
+				rigidbody2D.velocity -= new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
 			}
 
 			m_rightPunchPressed = false;

@@ -18,7 +18,9 @@ public class PlayerControlEditor : Editor
 
 		GUI.changed = false;
 
+		//Control test
 		script.m_controlType = (PlayerControl.eControlType) EditorGUILayout.EnumPopup("Control type", script.m_controlType);
+		script.m_invertKickback = EditorGUILayout.Toggle("Invert kickback", script.m_invertKickback);
 
 		//Vertical settings folder
 		m_vertical = EditorGUILayout.Foldout(m_vertical, "Vertical movement");
