@@ -1,19 +1,81 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour 
+{
+
+    public GameObject playerPrefab;
 
     //Number of player Max
-    private const int m_maxPlayers = 4;
+    private const int m_maxPlayers = 2;
 
     private bool[] m_playersIDs = new bool[m_maxPlayers];
 
+    public bool m_inGame = false;
+
+    //Put to false when entering ingame, put to true when exiting in game
+    private bool m_needIDGeneration = true;
+
+    //Spawner Tab
+    private GameObject[] m_SpawnerTab;
+    
+
     void Awake()
     {
+        //Keep the manager everywhere
+        DontDestroyOnLoad(transform.gameObject);
+
        for(int i = 0; i < m_maxPlayers; ++i)
        {
            m_playersIDs[i] = false;//Put everything to false
        }
+    }
+
+    void Update()
+    {
+        if(m_needIDGeneration && m_inGame)
+        {
+            m_needIDGeneration = false;
+
+            //Get the spawners
+            m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
+
+            for (int i = 0; i < m_maxPlayers; ++i)
+            {
+                if (m_playersIDs[i])//If the player is here
+                {
+                    GameObject player = Object.Instantiate(playerPrefab, m_SpawnerTab[i].transform.position, Quaternion.identity) as GameObject;//Instanciate the player at a spawner
+                    player.GetComponent<PlayerID>().SetID(i + 1);//Set his ID
+                    //return i + 1;//Return the id of the player
+                }
+            }
+        }
+    }
+
+    public bool[] GetPlayerTab()
+    {
+        return m_playersIDs;
+    }
+
+    public bool IsInGame()
+    {
+        return m_inGame;
+    }
+
+    public void SetInGame(bool inGame)
+    {
+        m_inGame = inGame;
+    }
+
+    public int GetCurrentPlayerNumber()
+    {
+        int playerNumber = 0;
+        for (int i = 0; i < m_maxPlayers; ++i)
+        {
+            if (m_playersIDs[i])
+                ++playerNumber;
+        }
+        return playerNumber;
     }
 
 

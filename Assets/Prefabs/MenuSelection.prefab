@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: PlayersManager
+  m_Name: MenuSelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,11 +36,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70969c78009e44489a87b30610acde9, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d02a604593b4b4ba0156275b861d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 100000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
-  m_inGame: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
