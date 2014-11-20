@@ -3,6 +3,14 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+	//Enumeration defining a control type
+	public enum eControlType
+	{
+		FOUR_BUTTONS,
+		X,
+		RIGHT_STICK
+	};
+
 	//Enumeration defining a punch direction
 	private enum ePunchDirection
 	{
@@ -12,6 +20,9 @@ public class PlayerControl : MonoBehaviour
 		DOWN
 	};
 
+	//Defines a control type
+	public eControlType m_controlType;
+
 	//Vertical velocity
 	public float m_gravity	     = 100.0f;
 	public float m_jump		     = 25.0f;
@@ -19,7 +30,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_kickBackY	 = 17.0f;
 	public float m_maxGravity    = 20.0f;
 
-	//Horizontal velocity
+	// velocity
 	public float m_inAirAccelX   = 75.0f;
 	public float m_inAirDeaccelX = 20.0f;
 	public float m_accelX	     = 100.0f;
@@ -33,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchMaxVel    = 2000.0f;
 	public float m_punchReturnVel = 50.0f;
 	public float m_punchForce	  = 2000.0f;
-
+	
 	//Reference to player glove
 	private Transform m_glove = null;
 
@@ -54,9 +65,11 @@ public class PlayerControl : MonoBehaviour
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;
 	private bool m_jumpReleased		 = false;
+	private bool m_downPunchPressed  = false;
 	private bool m_leftPunchPressed  = false;
 	private bool m_rightPunchPressed = false;
 	private bool m_upPunchPressed	 = false;
+	private bool m_rightStickCenter  = true;
 
 	private void Start()
 	{
@@ -70,12 +83,46 @@ public class PlayerControl : MonoBehaviour
 		m_playerID = GetComponent<PlayerID>().GetPlayerID();
 	}
 
-	private void Update()
+	private void CheckInputFourButtons()
 	{
-		//Check inputs (for some reason, GetButtonDown does not
-		//respond properly in FixedUpdate())
-
 		//Check jump button
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+		{
+			if(m_isGrounded)
+			{
+				m_jumpPressed = true;
+			}
+			else
+			{
+				m_downPunchPressed = true;
+			}
+		}
+		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
+		{
+			m_jumpReleased = true;
+		}
+		
+		//Check left button
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+		{
+			m_leftPunchPressed = true;
+		}
+		
+		//Check right button
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
+		{
+			m_rightPunchPressed = true;
+		}
+		
+		//Check up button
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
+		{
+			m_upPunchPressed = true;
+		}
+	}
+
+	private void CheckInputX()
+	{
 		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
 		{
 			m_jumpPressed = true;
@@ -85,22 +132,114 @@ public class PlayerControl : MonoBehaviour
 			m_jumpReleased = true;
 		}
 
-		//Check left button
 		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
 		{
-			m_leftPunchPressed = true;
+			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
+			                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
+
+			if(direction.sqrMagnitude > 0.5f)
+			{
+				if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+					{
+						m_rightPunchPressed = true;
+					}
+					else
+					{
+						m_downPunchPressed = true;
+					}
+				}
+				else
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+					{
+						m_upPunchPressed = true;
+					}
+					else
+					{
+						m_leftPunchPressed = true;
+					}
+				}
+			}
+			else
+			{
+				m_rightPunchPressed = true;
+			}
+		}
+	}
+
+	private void CheckInputRightStick()
+	{ 
+		if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
+		{
+			m_jumpPressed = true;
+		}
+		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " R1"))
+		{
+			m_jumpReleased = true;
 		}
 
-		//Check right button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
-		{
-			m_rightPunchPressed = true;
-		}
+		Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
+		                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
 
-		//Check up button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
+		if(direction.sqrMagnitude > 0.75f)
 		{
-			m_upPunchPressed = true;
+			if(m_rightStickCenter)
+			{
+				if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+					{
+						m_rightPunchPressed = true;
+					}
+					else
+					{
+						m_downPunchPressed = true;
+					}
+				}
+				else
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+					{
+						m_upPunchPressed = true;
+					}
+					else
+					{
+						m_leftPunchPressed = true;
+					}
+				}
+
+				m_rightStickCenter = false;
+			}
+		}
+		else
+		{
+			m_rightStickCenter = true;
+		}
+	}
+
+	private void Update()
+	{
+		//Check inputs (for some reason, GetButtonDown does not
+		//respond properly in FixedUpdate())
+
+		switch(m_controlType)
+		{
+			case eControlType.FOUR_BUTTONS :
+				CheckInputFourButtons();
+				break;
+
+			case eControlType.X :
+				CheckInputX();
+				break;
+
+			case eControlType.RIGHT_STICK :
+				CheckInputRightStick();
+				break;
+
+			default :
+				break;
 		}
 	}
 
@@ -126,7 +265,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Check horizontal input
-		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " Horizontal"), 0.0f);
+		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
 		moveInput.x *= accelX;
 
 		//If player is not moving, or if current velocity is above max value
@@ -168,11 +307,6 @@ public class PlayerControl : MonoBehaviour
 				m_isGrounded = false;
 				m_analogJump = true;
 			}
-			else if(!m_punchLaunched && !m_punchReturning)
-			{
-				m_punchDirection = LaunchPunch(ePunchDirection.DOWN);
-				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickBackY);
-			}
 
 			m_jumpPressed = false;
 		}
@@ -193,6 +327,18 @@ public class PlayerControl : MonoBehaviour
 			{
 				m_analogJump = false;
 			}
+		}
+
+		//Check down punch
+		if(m_downPunchPressed)
+		{
+			if(!m_isGrounded && !m_punchLaunched && !m_punchReturning)
+			{
+				m_punchDirection = LaunchPunch(ePunchDirection.DOWN);
+				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickBackY);
+			}
+
+			m_downPunchPressed = false;
 		}
 
 		//Check up punch

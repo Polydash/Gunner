@@ -18,6 +18,8 @@ public class PlayerControlEditor : Editor
 
 		GUI.changed = false;
 
+		script.m_controlType = (PlayerControl.eControlType) EditorGUILayout.EnumPopup("Control type", script.m_controlType);
+
 		//Vertical settings folder
 		m_vertical = EditorGUILayout.Foldout(m_vertical, "Vertical movement");
 		if(m_vertical)
