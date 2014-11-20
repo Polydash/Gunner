@@ -42,23 +42,27 @@ public class SpawnerManager : MonoBehaviour {
         m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
         m_currentPlayerNumber = m_players.Length;
 	}
+
+    public void NotifyDeath()
+    {
+        ++m_deathCounter;
+    }
 	
 	// Update is called once per frame
 	void Update () 
     {
         
-        for (int i = 0; i < m_players.Length; ++i)
-        {
-            if(m_players[i].GetComponent<PlayerDeath>().IsDead())
-            {
-                ++m_deathCounter;
-            }
-        }
+        //for (int i = 0; i < m_players.Length; ++i)
+        //{
+        //    if(m_players[i].GetComponent<PlayerDeath>().IsDead())
+        //    {
+        //        ++m_deathCounter;
+        //    }
+        //}
 
+       // print("DC : " + m_deathCounter + ", (m_currentPlayerNumber - 1) : " + (m_currentPlayerNumber - 1));
 
-
-
-        if(m_deathCounter > (m_currentPlayerNumber - 1))
+        if (m_currentPlayerNumber == 1 && m_deathCounter == 1)
         {
             m_deathCounter = 0;
             //Respawn everybody
@@ -67,6 +71,19 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].transform.position = m_SpawnerTab[i].transform.position;
                 m_players[i].GetComponent<Twinkle>().enabled = true;
                 m_players[i].GetComponent<PlayerDeath>().Reset();
+                m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
+            }
+        }
+        else if(m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1))
+        {
+            m_deathCounter = 0;
+            //Respawn everybody
+            for (int i = 0; i < m_players.Length; ++i)
+            {
+                m_players[i].transform.position = m_SpawnerTab[i].transform.position;
+                m_players[i].GetComponent<Twinkle>().enabled = true;
+                m_players[i].GetComponent<PlayerDeath>().Reset();
+                m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
         }
 
