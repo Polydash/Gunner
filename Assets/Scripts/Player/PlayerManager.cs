@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour 
 {
+    public bool Debug = false;
+
 
     public GameObject playerPrefab;
 
@@ -11,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     private bool[] m_playersIDs = new bool[m_maxPlayers];
 
-    public bool m_inGame = false;
+    private bool m_inGame = false;
 
     //Put to false when entering ingame, put to true when exiting in game
     private bool m_needIDGeneration = true;
@@ -29,11 +31,22 @@ public class PlayerManager : MonoBehaviour
        {
            m_playersIDs[i] = false;//Put everything to false
        }
+
+        if(Debug)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < players.Length; ++i)
+             {
+                 players[i].GetComponent<PlayerID>().SetID(i + 1);
+             }
+
+        }
+
     }
 
     void Update()
     {
-        if(m_needIDGeneration && m_inGame)
+        if(!Debug && m_needIDGeneration && m_inGame)
         {
             m_needIDGeneration = false;
 
