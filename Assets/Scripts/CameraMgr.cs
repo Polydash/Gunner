@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraMgr : MonoBehaviour
 {
+	public int m_size = 9;
+
     private void Awake()
     {
         /*//Get camera component and set ortho size
@@ -11,10 +13,11 @@ public class CameraMgr : MonoBehaviour
 
         //Set position
 		transform.position = new Vector3(LevelMgr.instance.m_levelSize * 16/9, LevelMgr.instance.m_levelSize, -10);*/
-
-		camera.orthographicSize = 9;
+		
+		//Set ortho size
+		camera.orthographicSize = m_size;
 		
 		//Set position
-		transform.position = new Vector3(16, 9, -10);
+		transform.position = new Vector3(m_size * 16/9, m_size, -10);
     }
 }
