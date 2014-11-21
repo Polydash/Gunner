@@ -276,6 +276,18 @@ public class PlayerControl : MonoBehaviour
 
 		//Check horizontal input
 		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
+
+		//Revert player
+		if(moveInput.x > 0.2f)
+		{
+			//Face right direction
+		}
+		else if(moveInput.x < -0.2f)
+		{
+			//Face left direction
+		}
+
+		//Multiply by acceleration value
 		moveInput.x *= accelX;
 
 		//If player is not moving, or if current velocity is above max value
