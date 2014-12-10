@@ -56,9 +56,9 @@ public class PlayerControl : MonoBehaviour
 	private int m_playerID = 0;
 
 	//Player State
-	private bool m_isGrounded 	 = false;
-	private bool m_facingRight	 = true;
-	private bool m_analogJump 	 = false;
+	public  bool m_isGrounded  {get; set;}
+	public  bool m_facingRight {get; set;}
+	private bool m_analogJump = false;
 
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
@@ -263,7 +263,6 @@ public class PlayerControl : MonoBehaviour
 		//Check if player is grounded
 		if(Mathf.Abs(rigidbody2D.velocity.y) > 0.001f)
 		{
-			GetComponent<Animator>().SetBool("Grounded", false);
 			m_isGrounded = false;
 		}
 
@@ -344,7 +343,6 @@ public class PlayerControl : MonoBehaviour
 			if(m_isGrounded)
 			{
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_jump);
-				GetComponent<Animator>().SetBool("Grounded", false);
 				m_isGrounded = false;
 				m_analogJump = true;
 			}
@@ -447,7 +445,6 @@ public class PlayerControl : MonoBehaviour
 				{
 					//Player is on the ground
 					m_isGrounded = true;
-					GetComponent<Animator>().SetBool("Grounded", true);
 					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0.0f);
 				}
 			}
