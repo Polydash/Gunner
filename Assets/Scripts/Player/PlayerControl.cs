@@ -57,6 +57,7 @@ public class PlayerControl : MonoBehaviour
 
 	//Player State
 	private bool m_isGrounded 	 = false;
+	private bool m_facingRight	 = true;
 	private bool m_analogJump 	 = false;
 
 	//Punch State
@@ -172,9 +173,13 @@ public class PlayerControl : MonoBehaviour
 					}
 				}
 			}
-			else
+			else if(m_facingRight)
 			{
 				m_rightPunchPressed = true;
+			}
+			else
+			{
+				m_leftPunchPressed = true;
 			}
 		}
 	}
@@ -281,10 +286,22 @@ public class PlayerControl : MonoBehaviour
 		if(moveInput.x > 0.2f)
 		{
 			//Face right direction
+			m_facingRight = true;
+			transform.localScale = new Vector2(1.0f, transform.localScale.y);
+
+			//Set glove local scale accordingly
+			float scale = Mathf.Abs(m_glove.transform.localScale.x);
+			m_glove.transform.localScale = new Vector2(scale, m_glove.transform.localScale.y);
 		}
 		else if(moveInput.x < -0.2f)
 		{
 			//Face left direction
+			m_facingRight = false;
+			transform.localScale = new Vector2(-1.0f, transform.localScale.y);
+
+			//Set glove local scale accordingly
+			float scale = Mathf.Abs(m_glove.transform.localScale.x);
+			m_glove.transform.localScale = new Vector2(-scale, m_glove.transform.localScale.y);
 		}
 
 		//Multiply by acceleration value
@@ -385,7 +402,8 @@ public class PlayerControl : MonoBehaviour
 			if(!m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.LEFT);
-				rigidbody2D.velocity += new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
+				Vector2 kickback = new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
+				rigidbody2D.velocity += kickback;
 			}
 
 			m_leftPunchPressed = false;
@@ -397,7 +415,8 @@ public class PlayerControl : MonoBehaviour
 			if(!m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.RIGHT);
-				rigidbody2D.velocity -= new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
+				Vector2 kickback = new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
+				rigidbody2D.velocity -= kickback;
 			}
 
 			m_rightPunchPressed = false;
@@ -502,6 +521,9 @@ public class PlayerControl : MonoBehaviour
 		default :
 			break;
 		}
+
+		//Consider the facing direction
+		m_glove.transform.localPosition *= transform.localScale.x;
 
 		//Init punch parameters
 		m_punchElapsed  = 0.0f;
