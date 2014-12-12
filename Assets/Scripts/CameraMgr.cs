@@ -5,6 +5,9 @@ public class CameraMgr : MonoBehaviour
 {
 	public int m_size = 9;
 
+	public int m_width  = 1024;
+	public int m_height = 576;
+
     private void Awake()
     {
         /*//Get camera component and set ortho size
@@ -14,6 +17,9 @@ public class CameraMgr : MonoBehaviour
         //Set position
 		transform.position = new Vector3(LevelMgr.instance.m_levelSize * 16/9, LevelMgr.instance.m_levelSize, -10);*/
 		
+		//Set resolution
+		Screen.SetResolution(m_width, m_height, false);
+
 		//Set ortho size
 		camera.orthographicSize = m_size;
 		

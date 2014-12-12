@@ -283,7 +283,7 @@ public class PlayerControl : MonoBehaviour
 		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
 
 		//Revert player
-		if(moveInput.x > 0.2f)
+		if(moveInput.x > 0.1f && !m_facingRight)
 		{
 			//Face right direction
 			m_facingRight = true;
@@ -292,8 +292,11 @@ public class PlayerControl : MonoBehaviour
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(scale, m_glove.transform.localScale.y);
+
+			//And revert horizontal position
+			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 		}
-		else if(moveInput.x < -0.2f)
+		else if(moveInput.x < -0.1f && m_facingRight)
 		{
 			//Face left direction
 			m_facingRight = false;
@@ -302,6 +305,9 @@ public class PlayerControl : MonoBehaviour
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(-scale, m_glove.transform.localScale.y);
+
+			//And revert horizontal position
+			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 		}
 
 		//Multiply by acceleration value
@@ -499,7 +505,7 @@ public class PlayerControl : MonoBehaviour
 		switch(direction)
 		{
 		case ePunchDirection.DOWN :
-			m_glove.transform.localPosition = new Vector2(0.0f, -1.5f);
+			m_glove.transform.localPosition = new Vector3(0.0f, -1.5f);
 			speedDirection = new Vector2(0.0f, -1.0f);
 			break;
 
@@ -523,7 +529,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Consider the facing direction
-		m_glove.transform.localPosition *= transform.localScale.x;
+		m_glove.transform.localPosition = new Vector2(transform.localScale.x*m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 
 		//Init punch parameters
 		m_punchElapsed  = 0.0f;
