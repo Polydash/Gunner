@@ -23,22 +23,28 @@ public class MenuPause : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        for (int i = 0; i < m_maxPlayers; ++i)
-        {
-            if (Input.GetButtonDown("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
-            {
-                m_paused = !m_paused;
-                GameObject.Destroy(GameObject.Find("PlayersManager"));
-            }
 
-            if (m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " B") && m_playerManager.GetPlayerTab()[i])
+        if (!m_playerManager.m_playerVictory)
+        {
+            for (int i = 0; i < m_maxPlayers; ++i)
             {
-                m_paused = !m_paused;
-                m_playerManager.ResetToMenu();
-                Application.LoadLevel("Menu");
-                
+                if (Input.GetButtonDown("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
+                {
+                    m_paused = !m_paused;
+                    GameObject.Destroy(GameObject.Find("PlayersManager"));
+                }
+
+                if (m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " B") && m_playerManager.GetPlayerTab()[i])
+                {
+                    m_paused = !m_paused;
+                    m_playerManager.ResetToMenu();
+                    Application.LoadLevel("Menu");
+
+                }
             }
         }
+
+       
 
         if (m_paused)
         {

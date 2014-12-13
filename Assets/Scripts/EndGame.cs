@@ -22,10 +22,10 @@ public class EndGame : MonoBehaviour
 
         if (PM.m_playerVictory)
         {
-            Time.timeScale = 0.2f;
-            //Time.timeScale = 1.0f - Mathf.Lerp(0.0f, 1.0f, m_Time / timeSlow);
-            print(Time.timeScale);
-            //m_Time += Time.deltaTime;
+            //Time.timeScale = 0.2f;
+            ////Time.timeScale = 1.0f - Mathf.Lerp(0.0f, 1.0f, m_Time / timeSlow);
+            //print(Time.timeScale);
+            ////m_Time += Time.deltaTime;
         }
 	}
 }

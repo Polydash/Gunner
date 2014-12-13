@@ -74,6 +74,7 @@ public class PlayerManager : MonoBehaviour
                 }
             }
             GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
+            GameObject.Find("InGameInterface").GetComponent<InGameInterface>().enabled = true;
 
             m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
             if (m_players.Length == 0)
@@ -111,7 +112,34 @@ public class PlayerManager : MonoBehaviour
         m_playerWinner = null;
         m_playerVictory = false;
         Time.timeScale = 1.0f;
+        for (int i = 0; i < m_players.Length; ++i)
+        {
+            //GameObject.Destroy(m_players[i]);
+            m_players[i].GetComponent<PlayerScore>().m_playerScore = 0;
+            
+        }
 
+        GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = false;
+
+    }
+
+    public void Reset()
+    {
+       
+        m_needIDGeneration = true;
+        m_playerVictory = false;
+        m_playerWinner = null;
+        m_playerVictory = false;
+        Time.timeScale = 1.0f;
+        for (int i = 0; i < m_players.Length; ++i)
+        {
+            GameObject.Destroy(m_players[i]);
+            //m_players[i].GetComponent<PlayerScore>().m_playerScore = 0;
+
+        }
+
+        GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = false;
+        GameObject.Find("InGameInterface").GetComponent<InGameInterface>().enabled = false;
     }
 
     public bool[] GetPlayerTab()
