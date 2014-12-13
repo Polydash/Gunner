@@ -40,7 +40,7 @@ public class PlayerPunch : MonoBehaviour
 			if(opponentScript.m_isGuarding && ((direction.x > 0.5f && !opponentScript.m_facingRight) ||
 			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
 			{
-				Debug.Log ("Blocked");
+				//Blocked
 			}
 			else
 			{
