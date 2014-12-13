@@ -85,7 +85,10 @@ public class PlayerControl : MonoBehaviour
 		{
 			m_kickbackScale = -1.0f;
 		}
-		
+
+		//Give control to the player
+		m_hasControl = true;
+
 		//Keep the player from rotating with physics
 		rigidbody2D.fixedAngle = true;
 		
