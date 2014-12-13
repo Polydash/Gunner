@@ -118,7 +118,6 @@ public class PlayerControl : MonoBehaviour
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
-				renderer.material.color = Color.red;
 			}
 
 			//Check jump button
@@ -162,7 +161,6 @@ public class PlayerControl : MonoBehaviour
 		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
 		{
 			m_isGuarding = false;
-			renderer.material.color = Color.white;
 		}
 	}
 	
@@ -174,7 +172,6 @@ public class PlayerControl : MonoBehaviour
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
-				renderer.material.color = Color.red;
 			}
 
 			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
@@ -232,7 +229,6 @@ public class PlayerControl : MonoBehaviour
 		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
 		{
 			m_isGuarding = false;
-			renderer.material.color = Color.white;
 		}
 	}
 	
@@ -244,7 +240,6 @@ public class PlayerControl : MonoBehaviour
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
-				renderer.material.color = Color.red;
 			}
 
 			if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
@@ -300,7 +295,6 @@ public class PlayerControl : MonoBehaviour
 		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
 		{
 			m_isGuarding = false;
-			renderer.material.color = Color.white;
 		}
 	}
 	
@@ -654,6 +648,5 @@ public class PlayerControl : MonoBehaviour
 	{
 		m_isGuarding = false;
 		m_brokenGuardElapsed = 0.0f;
-		renderer.material.color = Color.white;
 	}
 }

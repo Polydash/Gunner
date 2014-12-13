@@ -31,5 +31,6 @@ public class PlayerAnimation : MonoBehaviour
 			 		   (!m_playerControl.m_facingRight && rigidbody2D.velocity.x < -0.01f));
 
 		m_animator.SetBool("Running", running);
+		m_animator.SetBool("Guarding", m_playerControl.m_isGuarding);
 	}
 }
