@@ -89,8 +89,9 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Give control to the player
-		m_hasControl = true;
-		m_isGuarding = false;
+		m_hasControl  = true;
+		m_isGuarding  = false;
+		m_facingRight = true;
 
 		//Keep the player from rotating with physics
 		rigidbody2D.fixedAngle = true;
