@@ -58,15 +58,15 @@ public class PlayerPunch : MonoBehaviour
 			}
 			else
 			{
+				//Hit him with full force
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
+                m_PlayerScore.m_AddTouchScore = true;
+
 				//Break guard
 				if(opponentScript.m_isGuarding)
 				{
 					opponentScript.BreakGuard();
 				}
-
-				//Hit him with full force
-				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
-                m_PlayerScore.m_AddTouchScore = true;
 			}
 
 			script.m_punchLaunched = false;
