@@ -5,11 +5,15 @@ public class PlayerPunch : MonoBehaviour
 {
 	private float m_punchForce;
 
+    private PlayerScore m_PlayerScore;
+
 	private void Start()
 	{
 		//Get PlayerControl script and get parameter
 		PlayerControl script = GetComponentInParent<PlayerControl>();
 		m_punchForce = script.m_punchForce;
+
+        m_PlayerScore = GetComponent<PlayerScore>();
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -29,6 +33,10 @@ public class PlayerPunch : MonoBehaviour
 		//If glove punches a player
 		if(script.m_punchLaunched && collision.collider.tag == "Player")
 		{
+            //Added by Guillaume. Reset the score Timer and set the last player punched
+            m_PlayerScore.m_Time = 0.0f;
+            m_PlayerScore.LastPlayerTouched = collision.transform.gameObject;
+
 			//Get opponent PlayerControl script
 			PlayerControl opponentScript = collision.transform.GetComponent<PlayerControl>();
 
@@ -41,11 +49,13 @@ public class PlayerPunch : MonoBehaviour
 			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
 			{
 				//Blocked
+                 m_PlayerScore.m_AddTouchGuardScore = true;
 			}
 			else
 			{
 				//Hit him with full force
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
+                m_PlayerScore.m_AddTouchScore = true;
 			}
 
 			script.m_punchLaunched = false;

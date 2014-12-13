@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour 
 {
-    public bool Debug = false;
+    public bool _debug = false;
 
     public GameObject playerPrefab;
 
@@ -24,6 +24,8 @@ public class PlayerManager : MonoBehaviour
 
     public bool m_playerVictory = false;
 
+    SpawnerManager SpawnManager;
+
     void Awake()
     {
         //Keep the manager everywhere
@@ -34,7 +36,7 @@ public class PlayerManager : MonoBehaviour
            m_playersIDs[i] = false;//Put everything to false
        }
 
-        if(Debug)
+        if(_debug)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             for (int i = 0; i < players.Length; ++i)
@@ -44,11 +46,13 @@ public class PlayerManager : MonoBehaviour
 
         }
 
+       // SpawnManager = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>();
+
     }
 
     void Update()
     {
-        if(!Debug && m_needIDGeneration && m_inGame)
+        if(!_debug && m_needIDGeneration && m_inGame)
         {
             m_needIDGeneration = false;
             
@@ -62,11 +66,21 @@ public class PlayerManager : MonoBehaviour
                     GameObject player = Object.Instantiate(playerPrefab, m_SpawnerTab[i].transform.position, Quaternion.identity) as GameObject;//Instanciate the player at a spawner
                     player.GetComponent<PlayerID>().SetID(i + 1);//Set his ID
                     player.GetComponent<Twinkle>().enabled = true;
+
+                   
                     //return i + 1;//Return the id of the player
                 }
             }
+            Debug.Log("Instanciation");
             GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
         }
+
+
+        //Check every frame if there is a winner
+        //if (m_inGame)
+        //{
+
+        //}
 
     }
 

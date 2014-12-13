@@ -13,23 +13,23 @@ public class SpawnerManager : MonoBehaviour {
     private GameObject[] m_SpawnerTab;
 
     //Players
-    private GameObject[] m_players;
+    public GameObject[] m_players { get; set; }
 
     int m_deathCounter = 0;
 
-    public bool Debug = false;
+    public bool _debug = false;
 
-    SoundManager SM;
+    private SoundManager SM;
 
    
 
 	// Use this for initialization
-	void Start () 
+	void OnEnable () 
     {
-        if (!Debug)
+        if (!_debug)
         {
             m_playerManager = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
-            SM = GameObject.Find("Camera").GetComponent<SoundManager>();
+            //SM = GameObject.Find("Camera").GetComponent<SoundManager>();
         }
         else
         {
@@ -38,17 +38,18 @@ public class SpawnerManager : MonoBehaviour {
 
         if (!m_playerManager)
         {
-            //Debug.Log("Can't get PlayerManager in SpawnerManager");
+            print("Can't get PlayerManager in SpawnerManager");
         }
 
+        SM = GameObject.Find("Camera").GetComponent<SoundManager>();
         
         m_players = GameObject.FindGameObjectsWithTag("Player");
         m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
         m_currentPlayerNumber = m_players.Length;
 
+        //Debug.Break();
         SM.m_playSoundStartGame = true;
 
-       // print(m_SpawnerTab.Length);
 	}
 
     public void NotifyDeath()
@@ -84,6 +85,7 @@ public class SpawnerManager : MonoBehaviour {
         }
         else if(m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1))
         {
+           
             m_deathCounter = 0;
             //Respawn everybody
             for (int i = 0; i < m_players.Length; ++i)

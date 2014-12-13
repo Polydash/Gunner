@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Debug: 0
   playerPrefab: {fileID: 100000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+  m_playerVictory: 0
 --- !u!4 &112457402
 Transform:
   m_ObjectHideFlags: 0
@@ -272,6 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d02a604593b4b4ba0156275b861d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCountMin: 10
+  pointCountMax: 1000
 --- !u!4 &1116190249
 Transform:
   m_ObjectHideFlags: 0
