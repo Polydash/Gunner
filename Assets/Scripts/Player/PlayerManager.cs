@@ -24,7 +24,10 @@ public class PlayerManager : MonoBehaviour
 
     public bool m_playerVictory = false;
 
-    SpawnerManager SpawnManager;
+    private SpawnerManager SpawnManager;
+    private GameObject[] m_players;
+
+    public GameObject m_playerWinner { get; set; }
 
     void Awake()
     {
@@ -43,10 +46,9 @@ public class PlayerManager : MonoBehaviour
              {
                  players[i].GetComponent<PlayerID>().SetID(i + 1);
              }
-
         }
 
-       // SpawnManager = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>();
+       
 
     }
 
@@ -72,14 +74,33 @@ public class PlayerManager : MonoBehaviour
                 }
             }
             GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
+
+            m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
+            if (m_players.Length == 0)
+            {
+                Debug.Log("Do not work");
+            }
         }
 
+        
 
         //Check every frame if there is a winner
-        //if (m_inGame)
-        //{
-
-        //}
+        if (m_inGame && m_needIDGeneration == false)
+        {
+            for (int i = 0; i < m_players.Length; ++i)
+            {
+                if (m_players[i].GetComponent<PlayerScore>().m_playerScore >= m_PointCount)
+                {
+                    m_players[i].GetComponent<PlayerScore>().m_playerScore = m_PointCount;
+                    m_playerVictory = true;
+                    m_playerWinner = m_players[i];
+                    print("Winner player " + (m_playerWinner.GetComponent<PlayerID>().GetPlayerID()).ToString());
+                }
+                
+            }
+            
+            
+        }
 
     }
 
@@ -87,6 +108,8 @@ public class PlayerManager : MonoBehaviour
     {
         m_inGame = false;
         m_needIDGeneration = true;
+        m_playerVictory = false;
+        m_playerWinner = null;
         m_playerVictory = false;
 
     }
