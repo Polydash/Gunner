@@ -51,6 +51,6 @@ public class PlayerScore : MonoBehaviour {
 
         m_Time += Time.deltaTime;
 
-        //print("My Score = " + m_playerScore);
+        print("My Score = " + m_playerScore);
 	}
 }

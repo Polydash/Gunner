@@ -15,11 +15,11 @@ public class PlayerPunch : MonoBehaviour
 
         m_PlayerScore = transform.parent.GetComponent<PlayerScore>();
         if (!m_PlayerScore)
-        {
-            Debug.Log("Error getting player score in playerPunch");
-        }
-            
-        
+            print("PAS OK");
+        else
+            print("OK");
+
+        print("HEERERERERER");
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
