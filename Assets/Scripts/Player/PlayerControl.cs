@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_kickBackY	 = 17.0f;
 	public float m_maxGravity    = 20.0f;
 	
-	// velocity
+	//Horizontal velocity
 	public float m_inAirAccelX   = 75.0f;
 	public float m_inAirDeaccelX = 20.0f;
 	public float m_accelX	     = 100.0f;
@@ -347,6 +347,11 @@ public class PlayerControl : MonoBehaviour
 			accelX	 = m_inAirAccelX;
 		}
 
+		//Raise deacceleration while guarding
+		if(m_isGuarding)
+		{
+			deaccelX *= 4.0f;
+		}
 
 		if(m_hasControl && !m_isGuarding)
 		{
