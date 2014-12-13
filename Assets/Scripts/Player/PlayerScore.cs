@@ -35,6 +35,7 @@ public class PlayerScore : MonoBehaviour {
         if (LastPlayerTouched && LastPlayerTouched.GetComponent<PlayerDeath>().IsDead() && m_Time < DeathTimer)
         {
             m_playerScore += KillScore;
+            LastPlayerTouched = null;
         }
 
         if (m_AddTouchScore)
