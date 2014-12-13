@@ -5,7 +5,6 @@ public class PlayerManager : MonoBehaviour
 {
     public bool Debug = false;
 
-    
     public GameObject playerPrefab;
 
     //Number of player Max
@@ -20,7 +19,10 @@ public class PlayerManager : MonoBehaviour
 
     //Spawner Tab
     private GameObject[] m_SpawnerTab;
-    
+
+    public int m_PointCount { get; set; }
+
+    public bool m_playerVictory = false;
 
     void Awake()
     {
@@ -65,12 +67,14 @@ public class PlayerManager : MonoBehaviour
             }
             GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
         }
+
     }
 
     public void ResetToMenu()
     {
         m_inGame = false;
         m_needIDGeneration = true;
+        m_playerVictory = false;
 
     }
 

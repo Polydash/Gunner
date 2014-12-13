@@ -34,8 +34,7 @@ public class SpawnerManager : MonoBehaviour {
         else
         {
             m_playerManager = GameObject.Find("DEBUGPlayerManager").GetComponent<PlayerManager>();
-        }
-           
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
         if (!m_playerManager)
         {

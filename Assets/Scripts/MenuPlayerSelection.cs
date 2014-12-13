@@ -7,6 +7,11 @@ public class MenuPlayerSelection : MonoBehaviour {
     private PlayerManager m_playerManager;
     private int m_maxPlayers = -1;
 
+    private int pointCount = 50;
+
+    public int pointCountMin = 10;
+    public int pointCountMax = 1000;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -32,8 +37,33 @@ public class MenuPlayerSelection : MonoBehaviour {
 
             if (Input.GetButton("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
             {
+                m_playerManager.m_PointCount = pointCount;
                 m_playerManager.SetInGame(true);
                 Application.LoadLevel("Game");
+            }
+        }
+
+        //Change the round count
+        for (int i = 0; i < m_maxPlayers; ++i)
+        {
+            if (Input.GetAxis("P" + (i + 1).ToString() + " LHorizontal") > 0 && m_playerManager.GetPlayerTab()[i])
+            {
+                ++pointCount;
+                if (pointCount > pointCountMax)
+                {
+                    pointCount = pointCountMin;
+                }
+                break;
+            }
+
+            if (Input.GetAxis("P" + (i + 1).ToString() + " LHorizontal") < 0 && m_playerManager.GetPlayerTab()[i])
+            {
+                --pointCount;
+                if (pointCount < pointCountMin)
+                {
+                    pointCount = pointCountMax;
+                }
+                break;
             }
         }
        
@@ -46,6 +76,8 @@ public class MenuPlayerSelection : MonoBehaviour {
         {
             GUI.Box(new Rect(10, 10 + i * 30, 200, 30), "Player " + (i + 1).ToString() + " " + (m_playerManager.GetPlayerTab()[i]?"Ready !":" not Ready."));
         }
+
+        GUI.Box(new Rect(Screen.width - 200, 50, 200, 30), "Points to win : " + pointCount.ToString());
 
         GUI.Box(new Rect(10, Screen.height - 50, 200, 30), "Press start to Begin");
     }
