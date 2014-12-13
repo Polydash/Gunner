@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
 	public  bool m_facingRight {get; set;}
 	public  bool m_hasControl  {get; set;}
 	private bool m_analogJump = false;
+	private bool m_isGuarding = false;
 	
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
@@ -77,6 +78,7 @@ public class PlayerControl : MonoBehaviour
 	private bool m_upPunchPressed	 = false;
 	private bool m_rightStickCenter  = true;
 	private Vector2 m_moveInput;
+	private float m_bumperThreshold = -0.3f;
 	
 	private void Start()
 	{
@@ -101,141 +103,193 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputFourButtons()
 	{
-		//Check jump button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+		//If player is not guarding
+		if(!m_isGuarding)
 		{
-			if(m_isGrounded)
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
 			{
-				m_jumpPressed = true;
+				m_isGuarding = true;
+				renderer.material.color = Color.red;
 			}
-			else
+
+			//Check jump button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
 			{
-				m_downPunchPressed = true;
+				if(m_isGrounded)
+				{
+					m_jumpPressed = true;
+				}
+				else
+				{
+					m_downPunchPressed = true;
+				}
+			}
+			
+			//Check left button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+			{
+				m_leftPunchPressed = true;
+			}
+			
+			//Check right button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
+			{
+				m_rightPunchPressed = true;
+			}
+			
+			//Check up button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
+			{
+				m_upPunchPressed = true;
 			}
 		}
-		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
+
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
 		{
 			m_jumpReleased = true;
 		}
-		
-		//Check left button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
 		{
-			m_leftPunchPressed = true;
-		}
-		
-		//Check right button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
-		{
-			m_rightPunchPressed = true;
-		}
-		
-		//Check up button
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
-		{
-			m_upPunchPressed = true;
+			m_isGuarding = false;
+			renderer.material.color = Color.white;
 		}
 	}
 	
 	private void CheckInputX()
 	{
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+		if(!m_isGuarding)
 		{
-			m_jumpPressed = true;
-		}
-		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
-		{
-			m_jumpReleased = true;
-		}
-		
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
-		{
-			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
-			                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
-			
-			if(direction.sqrMagnitude > 0.5f)
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
 			{
-				if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+				m_isGuarding = true;
+				renderer.material.color = Color.red;
+			}
+
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+			{
+				m_jumpPressed = true;
+			}
+			
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+			{
+				Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
+				                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
+				
+				if(direction.sqrMagnitude > 0.5f)
 				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
 					{
-						m_rightPunchPressed = true;
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							m_rightPunchPressed = true;
+						}
+						else
+						{
+							m_downPunchPressed = true;
+						}
 					}
 					else
 					{
-						m_downPunchPressed = true;
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							m_upPunchPressed = true;
+						}
+						else
+						{
+							m_leftPunchPressed = true;
+						}
 					}
+				}
+				else if(m_facingRight)
+				{
+					m_rightPunchPressed = true;
 				}
 				else
 				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-					{
-						m_upPunchPressed = true;
-					}
-					else
-					{
-						m_leftPunchPressed = true;
-					}
+					m_leftPunchPressed = true;
 				}
 			}
-			else if(m_facingRight)
-			{
-				m_rightPunchPressed = true;
-			}
-			else
-			{
-				m_leftPunchPressed = true;
-			}
+		}
+
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
+		{
+			m_jumpReleased = true;
+		}
+
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
+		{
+			m_isGuarding = false;
+			renderer.material.color = Color.white;
 		}
 	}
 	
 	private void CheckInputRightStick()
 	{ 
-		if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
+		if(!m_isGuarding)
 		{
-			m_jumpPressed = true;
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
+			{
+				m_isGuarding = true;
+				renderer.material.color = Color.red;
+			}
+
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
+			{
+				m_jumpPressed = true;
+			}
+			
+			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
+			                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
+			
+			if(direction.sqrMagnitude > 0.75f)
+			{
+				if(m_rightStickCenter)
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							m_rightPunchPressed = true;
+						}
+						else
+						{
+							m_downPunchPressed = true;
+						}
+					}
+					else
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							m_upPunchPressed = true;
+						}
+						else
+						{
+							m_leftPunchPressed = true;
+						}
+					}
+					
+					m_rightStickCenter = false;
+				}
+			}
+			else
+			{
+				m_rightStickCenter = true;
+			}
 		}
-		else if(Input.GetButtonUp("P" + m_playerID.ToString() + " R1"))
+
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " R1"))
 		{
 			m_jumpReleased = true;
 		}
-		
-		Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
-		                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
-		
-		if(direction.sqrMagnitude > 0.75f)
+
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
 		{
-			if(m_rightStickCenter)
-			{
-				if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
-				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-					{
-						m_rightPunchPressed = true;
-					}
-					else
-					{
-						m_downPunchPressed = true;
-					}
-				}
-				else
-				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-					{
-						m_upPunchPressed = true;
-					}
-					else
-					{
-						m_leftPunchPressed = true;
-					}
-				}
-				
-				m_rightStickCenter = false;
-			}
-		}
-		else
-		{
-			m_rightStickCenter = true;
+			m_isGuarding = false;
+			renderer.material.color = Color.white;
 		}
 	}
 	
@@ -246,10 +300,7 @@ public class PlayerControl : MonoBehaviour
 		
 		//Only check inputs if player has control
 		if(m_hasControl)
-		{
-			//Check horizontal input
-			m_moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
-			
+		{	
 			switch(m_controlType)
 			{
 			case eControlType.FOUR_BUTTONS :
@@ -290,7 +341,19 @@ public class PlayerControl : MonoBehaviour
 			deaccelX = m_inAirDeaccelX;
 			accelX	 = m_inAirAccelX;
 		}
-		
+
+
+		if(m_hasControl && !m_isGuarding)
+		{
+			//Check horizontal input
+			m_moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
+		}
+		else
+		{
+			//Reset horizontal input
+			m_moveInput = new Vector2(0.0f, 0.0f);
+		}
+
 		//Revert player
 		if(m_moveInput.x > 0.1f && !m_facingRight)
 		{

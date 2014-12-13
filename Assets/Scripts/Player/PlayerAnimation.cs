@@ -6,8 +6,6 @@ public class PlayerAnimation : MonoBehaviour
 	private Animator m_animator;
 	private PlayerControl m_playerControl;
 
-	private bool m_running = false;
-
 	void Start()
 	{
 		m_animator = GetComponent<Animator>();
