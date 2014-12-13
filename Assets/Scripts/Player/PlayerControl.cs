@@ -552,13 +552,14 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 
+		//Rebound
 		for(int i=0; i<collision.contacts.Length; ++i)
 		{
 			if(Mathf.Abs(collision.contacts[i].normal.x) > 0.9f && Mathf.Abs(collision.contacts[i].normal.y) < 0.1f)
 			{
-				if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX)
+				if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX/2.0f)
 				{
-					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity, rigidbody2D.velocity.y);
+					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity/2.0f, rigidbody2D.velocity.y);
 				}
 			}
 		}
