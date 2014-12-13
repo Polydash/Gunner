@@ -29,11 +29,25 @@ public class PlayerPunch : MonoBehaviour
 		//If glove punches a player
 		if(script.m_punchLaunched && collision.collider.tag == "Player")
 		{
-			//Hit him
+			//Get opponent PlayerControl script
+			PlayerControl opponentScript = collision.transform.GetComponent<PlayerControl>();
+
+			//Get punch direction
 			Vector2 direction = script.m_punchDirection;
 			direction.Normalize();
-			collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
-			
+
+			//If player is guarding
+			if(opponentScript.m_isGuarding && ((direction.x > 0.5f && !opponentScript.m_facingRight) ||
+			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
+			{
+				Debug.Log ("Blocked");
+			}
+			else
+			{
+				//Hit him with full force
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
+			}
+
 			script.m_punchLaunched = false;
 			script.m_punchReturning = true;
 			rigidbody2D.velocity = new Vector2(0.0f, 0.0f);

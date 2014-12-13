@@ -59,8 +59,8 @@ public class PlayerControl : MonoBehaviour
 	public  bool m_isGrounded  {get; set;}
 	public  bool m_facingRight {get; set;}
 	public  bool m_hasControl  {get; set;}
+	public  bool m_isGuarding  {get; set;}
 	private bool m_analogJump = false;
-	private bool m_isGuarding = false;
 	
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
@@ -90,6 +90,7 @@ public class PlayerControl : MonoBehaviour
 
 		//Give control to the player
 		m_hasControl = true;
+		m_isGuarding = false;
 
 		//Keep the player from rotating with physics
 		rigidbody2D.fixedAngle = true;
@@ -106,6 +107,7 @@ public class PlayerControl : MonoBehaviour
 		//If player is not guarding
 		if(!m_isGuarding)
 		{
+			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
 			{
 				m_isGuarding = true;
@@ -161,6 +163,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		if(!m_isGuarding)
 		{
+			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
 			{
 				m_isGuarding = true;
@@ -230,6 +233,7 @@ public class PlayerControl : MonoBehaviour
 	{ 
 		if(!m_isGuarding)
 		{
+			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
 			{
 				m_isGuarding = true;
