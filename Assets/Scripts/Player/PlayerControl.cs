@@ -350,7 +350,7 @@ public class PlayerControl : MonoBehaviour
 		//Raise deacceleration while guarding
 		if(m_isGuarding)
 		{
-			deaccelX *= 4.0f;
+			deaccelX *= 2.0f;
 		}
 
 		if(m_hasControl && !m_isGuarding)
