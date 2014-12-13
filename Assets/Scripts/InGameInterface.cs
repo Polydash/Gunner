@@ -3,20 +3,35 @@ using System.Collections;
 
 public class InGameInterface : MonoBehaviour {
 
-    public GameObject[] m_players;
+    private GameObject[] m_players;
 
     private int rectWidth = 100;
     private int rectHeight = 20;
 
     PlayerManager PM;
 
+    public bool _debug = false;
+
 	// Use this for initialization
 	void OnEnable ()
     {
-        PM = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
-        m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
-        print(m_players.Length);
+        if (!_debug)
+        {
+            PM = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
+            m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
+            print(m_players.Length);
+        }
+       
 	}
+
+    void Start()
+    {
+        if (_debug)
+        {
+            PM = GameObject.Find("DEBUGPlayerManager").GetComponent<PlayerManager>();
+            m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () 
