@@ -136,7 +136,7 @@ public class PlayerControl : MonoBehaviour
 	private void CheckInputFourButtons()
 	{
 		//If player is not guarding
-		if(!m_isGuarding)
+		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
@@ -190,7 +190,7 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputX()
 	{
-		if(!m_isGuarding)
+		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
@@ -264,7 +264,7 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputRightStick()
 	{ 
-		if(!m_isGuarding)
+		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
