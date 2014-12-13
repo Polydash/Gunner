@@ -5,7 +5,7 @@ public class PlayerManager : MonoBehaviour
 {
     public bool Debug = false;
 
-
+    
     public GameObject playerPrefab;
 
     //Number of player Max

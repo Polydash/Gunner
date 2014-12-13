@@ -28,11 +28,7 @@ public class MenuPause : MonoBehaviour {
             if (Input.GetButtonDown("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
             {
                 m_paused = !m_paused;
-            }
-
-            if(m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " A") && m_playerManager.GetPlayerTab()[i])
-            {
-                m_paused = !m_paused;
+                GameObject.Destroy(GameObject.Find("PlayersManager"));
             }
 
             if (m_paused && Input.GetButtonUp("P" + (i + 1).ToString() + " B") && m_playerManager.GetPlayerTab()[i])
@@ -59,13 +55,14 @@ public class MenuPause : MonoBehaviour {
     {
          if (m_paused)
          {
-             GUI.Box(new Rect(Screen.width / 2.0f - 200.0f / 2.0f, Screen.height/2.0f - 100.0f/2.0f, 200, 100), "Press A to Continue\nPress B to Quit");
+             GUI.Box(new Rect(Screen.width / 2.0f - 200.0f / 2.0f, Screen.height/2.0f - 100.0f/2.0f, 200, 100), "Press Start to Continue\nPress B to Quit");
          }
     }
 
     void OnDestroy()
     {
         Time.timeScale = 1.0f;//Check Up on destroy
+        
     }
 
 
