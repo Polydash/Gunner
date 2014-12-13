@@ -309,7 +309,7 @@ public class PlayerControl : MonoBehaviour
 		//respond properly in FixedUpdate())
 
 		//Increase broken guard time
-		if(m_brokenGuardElapsed < m_brokenGuardTime)
+		if(m_brokenGuardElapsed <= m_brokenGuardTime)
 		{
 			m_brokenGuardElapsed += Time.deltaTime;
 		}
@@ -639,5 +639,6 @@ public class PlayerControl : MonoBehaviour
 	{
 		m_isGuarding = false;
 		m_brokenGuardElapsed = 0.0f;
+		renderer.material.color = Color.white;
 	}
 }

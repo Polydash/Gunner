@@ -14,12 +14,6 @@ public class PlayerPunch : MonoBehaviour
 		m_punchForce = script.m_punchForce;
 
         m_PlayerScore = transform.parent.GetComponent<PlayerScore>();
-        if (!m_PlayerScore)
-            print("PAS OK");
-        else
-            print("OK");
-
-        print("HEERERERERER");
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
