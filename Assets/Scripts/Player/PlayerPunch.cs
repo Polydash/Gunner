@@ -49,10 +49,17 @@ public class PlayerPunch : MonoBehaviour
 			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
 			{
 				//Blocked
-                 m_PlayerScore.m_AddTouchGuardScore = true;
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce / 4.0f);
+                m_PlayerScore.m_AddTouchGuardScore = true;
 			}
 			else
 			{
+				//Break guard
+				if(opponentScript.m_isGuarding)
+				{
+					opponentScript.BreakGuard();
+				}
+
 				//Hit him with full force
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
                 m_PlayerScore.m_AddTouchScore = true;
