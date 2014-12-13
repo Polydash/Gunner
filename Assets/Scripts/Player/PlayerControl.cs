@@ -63,6 +63,7 @@ public class PlayerControl : MonoBehaviour
 	private bool m_analogJump = false;
 	private float m_brokenGuardElapsed;
 	private float m_brokenGuardTime = 0.5f;
+	private float m_horizontalVelocity;
 	
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
@@ -530,6 +531,8 @@ public class PlayerControl : MonoBehaviour
 		//Only clamp vertical velocity
 		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,
 		                                   Mathf.Max(rigidbody2D.velocity.y, -m_maxGravity));
+
+		m_horizontalVelocity = rigidbody2D.velocity.x;
 	}
 	
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -545,6 +548,17 @@ public class PlayerControl : MonoBehaviour
 					//Player is on the ground
 					m_isGrounded = true;
 					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0.0f);
+				}
+			}
+		}
+
+		for(int i=0; i<collision.contacts.Length; ++i)
+		{
+			if(Mathf.Abs(collision.contacts[i].normal.x) > 0.9f && Mathf.Abs(collision.contacts[i].normal.y) < 0.1f)
+			{
+				if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX)
+				{
+					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity, rigidbody2D.velocity.y);
 				}
 			}
 		}
