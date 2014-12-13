@@ -41,6 +41,8 @@ public class SpawnerManager : MonoBehaviour {
         m_players = GameObject.FindGameObjectsWithTag("Player");
         m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
         m_currentPlayerNumber = m_players.Length;
+
+       // print(m_SpawnerTab.Length);
 	}
 
     public void NotifyDeath()

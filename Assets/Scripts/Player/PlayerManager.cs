@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject playerPrefab;
 
     //Number of player Max
-    private const int m_maxPlayers = 2;
+    private const int m_maxPlayers = 4;
 
     private bool[] m_playersIDs = new bool[m_maxPlayers];
 
