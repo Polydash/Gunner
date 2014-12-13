@@ -24,7 +24,7 @@ public class SpawnerManager : MonoBehaviour {
    
 
 	// Use this for initialization
-	void OnEnable()
+	void OnEnable () 
     {
         if (!_debug)
         {
@@ -71,7 +71,7 @@ public class SpawnerManager : MonoBehaviour {
 
        // print("DC : " + m_deathCounter + ", (m_currentPlayerNumber - 1) : " + (m_currentPlayerNumber - 1));
 
-        if (m_currentPlayerNumber == 1 && m_deathCounter == 1)//Case where there is only one player
+        if (m_currentPlayerNumber == 1 && m_deathCounter == 1)//Case where there is only one player. Debug purposes
         {
             m_deathCounter = 0;
             //Respawn everybody
@@ -83,9 +83,8 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
         }
-        else if(m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1))
+        else if (m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1) && !m_playerManager.m_playerVictory)
         {
-           
             m_deathCounter = 0;
             //Respawn everybody
             for (int i = 0; i < m_players.Length; ++i)
@@ -96,10 +95,6 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
             SM.m_playSoundStartRound = true;
-            
         }
-
-        
-       
 	}
 }

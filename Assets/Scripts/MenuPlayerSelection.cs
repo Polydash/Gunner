@@ -7,7 +7,7 @@ public class MenuPlayerSelection : MonoBehaviour {
     private PlayerManager m_playerManager;
     private int m_maxPlayers = -1;
 
-    private int pointCount = 50;
+    private int pointCount = 11;
 
     public int pointCountMin = 10;
     public int pointCountMax = 1000;

@@ -14,10 +14,10 @@ public class PlayerPunch : MonoBehaviour
 		m_punchForce = script.m_punchForce;
 
         m_PlayerScore = transform.parent.GetComponent<PlayerScore>();
-		if(!m_PlayerScore)
-		{
-			Debug.LogError("Failed to get playerscore reference");
-		}
+        if (!m_PlayerScore)
+        {
+            Debug.Log("Error getting player score in playerPunch");
+        }
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -58,15 +58,15 @@ public class PlayerPunch : MonoBehaviour
 			}
 			else
 			{
-				//Hit him with full force
-				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
-                m_PlayerScore.m_AddTouchScore = true;
-
 				//Break guard
 				if(opponentScript.m_isGuarding)
 				{
 					opponentScript.BreakGuard();
 				}
+
+				//Hit him with full force
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
+                m_PlayerScore.m_AddTouchScore = true;
 			}
 
 			script.m_punchLaunched = false;
