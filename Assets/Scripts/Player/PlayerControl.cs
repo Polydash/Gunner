@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
 		X,
 		RIGHT_STICK
 	};
-
+	
 	//Enumeration defining a punch direction
 	private enum ePunchDirection
 	{
@@ -19,10 +19,10 @@ public class PlayerControl : MonoBehaviour
 		UP,
 		DOWN
 	};
-
+	
 	//Defines a control type
 	public eControlType m_controlType;
-
+	
 	//Invert kickback helpers
 	public bool m_invertKickback = false;
 	private float m_kickbackScale = 1.0f;
@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_analog		 = 20.0f;
 	public float m_kickBackY	 = 17.0f;
 	public float m_maxGravity    = 20.0f;
-
+	
 	// velocity
 	public float m_inAirAccelX   = 75.0f;
 	public float m_inAirDeaccelX = 20.0f;
@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_deaccelX      = 75.0f;
 	public float m_kickBackX	 = 12.0f;
 	public float m_maxVelX       = 12.0f;
-
+	
 	//Punch velocity
 	public float m_punchTime   	  = 0.12f;
 	public float m_punchMinVel 	  = 500.0f;
@@ -51,22 +51,23 @@ public class PlayerControl : MonoBehaviour
 	
 	//Reference to player glove
 	private Transform m_glove = null;
-
+	
 	//Player ID
 	private int m_playerID = 0;
-
+	
 	//Player State
 	public  bool m_isGrounded  {get; set;}
 	public  bool m_facingRight {get; set;}
+	public  bool m_hasControl  {get; set;}
 	private bool m_analogJump = false;
-
+	
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
 	private float   m_punchInertia;
 	public  Vector2 m_punchDirection {get; set;}
 	public  bool    m_punchLaunched  {get; set;}
 	public  bool    m_punchReturning {get; set;}
-
+	
 	//Input helper variables
 	private bool m_jumpPressed 		 = false;
 	private bool m_jumpReleased		 = false;
@@ -75,7 +76,8 @@ public class PlayerControl : MonoBehaviour
 	private bool m_rightPunchPressed = false;
 	private bool m_upPunchPressed	 = false;
 	private bool m_rightStickCenter  = true;
-
+	private Vector2 m_moveInput;
+	
 	private void Start()
 	{
 		//Invert kickback
@@ -83,17 +85,17 @@ public class PlayerControl : MonoBehaviour
 		{
 			m_kickbackScale = -1.0f;
 		}
-
+		
 		//Keep the player from rotating with physics
 		rigidbody2D.fixedAngle = true;
-
+		
 		//Init reference to player glove
 		m_glove = transform.GetChild(0);
-
+		
 		//Init player ID
 		m_playerID = GetComponent<PlayerID>().GetPlayerID();
 	}
-
+	
 	private void CheckInputFourButtons()
 	{
 		//Check jump button
@@ -131,7 +133,7 @@ public class PlayerControl : MonoBehaviour
 			m_upPunchPressed = true;
 		}
 	}
-
+	
 	private void CheckInputX()
 	{
 		if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
@@ -142,12 +144,12 @@ public class PlayerControl : MonoBehaviour
 		{
 			m_jumpReleased = true;
 		}
-
+		
 		if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
 		{
 			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
 			                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
-
+			
 			if(direction.sqrMagnitude > 0.5f)
 			{
 				if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
@@ -183,7 +185,7 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 	}
-
+	
 	private void CheckInputRightStick()
 	{ 
 		if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
@@ -194,10 +196,10 @@ public class PlayerControl : MonoBehaviour
 		{
 			m_jumpReleased = true;
 		}
-
+		
 		Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
 		                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
-
+		
 		if(direction.sqrMagnitude > 0.75f)
 		{
 			if(m_rightStickCenter)
@@ -224,7 +226,7 @@ public class PlayerControl : MonoBehaviour
 						m_leftPunchPressed = true;
 					}
 				}
-
+				
 				m_rightStickCenter = false;
 			}
 		}
@@ -233,31 +235,38 @@ public class PlayerControl : MonoBehaviour
 			m_rightStickCenter = true;
 		}
 	}
-
+	
 	private void Update()
 	{
 		//Check inputs (for some reason, GetButtonDown does not
 		//respond properly in FixedUpdate())
-
-		switch(m_controlType)
+		
+		//Only check inputs if player has control
+		if(m_hasControl)
 		{
+			//Check horizontal input
+			m_moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
+			
+			switch(m_controlType)
+			{
 			case eControlType.FOUR_BUTTONS :
 				CheckInputFourButtons();
 				break;
-
+				
 			case eControlType.X :
 				CheckInputX();
 				break;
-
+				
 			case eControlType.RIGHT_STICK :
 				CheckInputRightStick();
 				break;
-
+				
 			default :
 				break;
+			}
 		}
 	}
-
+	
 	private void FixedUpdate()
 	{
 		//Check if player is grounded
@@ -265,7 +274,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			m_isGrounded = false;
 		}
-
+		
 		//Set horizontal deacceleration/acceleration values
 		float deaccelX, accelX;
 		if(m_isGrounded)
@@ -278,43 +287,40 @@ public class PlayerControl : MonoBehaviour
 			deaccelX = m_inAirDeaccelX;
 			accelX	 = m_inAirAccelX;
 		}
-
-		//Check horizontal input
-		Vector2 moveInput = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"), 0.0f);
-
+		
 		//Revert player
-		if(moveInput.x > 0.1f && !m_facingRight)
+		if(m_moveInput.x > 0.1f && !m_facingRight)
 		{
 			//Face right direction
 			m_facingRight = true;
 			transform.localScale = new Vector2(1.0f, transform.localScale.y);
-
+			
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(scale, m_glove.transform.localScale.y);
-
+			
 			//And revert horizontal position
 			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 		}
-		else if(moveInput.x < -0.1f && m_facingRight)
+		else if(m_moveInput.x < -0.1f && m_facingRight)
 		{
 			//Face left direction
 			m_facingRight = false;
 			transform.localScale = new Vector2(-1.0f, transform.localScale.y);
-
+			
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(-scale, m_glove.transform.localScale.y);
-
+			
 			//And revert horizontal position
 			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 		}
-
+		
 		//Multiply by acceleration value
-		moveInput.x *= accelX;
-
+		m_moveInput.x *= accelX;
+		
 		//If player is not moving, or if current velocity is above max value
-		if(Mathf.Abs(moveInput.x) < 0.01f || Mathf.Abs(rigidbody2D.velocity.x) > m_maxVelX)
+		if(Mathf.Abs(m_moveInput.x) < 0.01f || Mathf.Abs(rigidbody2D.velocity.x) > m_maxVelX)
 		{
 			//Apply horizontal deacceleration
 			if(rigidbody2D.velocity.x > deaccelX * Time.deltaTime)
@@ -330,19 +336,19 @@ public class PlayerControl : MonoBehaviour
 				rigidbody2D.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
 			}
 		}
-		else if(moveInput.x * rigidbody2D.velocity.x > 0.0f)
+		else if(m_moveInput.x * rigidbody2D.velocity.x > 0.0f)
 		{
 			//Apply horizontal input, considering max speed
-			rigidbody2D.velocity += new Vector2(Mathf.Clamp(moveInput.x * Time.deltaTime,
+			rigidbody2D.velocity += new Vector2(Mathf.Clamp(m_moveInput.x * Time.deltaTime,
 			                                                Mathf.Min(0.0f, -m_maxVelX - rigidbody2D.velocity.x),
 			                                                Mathf.Max(0.0f, m_maxVelX - rigidbody2D.velocity.x)), 0.0f);
 		}
 		else
 		{
 			//Apply horizontal input
-			rigidbody2D.velocity += new Vector2(moveInput.x * Time.deltaTime, 0.0f);
+			rigidbody2D.velocity += new Vector2(m_moveInput.x * Time.deltaTime, 0.0f);
 		}
-
+		
 		//Check jump
 		if(m_jumpPressed)
 		{
@@ -352,7 +358,7 @@ public class PlayerControl : MonoBehaviour
 				m_isGrounded = false;
 				m_analogJump = true;
 			}
-
+			
 			m_jumpPressed = false;
 		}
 		else if(m_jumpReleased)
@@ -360,7 +366,7 @@ public class PlayerControl : MonoBehaviour
 			m_analogJump = false;
 			m_jumpReleased = false;
 		}
-
+		
 		//Check analogic jump
 		if(m_analogJump)
 		{
@@ -373,7 +379,7 @@ public class PlayerControl : MonoBehaviour
 				m_analogJump = false;
 			}
 		}
-
+		
 		//Check down punch
 		if(m_downPunchPressed)
 		{
@@ -382,26 +388,26 @@ public class PlayerControl : MonoBehaviour
 				m_punchDirection = LaunchPunch(ePunchDirection.DOWN);
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickbackScale * m_kickBackY);
 			}
-
+			
 			m_downPunchPressed = false;
 		}
-
+		
 		//Check up punch
 		if(m_upPunchPressed)
 		{
 			if(!m_punchLaunched && !m_punchReturning)
 			{
 				m_punchDirection = LaunchPunch(ePunchDirection.UP);
-
+				
 				if(!m_isGrounded)
 				{
 					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickbackScale * -m_kickBackY);
 				}
 			}
-
+			
 			m_upPunchPressed = false;
 		}
-
+		
 		//Check left punch
 		if(m_leftPunchPressed)
 		{
@@ -411,10 +417,10 @@ public class PlayerControl : MonoBehaviour
 				Vector2 kickback = new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
 				rigidbody2D.velocity += kickback;
 			}
-
+			
 			m_leftPunchPressed = false;
 		}
-
+		
 		//Check right punch
 		if(m_rightPunchPressed)
 		{
@@ -424,21 +430,21 @@ public class PlayerControl : MonoBehaviour
 				Vector2 kickback = new Vector2(m_kickbackScale * m_kickBackX, 0.0f);
 				rigidbody2D.velocity -= kickback;
 			}
-
+			
 			m_rightPunchPressed = false;
 		}
-
+		
 		//Update punch movement
 		UpdatePunch();
-
+		
 		//Apply gravity
 		rigidbody2D.velocity -= new Vector2(0.0f, m_gravity * Time.deltaTime);
-
+		
 		//Only clamp vertical velocity
 		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,
 		                                   Mathf.Max(rigidbody2D.velocity.y, -m_maxGravity));
 	}
-
+	
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		for(int i=0; i<collision.contacts.Length; ++i)
@@ -456,7 +462,7 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 	}
-
+	
 	//This method updates the punch velocity, and should only be used in FixedUpdate
 	private void UpdatePunch()
 	{
@@ -479,7 +485,7 @@ public class PlayerControl : MonoBehaviour
 				m_glove.collider2D.enabled = false;
 			}
 		}
-
+		
 		//If punch is returning
 		if(m_punchReturning)
 		{
@@ -496,11 +502,11 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 	}
-
+	
 	private Vector2 LaunchPunch(ePunchDirection direction)
 	{
 		Vector2 speedDirection = new Vector2();
-
+		
 		//Determine punch direction and local position
 		switch(direction)
 		{
@@ -508,29 +514,29 @@ public class PlayerControl : MonoBehaviour
 			m_glove.transform.localPosition = new Vector3(0.0f, -1.5f);
 			speedDirection = new Vector2(0.0f, -1.0f);
 			break;
-
+			
 		case ePunchDirection.UP :
 			m_glove.transform.localPosition = new Vector2(0.0f, 1.0f);
 			speedDirection = new Vector2(0.0f, 1.0f);
 			break;
-
+			
 		case ePunchDirection.RIGHT :
 			m_glove.transform.localPosition = new Vector2(1.0f, 0.0f);
 			speedDirection = new Vector2(1.0f, 0.0f);
 			break;
-
+			
 		case ePunchDirection.LEFT :
 			m_glove.transform.localPosition = new Vector2(-1.0f, 0.0f);
 			speedDirection = new Vector2(-1.0f, 0.0f);
 			break;
-
+			
 		default :
 			break;
 		}
-
+		
 		//Consider the facing direction
 		m_glove.transform.localPosition = new Vector2(transform.localScale.x*m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
-
+		
 		//Init punch parameters
 		m_punchElapsed  = 0.0f;
 		Vector2 inertia = Vector2.Dot(rigidbody2D.velocity, speedDirection) * speedDirection;
@@ -538,7 +544,7 @@ public class PlayerControl : MonoBehaviour
 		m_punchLaunched = true;
 		m_glove.renderer.enabled = true;
 		m_glove.collider2D.enabled = true;
-
+		
 		return speedDirection;
 	}
 }
