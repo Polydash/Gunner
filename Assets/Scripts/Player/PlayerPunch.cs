@@ -13,7 +13,13 @@ public class PlayerPunch : MonoBehaviour
 		PlayerControl script = GetComponentInParent<PlayerControl>();
 		m_punchForce = script.m_punchForce;
 
-        m_PlayerScore = GetComponent<PlayerScore>();
+        m_PlayerScore = transform.parent.GetComponent<PlayerScore>();
+        if (!m_PlayerScore)
+            print("PAS OK");
+        else
+            print("OK");
+
+        print("HEERERERERER");
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -49,20 +55,13 @@ public class PlayerPunch : MonoBehaviour
 			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
 			{
 				//Blocked
-				collision.collider.rigidbody2D.AddForce(direction * m_punchForce / 4.0f);
-                m_PlayerScore.m_AddTouchGuardScore = true;
+                 m_PlayerScore.m_AddTouchGuardScore = true;
 			}
 			else
 			{
 				//Hit him with full force
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
                 m_PlayerScore.m_AddTouchScore = true;
-
-				//Break guard
-				if(opponentScript.m_isGuarding)
-				{
-					opponentScript.BreakGuard();
-				}
 			}
 
 			script.m_punchLaunched = false;

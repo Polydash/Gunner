@@ -71,7 +71,6 @@ public class PlayerManager : MonoBehaviour
                     //return i + 1;//Return the id of the player
                 }
             }
-            Debug.Log("Instanciation");
             GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().enabled = true;
         }
 

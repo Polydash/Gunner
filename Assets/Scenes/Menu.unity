@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70969c78009e44489a87b30610acde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debug: 0
+  _debug: 0
   playerPrefab: {fileID: 100000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
   m_playerVictory: 0
 --- !u!4 &112457402
