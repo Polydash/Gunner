@@ -61,6 +61,8 @@ public class PlayerControl : MonoBehaviour
 	public  bool m_hasControl  {get; set;}
 	public  bool m_isGuarding  {get; set;}
 	private bool m_analogJump = false;
+	private float m_brokenGuardElapsed;
+	private float m_brokenGuardTime = 0.5f;
 	
 	//Punch State
 	private float   m_punchElapsed = 0.0f;
@@ -88,6 +90,9 @@ public class PlayerControl : MonoBehaviour
 			m_kickbackScale = -1.0f;
 		}
 
+		//Init guard time
+		m_brokenGuardElapsed = m_brokenGuardTime;
+
 		//Give control to the player
 		m_hasControl  = true;
 		m_isGuarding  = false;
@@ -109,7 +114,7 @@ public class PlayerControl : MonoBehaviour
 		if(!m_isGuarding)
 		{
 			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
 				renderer.material.color = Color.red;
@@ -165,7 +170,7 @@ public class PlayerControl : MonoBehaviour
 		if(!m_isGuarding)
 		{
 			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
 				renderer.material.color = Color.red;
@@ -235,7 +240,7 @@ public class PlayerControl : MonoBehaviour
 		if(!m_isGuarding)
 		{
 			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold)
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
 			{
 				m_isGuarding = true;
 				renderer.material.color = Color.red;
@@ -302,7 +307,13 @@ public class PlayerControl : MonoBehaviour
 	{
 		//Check inputs (for some reason, GetButtonDown does not
 		//respond properly in FixedUpdate())
-		
+
+		//Increase broken guard time
+		if(m_brokenGuardElapsed < m_brokenGuardTime)
+		{
+			m_brokenGuardElapsed += Time.deltaTime;
+		}
+
 		//Only check inputs if player has control
 		if(m_hasControl)
 		{	
@@ -622,5 +633,11 @@ public class PlayerControl : MonoBehaviour
 		m_glove.collider2D.enabled = true;
 		
 		return speedDirection;
+	}
+
+	public void BreakGuard()
+	{
+		m_isGuarding = false;
+		m_brokenGuardElapsed = 0.0f;
 	}
 }

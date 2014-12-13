@@ -24,7 +24,7 @@ public class SpawnerManager : MonoBehaviour {
    
 
 	// Use this for initialization
-	void OnEnable () 
+	void Start() 
     {
         if (!_debug)
         {

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b061be974a9dc4ab0b9f087efefc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debug: 1
+  _debug: 1
 --- !u!4 &60371897
 Transform:
   m_ObjectHideFlags: 0
@@ -239,8 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70969c78009e44489a87b30610acde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debug: 1
+  _debug: 1
   playerPrefab: {fileID: 100000, guid: e9d98ca97af9f5f4e916bd8cd59d1b90, type: 2}
+  m_playerVictory: 0
 --- !u!4 &112559445
 Transform:
   m_ObjectHideFlags: 0
@@ -510,6 +511,7 @@ GameObject:
   - 114: {fileID: 422597490}
   - 114: {fileID: 422597491}
   - 114: {fileID: 422597493}
+  - 114: {fileID: 422597494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -700,6 +702,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dac7a1cb46a0d47a3741abe6f39879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &422597494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: e9d98ca97af9f5f4e916bd8cd59d1b90,
+    type: 2}
+  m_PrefabInternal: {fileID: 1511518902}
+  m_GameObject: {fileID: 422597482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d78424ca0a8d749a34871803275303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TouchScore: 2
+  TouchGuardScore: 1
+  KillScore: 5
+  DeathTimer: 5
 --- !u!1 &554142379
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1006,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
       propertyPath: Debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
+      propertyPath: _debug
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1288,6 +1310,7 @@ GameObject:
   - 114: {fileID: 1495137087}
   - 114: {fileID: 1495137086}
   - 114: {fileID: 1495137094}
+  - 114: {fileID: 1495137095}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1478,6 +1501,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dac7a1cb46a0d47a3741abe6f39879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1495137095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: e9d98ca97af9f5f4e916bd8cd59d1b90,
+    type: 2}
+  m_PrefabInternal: {fileID: 1233181326}
+  m_GameObject: {fileID: 1495137083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d78424ca0a8d749a34871803275303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TouchScore: 2
+  TouchGuardScore: 1
+  KillScore: 5
+  DeathTimer: 5
 --- !u!1001 &1511518902
 Prefab:
   m_ObjectHideFlags: 0
@@ -1600,6 +1639,10 @@ Prefab:
     - target: {fileID: 400000, guid: b0d8991a2b0016a4194a2ba822d7c4c7, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: b0d8991a2b0016a4194a2ba822d7c4c7, type: 2}
+      propertyPath: _debug
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0d8991a2b0016a4194a2ba822d7c4c7, type: 2}
@@ -2104,11 +2147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf05739ba1c26440ba4058a6bfe3bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmbianceSounds: []
+  AmbianceSounds:
+  - {fileID: 8300000, guid: 0b4bda875c3059b42a18123a8a563481, type: 3}
+  - {fileID: 8300000, guid: c873293b53edeb54182fa0d09dfeea3e, type: 3}
+  - {fileID: 8300000, guid: d23bc680dfdb0794aa45425bc84a1371, type: 3}
   min: 5
   max: 20
-  SoundStartGame: {fileID: 0}
-  SoundStartRound: {fileID: 0}
+  SoundStartGame: {fileID: 8300000, guid: 7f9ebd676412e7e499de51840c035e4a, type: 3}
+  SoundStartRound: {fileID: 8300000, guid: e0a2ab1d50d83db4b812af1b657ea1bc, type: 3}
 --- !u!82 &1981510583
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2120,7 +2166,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: b08048d794543d245bfaf377137f57e7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .00899999961
+  m_Volume: .100000001
   m_Pitch: 1
   Loop: 1
   Mute: 0
