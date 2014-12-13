@@ -67,6 +67,7 @@ public class PlayerPunch : MonoBehaviour
 				//Hit him with full force
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
                 m_PlayerScore.m_AddTouchScore = true;
+				Camera.main.GetComponent<CameraMgr>().Translate(direction);
 			}
 
 			script.m_punchLaunched = false;

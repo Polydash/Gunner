@@ -206,6 +206,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .03125
       objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
   m_RootGameObject: {fileID: 1973060348}
@@ -2138,7 +2142,7 @@ GameObject:
   - 114: {fileID: 1981510582}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
