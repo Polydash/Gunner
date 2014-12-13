@@ -54,7 +54,7 @@ public class CameraMgr : MonoBehaviour
 
 		if(m_shakeValue <= Mathf.PI/2.0f)
 		{
-			m_shakeValue += Time.deltaTime * 50.0f;
+			m_shakeValue += Time.deltaTime * 25.0f;
 			transform.position += Mathf.Sin(Mathf.PI/2.0f + m_shakeValue) * new Vector3(m_shakeTranslate.x, m_shakeTranslate.y);
 			transform.position += new Vector3(Random.Range(-0.01f, 0.01f), Random.Range(-0.01f, 0.01f));
 		}
