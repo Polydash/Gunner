@@ -19,12 +19,17 @@ public class SpawnerManager : MonoBehaviour {
 
     public bool Debug = false;
 
+    SoundManager SM;
+
+   
+
 	// Use this for initialization
 	void Start () 
     {
         if (!Debug)
         {
             m_playerManager = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
+            SM = GameObject.Find("Camera").GetComponent<SoundManager>();
         }
         else
         {
@@ -41,6 +46,8 @@ public class SpawnerManager : MonoBehaviour {
         m_players = GameObject.FindGameObjectsWithTag("Player");
         m_SpawnerTab = GameObject.FindGameObjectsWithTag("Spawner");
         m_currentPlayerNumber = m_players.Length;
+
+        SM.m_playSoundStartGame = true;
 
        // print(m_SpawnerTab.Length);
 	}
@@ -64,7 +71,7 @@ public class SpawnerManager : MonoBehaviour {
 
        // print("DC : " + m_deathCounter + ", (m_currentPlayerNumber - 1) : " + (m_currentPlayerNumber - 1));
 
-        if (m_currentPlayerNumber == 1 && m_deathCounter == 1)
+        if (m_currentPlayerNumber == 1 && m_deathCounter == 1)//Case where there is only one player
         {
             m_deathCounter = 0;
             //Respawn everybody
@@ -87,6 +94,8 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].GetComponent<PlayerDeath>().Reset();
                 m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
+            SM.m_playSoundStartRound = true;
+            
         }
 
         
