@@ -77,8 +77,8 @@ public class PlayerControl : MonoBehaviour
 	private bool m_rightPunchPressed = false;
 	private bool m_upPunchPressed	 = false;
 	private bool m_rightStickCenter  = true;
+	private float m_bumperThreshold  = -0.3f;
 	private Vector2 m_moveInput;
-	private float m_bumperThreshold = -0.3f;
 	
 	private void Start()
 	{
