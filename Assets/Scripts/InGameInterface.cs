@@ -53,20 +53,20 @@ public class InGameInterface : MonoBehaviour {
                     int newlevel = 0;
                     if (PM.GetCurrentPlayerNumber() == 2)
                     {
-                        newlevel = Random.Range(2, 7);
+                        newlevel = Random.Range(2, 6);
                         while (newlevel == PM.currentLevel)
                         {
-                            newlevel = Random.Range(2, 7);
+                            newlevel = Random.Range(2, 6);
                         }
 
 
                     }
                     else
                     {
-                        newlevel = Random.Range(2, 6);
+                        newlevel = Random.Range(2, 5);
                         while (newlevel == PM.currentLevel)
                         {
-                            newlevel = Random.Range(2, 6);
+                            newlevel = Random.Range(2, 5);
                         }
                     }
                     PM.currentLevel = newlevel;

@@ -32,7 +32,7 @@ public class PlayerScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (LastPlayerTouched && LastPlayerTouched.GetComponent<PlayerDeath>().IsDead() && m_Time < DeathTimer)
+        if (LastPlayerTouched && LastPlayerTouched.GetComponent<PlayerDeath>().IsDead() && m_Time <= DeathTimer)
         {
             m_playerScore += KillScore;
             LastPlayerTouched = null;

@@ -62,11 +62,11 @@ public class MenuPlayerSelection : MonoBehaviour {
 
                 if (m_playerManager.GetCurrentPlayerNumber() == 2)
                 {
-                    levelNumber = Random.Range(2, 7);
+                    levelNumber = Random.Range(2, 6);
                 }
                 else
                 {
-                    levelNumber = Random.Range(2, 6);
+                    levelNumber = Random.Range(2, 5);
                 }
                 m_playerManager.currentLevel = levelNumber;
                 Application.LoadLevel(levelNumber);
