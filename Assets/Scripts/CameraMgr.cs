@@ -26,7 +26,7 @@ public class CameraMgr : MonoBehaviour
 		transform.position = new Vector3(LevelMgr.instance.m_levelSize * 16/9, LevelMgr.instance.m_levelSize, -10);*/
 		
 		//Set resolution
-		Screen.SetResolution(m_width, m_height, false);
+		//Screen.SetResolution(m_width, m_height, false);
 
 		//Set ortho size
 		camera.orthographicSize = m_size;
