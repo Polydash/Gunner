@@ -652,6 +652,7 @@ public class PlayerControl : MonoBehaviour
 				m_punchReturning = true;
 				m_glove.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 				m_glove.collider2D.enabled = false;
+                GameObject.Find("Camera").GetComponent<SoundManager>().m_playSoundWoosh = true;
 			}
 		}
 		

@@ -202,7 +202,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 781d47de0b102014c898d9c5744e6920, type: 3}
   - {fileID: 8300000, guid: b456de1ef93866f4b9f7a59dd3fbf809, type: 3}
   - {fileID: 8300000, guid: 112a414dcc903b542a60af06510ba748, type: 3}
-  WallPunchSounds: []
+  WallPunchSounds:
+  - {fileID: 8300000, guid: c50dbaa415a56d94e8b3974d3b7fd3a8, type: 3}
+  - {fileID: 8300000, guid: 670ec388cfef4074fb11ea53639fed63, type: 3}
+  - {fileID: 8300000, guid: 15c9af57013481e4b8c909a58dc85bad, type: 3}
+  - {fileID: 8300000, guid: 93f81cad4ebd2ac4f9c5093aefbd38ef, type: 3}
+  - {fileID: 8300000, guid: 047a4f3049963614e8dc8e72a5e596bc, type: 3}
+  - {fileID: 8300000, guid: 1827f214309861d42a376eb0793605a7, type: 3}
   SoundGuard:
   - {fileID: 8300000, guid: 286d5153bc5f7da4f921e79528e06d02, type: 3}
   - {fileID: 8300000, guid: c1fde83f0fcf2d746bcd9968fed63885, type: 3}
@@ -210,6 +216,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cd496688ca4ad9842a113d9ad43433e0, type: 3}
   - {fileID: 8300000, guid: 237ad859cb8f5ac479bf82bb8d628733, type: 3}
   - {fileID: 8300000, guid: f1f4be26ea65f02418bd7665e6a2efa0, type: 3}
+  SoundWoosh:
+  - {fileID: 8300000, guid: fa3a724c683a6e1448839f6aa7e5eee0, type: 3}
+  - {fileID: 8300000, guid: e4ffdb1d3bdce614ea2e78b8c664fd0d, type: 3}
+  - {fileID: 8300000, guid: 2b50c89ee0eba91458cde2a6a82e1f3a, type: 3}
+  - {fileID: 8300000, guid: d4548ed5037d1b743b4934cfb43b5457, type: 3}
+  - {fileID: 8300000, guid: a52aa1bc8e901734a8cec313b45bd719, type: 3}
+  - {fileID: 8300000, guid: 36bd40ed82d49a8419d94e9ea254cea3, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

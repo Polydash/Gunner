@@ -25,6 +25,8 @@ public class SoundManager : MonoBehaviour {
     public AudioClip[] SoundGuard;
     public bool m_playSoundGuard { get; set; }
 
+    public AudioClip[] SoundWoosh;
+    public bool m_playSoundWoosh { get; set; }
 
 
     private bool m_soundPlayed = false;
@@ -45,6 +47,8 @@ public class SoundManager : MonoBehaviour {
 
         m_playSoundHitSuccess = false;
         m_playSoundHitWall = false;
+
+        m_playSoundWoosh = false;
 	}
 	
 	// Update is called once per frame
@@ -54,6 +58,7 @@ public class SoundManager : MonoBehaviour {
         if (m_playSoundStartGame)
         {
             audio.PlayOneShot(SoundStartGame);
+            audio.PlayOneShot(SoundsStartRoundArbitre[Random.Range(0, SoundsStartRoundArbitre.Length)]); 
             m_playSoundStartGame = false;
         }
 
@@ -80,6 +85,12 @@ public class SoundManager : MonoBehaviour {
         {
             audio.PlayOneShot(SoundGuard[Random.Range(0, SoundGuard.Length)]);
             m_playSoundGuard = false;
+        }
+
+        if (m_playSoundWoosh)
+        {
+            audio.PlayOneShot(SoundWoosh[Random.Range(0, SoundWoosh.Length)]);
+            m_playSoundWoosh = false;
         }
 
         //Play Ambiance Sounds

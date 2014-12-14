@@ -49,6 +49,9 @@ public class PlayerPunch : MonoBehaviour
 			script.m_punchReturning = true;
 			rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 			collider2D.enabled = false;
+
+            //play sounds
+            GameObject.Find("Camera").GetComponent<SoundManager>().m_playSoundHitWall = true;
 		}
 
 		//If glove punches a player
