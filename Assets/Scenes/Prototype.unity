@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 1
+  timeBeforeRespawn: 5
 --- !u!4 &60371897
 Transform:
   m_ObjectHideFlags: 0
@@ -338,6 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 1
+  mySkin: {fileID: 11400000, guid: b5acdaec6b94f9443bce5bb9fb4a7146, type: 2}
 --- !u!4 &167382600
 Transform:
   m_ObjectHideFlags: 0
@@ -573,7 +575,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37576cb0c9dd3804e85e8a8f968eccb0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 088b1c52685928549b50d74f0262591f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &383075763
 Transform:
@@ -808,9 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d78424ca0a8d749a34871803275303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchScore: 2
-  TouchGuardScore: 1
-  KillScore: 5
+  KillScore: 1
   DeathTimer: 5
 --- !u!1 &430701766
 GameObject:
@@ -860,7 +860,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37576cb0c9dd3804e85e8a8f968eccb0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 088b1c52685928549b50d74f0262591f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &554142379
 GameObject:
@@ -1353,7 +1353,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37576cb0c9dd3804e85e8a8f968eccb0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 088b1c52685928549b50d74f0262591f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1385811796
 GameObject:
@@ -1759,9 +1759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d78424ca0a8d749a34871803275303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchScore: 2
-  TouchGuardScore: 1
-  KillScore: 5
+  KillScore: 1
   DeathTimer: 5
 --- !u!1001 &1511518902
 Prefab:
