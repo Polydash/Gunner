@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
 	};
 	
 	//Enumeration defining a punch direction
-	private enum ePunchDirection
+	public enum ePunchDirection
 	{
 		RIGHT,
 		LEFT, 
@@ -73,7 +73,8 @@ public class PlayerControl : MonoBehaviour
 	public  bool    m_punchRequested {get; set;}
 	public  bool    m_punchLaunched  {get; set;}
 	public  bool    m_punchReturning {get; set;}
-	
+	public  ePunchDirection m_requestedDirection {get; set;}
+
 	//Input helper variables
 	private bool  m_jumpPressed 	  = false;
 	private bool  m_jumpReleased      = false;
@@ -89,6 +90,7 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator PunchRight(float waitTime)
 	{
 		m_punchRequested = true;
+		m_requestedDirection = ePunchDirection.RIGHT;
 		yield return new WaitForSeconds(waitTime);
 		m_rightPunchPressed = true;
 	}
@@ -96,6 +98,7 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator PunchLeft(float waitTime)
 	{
 		m_punchRequested = true;
+		m_requestedDirection = ePunchDirection.LEFT;
 		yield return new WaitForSeconds(waitTime);
 		m_leftPunchPressed = true;
 	}
@@ -103,6 +106,7 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator PunchUp(float waitTime)
 	{
 		m_punchRequested = true;
+		m_requestedDirection = ePunchDirection.UP;
 		yield return new WaitForSeconds(waitTime);
 		m_upPunchPressed = true;
 	}
@@ -110,6 +114,7 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator PunchDown(float waitTime)
 	{
 		m_punchRequested = true;
+		m_requestedDirection = ePunchDirection.DOWN;
 		yield return new WaitForSeconds(waitTime);
 		m_downPunchPressed = true;
 	}

@@ -36,7 +36,12 @@ public class PlayerAnimation : MonoBehaviour
 						m_playerControl.m_punchLaunched  ||
 						m_playerControl.m_punchReturning;
 
-		m_animator.SetBool("Punching", punching);
+		m_animator.SetBool("PunchingSide", punching && 
+		                   				   (m_playerControl.m_requestedDirection == PlayerControl.ePunchDirection.RIGHT ||
+		 									m_playerControl.m_requestedDirection == PlayerControl.ePunchDirection.LEFT));
+
+		m_animator.SetBool("PunchingUp", punching && m_playerControl.m_requestedDirection == PlayerControl.ePunchDirection.UP);
+		m_animator.SetBool("PunchingDown", punching && m_playerControl.m_requestedDirection == PlayerControl.ePunchDirection.DOWN);
 
 		m_animator.SetBool("Guarding", m_playerControl.m_isGuarding);
 	}

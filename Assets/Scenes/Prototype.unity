@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 1
-  timeBeforeRespawn: 5
+  timeBeforeRespawn: 3
 --- !u!4 &60371897
 Transform:
   m_ObjectHideFlags: 0
