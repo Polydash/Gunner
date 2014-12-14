@@ -39,7 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b061be974a9dc4ab0b9f087efefc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Debug: 0
+  _debug: 0
+  timeBeforeRespawn: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

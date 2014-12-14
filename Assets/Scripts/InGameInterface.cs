@@ -24,7 +24,6 @@ public class InGameInterface : MonoBehaviour {
         {
             PM = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
             m_players = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>().m_players;
-            print(m_players.Length);
         }
        
 	}

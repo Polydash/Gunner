@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject m_playerWinner { get; set; }
 
+    public int currentLevel { get; set; }
+
     void Awake()
     {
         //Keep the manager everywhere
@@ -49,6 +51,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         m_playerVictory = false;
+
+        currentLevel = 0;
 
     }
 

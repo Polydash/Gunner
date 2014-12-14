@@ -24,6 +24,8 @@ public class MenuPlayerSelection : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+       // Random.seed = (int)Time.time;
+
         m_playerManager = GameObject.Find("PlayersManager").GetComponent<PlayerManager>();
         if (!m_playerManager)
         {
@@ -56,7 +58,19 @@ public class MenuPlayerSelection : MonoBehaviour {
             {
                 m_playerManager.m_PointCount = pointCount;
                 m_playerManager.SetInGame(true);
-                Application.LoadLevel("Game");
+
+                int levelNumber = 0;
+
+                for (int j = 0; j < 100; ++j)
+                {
+                    levelNumber = Random.Range(1, 3);
+                    print(levelNumber);
+                }
+                
+                m_playerManager.currentLevel = levelNumber;
+                string level = "Level " + levelNumber.ToString();
+                
+                Application.LoadLevel("Level 1");
             }
         }
 
