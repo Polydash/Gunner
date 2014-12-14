@@ -32,6 +32,7 @@ public class Twinkle : MonoBehaviour {
          }
 
         PlayerName.renderer.enabled = true;
+        PlayerName.GetComponent<TextMesh>().text = "P "+ GetComponent<PlayerID>().GetPlayerID().ToString();
 	}
 	
 	// Update is called once per frame
