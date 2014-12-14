@@ -663,6 +663,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				m_punchReturning = false;
 				m_glove.renderer.enabled = false;
+				m_glove.GetComponent<ChainControl>().SetVisible(false);
 			}
 		}
 	}
@@ -710,6 +711,7 @@ public class PlayerControl : MonoBehaviour
 		m_punchInertia  = inertia.x;
 		m_punchLaunched = true;
 		m_glove.renderer.enabled = true;
+		m_glove.GetComponent<ChainControl>().SetVisible(true);
 		m_glove.collider2D.enabled = true;
 		
 		return speedDirection;
