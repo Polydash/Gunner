@@ -491,6 +491,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			if(m_isGrounded)
 			{
+				Instantiate(GetComponent<PlayerFXData>().m_FXJumpSmoke, transform.position + new Vector3(0.0f, -1.0f), Quaternion.identity);
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_jump);
 				m_isGrounded = false;
 				m_analogJump = true;

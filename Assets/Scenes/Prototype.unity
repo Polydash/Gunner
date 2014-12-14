@@ -97,13 +97,13 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1132349585}
   m_GameObject: {fileID: 60371895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3b061be974a9dc4ab0b9f087efefc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 1
-  timeBeforeRespawn: 3
+  timeBeforeRespawn: 2
 --- !u!4 &60371897
 Transform:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &167382599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,6 +790,7 @@ GameObject:
   - 114: {fileID: 422597487}
   - 114: {fileID: 422597486}
   - 114: {fileID: 422597485}
+  - 114: {fileID: 422597495}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -865,7 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5338a927ca9eb9a4fb090ca598970cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yDeath: -20
+  yDeath: -10
 --- !u!114 &422597488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,6 +997,19 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &422597495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: e9d98ca97af9f5f4e916bd8cd59d1b90,
+    type: 2}
+  m_PrefabInternal: {fileID: 295022539}
+  m_GameObject: {fileID: 422597482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ada71dcc5365ba4db574efe9a0811da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FXJumpSmoke: {fileID: 400000, guid: eecb2db0fff30fa41b37165c9f362ef6, type: 2}
 --- !u!1 &533397215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1577,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fb21a521ca852b7449ed2386285d99de, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb21a521ca852b7449ed2386285d99de, type: 2}
   m_RootGameObject: {fileID: 167382598}
@@ -1619,6 +1637,7 @@ GameObject:
   - 114: {fileID: 1375791422}
   - 114: {fileID: 1375791421}
   - 114: {fileID: 1375791420}
+  - 114: {fileID: 1375791432}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1664,7 +1683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5338a927ca9eb9a4fb090ca598970cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yDeath: -20
+  yDeath: -10
 --- !u!114 &1375791423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,6 +1844,19 @@ Transform:
   - {fileID: 319379117}
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!114 &1375791432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: e9d98ca97af9f5f4e916bd8cd59d1b90,
+    type: 2}
+  m_PrefabInternal: {fileID: 1548360448}
+  m_GameObject: {fileID: 1375791419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ada71dcc5365ba4db574efe9a0811da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FXJumpSmoke: {fileID: 400000, guid: eecb2db0fff30fa41b37165c9f362ef6, type: 2}
 --- !u!1 &1385811796
 GameObject:
   m_ObjectHideFlags: 0

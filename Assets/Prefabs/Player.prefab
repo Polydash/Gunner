@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400018}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -431,6 +432,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_centerOffset: {x: 0, y: -.300000012}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ada71dcc5365ba4db574efe9a0811da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FXJumpSmoke: {fileID: 400000, guid: eecb2db0fff30fa41b37165c9f362ef6, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
