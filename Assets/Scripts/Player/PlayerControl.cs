@@ -74,14 +74,15 @@ public class PlayerControl : MonoBehaviour
 	public  bool    m_punchReturning {get; set;}
 	
 	//Input helper variables
-	private bool m_jumpPressed 		 = false;
-	private bool m_jumpReleased		 = false;
-	private bool m_downPunchPressed  = false;
-	private bool m_leftPunchPressed  = false;
-	private bool m_rightPunchPressed = false;
-	private bool m_upPunchPressed	 = false;
-	private bool m_rightStickCenter  = true;
-	private float m_bumperThreshold  = -0.3f;
+	private bool  m_jumpPressed 	  = false;
+	private bool  m_jumpReleased      = false;
+	private bool  m_downPunchPressed  = false;
+	private bool  m_leftPunchPressed  = false;
+	private bool  m_rightPunchPressed = false;
+	private bool  m_upPunchPressed	  = false;
+	private bool  m_rightStickCenter  = true;
+	private float m_bumperThreshold   = -0.3f;
+	private float m_punchDelay 		  = 0.1f;
 	private Vector2 m_moveInput;
 
 	IEnumerator PunchRight(float waitTime)
@@ -160,28 +161,28 @@ public class PlayerControl : MonoBehaviour
 				{
 					m_jumpPressed = true;
 				}
-				else
+				else if(!m_isGrounded)
 				{
-					m_downPunchPressed = true;
+					StartCoroutine(PunchDown(m_punchDelay));
 				}
 			}
 			
 			//Check left button
 			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
 			{
-				m_leftPunchPressed = true;
+				StartCoroutine(PunchLeft(m_punchDelay));
 			}
 			
 			//Check right button
 			if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
 			{
-				m_rightPunchPressed = true;
+				StartCoroutine(PunchRight(m_punchDelay));
 			}
 			
 			//Check up button
 			if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
 			{
-				m_upPunchPressed = true;
+				StartCoroutine(PunchUp(m_punchDelay));
 			}
 		}
 
@@ -223,38 +224,32 @@ public class PlayerControl : MonoBehaviour
 					{
 						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
 						{
-							//m_rightPunchPressed = true;
-							StartCoroutine(PunchRight(0.1f));
+							StartCoroutine(PunchRight(m_punchDelay));
 						}
-						else
+						else if(!m_isGrounded)
 						{
-							//m_downPunchPressed = true;
-							StartCoroutine(PunchDown(0.1f));
+							StartCoroutine(PunchDown(m_punchDelay));
 						}
 					}
 					else
 					{
 						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
 						{
-							//m_upPunchPressed = true;
-							StartCoroutine(PunchUp(0.1f));
+							StartCoroutine(PunchUp(m_punchDelay));
 						}
 						else
 						{
-							StartCoroutine(PunchLeft(0.1f));
-							//m_leftPunchPressed = true;
+							StartCoroutine(PunchLeft(m_punchDelay));
 						}
 					}
 				}
 				else if(m_facingRight)
 				{
-					//m_rightPunchPressed = true;
-					StartCoroutine(PunchRight(0.1f));
+					StartCoroutine(PunchRight(m_punchDelay));
 				}
 				else
 				{
-					StartCoroutine(PunchLeft(0.1f));
-					//m_leftPunchPressed = true;
+					StartCoroutine(PunchLeft(m_punchDelay));
 				}
 			}
 		}
@@ -297,22 +292,22 @@ public class PlayerControl : MonoBehaviour
 					{
 						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
 						{
-							m_rightPunchPressed = true;
+							StartCoroutine(PunchRight(m_punchDelay));
 						}
-						else
+						else if(!m_isGrounded)
 						{
-							m_downPunchPressed = true;
+							StartCoroutine(PunchDown(m_punchDelay));
 						}
 					}
 					else
 					{
 						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
 						{
-							m_upPunchPressed = true;
+							StartCoroutine(PunchUp(m_punchDelay));
 						}
 						else
 						{
-							m_leftPunchPressed = true;
+							StartCoroutine(PunchLeft(m_punchDelay));
 						}
 					}
 					
