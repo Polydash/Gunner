@@ -585,14 +585,14 @@ public class PlayerControl : MonoBehaviour
 					m_isGrounded = true;
 					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0.0f);
 				}
+			}
 
-				//Rebound
-				if(Mathf.Abs(collision.contacts[i].normal.x) > 0.9f && Mathf.Abs(collision.contacts[i].normal.y) < 0.1f)
+			//Rebound
+			if(Mathf.Abs(collision.contacts[i].normal.x) > 0.9f && Mathf.Abs(collision.contacts[i].normal.y) < 0.1f)
+			{
+				if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX/4.0f)
 				{
-					if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX/4.0f)
-					{
-						rigidbody2D.velocity = new Vector2(-m_horizontalVelocity/2.0f, rigidbody2D.velocity.y);
-					}
+					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity/2.0f, rigidbody2D.velocity.y);
 				}
 			}
 		}
