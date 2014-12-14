@@ -49,8 +49,9 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchReturnVel = 50.0f;
 	public float m_punchForce	  = 2000.0f;
 	
-	//Reference to player glove
+	//Reference to player glove and player name
 	private Transform m_glove = null;
+	private Transform m_playerName = null;
 	
 	//Player ID
 	private int m_playerID = 0;
@@ -134,6 +135,7 @@ public class PlayerControl : MonoBehaviour
 		
 		//Init reference to player glove
 		m_glove = transform.GetChild(0);
+		m_playerName = transform.GetChild(1);
 		
 		//Init player ID
 		m_playerID = GetComponent<PlayerID>().GetPlayerID();
@@ -418,9 +420,14 @@ public class PlayerControl : MonoBehaviour
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(scale, m_glove.transform.localScale.y);
-			
+
+			//Set playerName local scale accordingly
+			scale = Mathf.Abs(m_playerName.transform.localScale.x);
+			m_playerName.transform.localScale = new Vector2(scale, m_playerName.transform.localScale.y);
+
 			//And revert horizontal position
 			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
+			m_playerName.transform.localPosition = new Vector2(-m_playerName.transform.localPosition.x, m_playerName.transform.localPosition.y);
 		}
 		else if(m_moveInput.x < -0.1f && m_facingRight && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
@@ -431,9 +438,14 @@ public class PlayerControl : MonoBehaviour
 			//Set glove local scale accordingly
 			float scale = Mathf.Abs(m_glove.transform.localScale.x);
 			m_glove.transform.localScale = new Vector2(-scale, m_glove.transform.localScale.y);
-			
+
+			//Set playerName local scale accordingly
+			scale = Mathf.Abs(m_playerName.transform.localScale.x);
+			m_playerName.transform.localScale = new Vector2(-scale, m_playerName.transform.localScale.y);
+
 			//And revert horizontal position
 			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
+			m_playerName.transform.localPosition = new Vector2(-m_playerName.transform.localPosition.x, m_playerName.transform.localPosition.y);
 		}
 		
 		//Multiply by acceleration value
