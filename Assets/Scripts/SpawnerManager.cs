@@ -21,7 +21,9 @@ public class SpawnerManager : MonoBehaviour {
 
     private SoundManager SM;
 
-   
+    public float timeBeforeRespawn = 5.0f;
+    float time = 0.0f;
+    bool needRespawn = false;
 
 	// Use this for initialization
 	void OnEnable () 
@@ -83,7 +85,7 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
         }
-        else if (m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1) && !m_playerManager.m_playerVictory)
+        else if (needRespawn && m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1) && !m_playerManager.m_playerVictory)
         {
             m_deathCounter = 0;
             //Respawn everybody
@@ -95,6 +97,19 @@ public class SpawnerManager : MonoBehaviour {
                 m_players[i].rigidbody2D.velocity = new Vector2(0, 0);
             }
             SM.m_playSoundStartRound = true;
+
+            time = 0.0f;
+            needRespawn = false;
+        }
+
+        if (!needRespawn && m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1) && !m_playerManager.m_playerVictory)
+        {
+            print("Deaaaaath");
+            time += Time.deltaTime;
+            if (time >= timeBeforeRespawn)
+            {
+                needRespawn = true;
+            }
         }
 	}
 }
