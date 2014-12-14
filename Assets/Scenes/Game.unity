@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
-  timeBeforeRespawn: 4
+  timeBeforeRespawn: 3
 --- !u!4 &313308425
 Transform:
   m_ObjectHideFlags: 0
@@ -1813,7 +1813,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
       propertyPath: timeBeforeRespawn
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
