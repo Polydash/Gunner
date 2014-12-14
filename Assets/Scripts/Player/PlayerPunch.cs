@@ -7,6 +7,22 @@ public class PlayerPunch : MonoBehaviour
 
     private PlayerScore m_PlayerScore;
 
+	private IEnumerator WaitForSecondsUnscaled(float time)
+	{
+		float start = Time.realtimeSinceStartup;
+		while (Time.realtimeSinceStartup < start + time)
+		{
+			yield return null;
+		}
+	}
+
+	private IEnumerator Freeze(float waitTime)
+	{
+		Time.timeScale = 0.0f;
+		yield return StartCoroutine(WaitForSecondsUnscaled(waitTime));
+		Time.timeScale = 1.0f;
+	}
+
 	private void Start()
 	{
 		//Get PlayerControl script and get parameter
@@ -68,6 +84,7 @@ public class PlayerPunch : MonoBehaviour
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
                 m_PlayerScore.m_AddTouchScore = true;
 				Camera.main.GetComponent<CameraMgr>().Translate(direction);
+				StartCoroutine(Freeze(0.075f));
 			}
 
 			script.m_punchLaunched = false;
