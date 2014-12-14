@@ -409,7 +409,7 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		//Revert player
-		if(m_moveInput.x > 0.1f && !m_facingRight)
+		if(m_moveInput.x > 0.1f && !m_facingRight && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
 			//Face right direction
 			m_facingRight = true;
@@ -422,7 +422,7 @@ public class PlayerControl : MonoBehaviour
 			//And revert horizontal position
 			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
 		}
-		else if(m_moveInput.x < -0.1f && m_facingRight)
+		else if(m_moveInput.x < -0.1f && m_facingRight && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
 			//Face left direction
 			m_facingRight = false;
