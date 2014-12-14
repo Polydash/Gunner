@@ -117,8 +117,8 @@ public class InGameInterface : MonoBehaviour {
         }
         else
         {
-            GUI.Box(new Rect(Screen.width/2 - rectWidth/2, Screen.height/2 - rectHeight/2, rectWidth, rectHeight), "Player " + GameObject.Find("PlayersManager").GetComponent<PlayerManager>().m_playerWinner.GetComponent<PlayerID>().GetPlayerID().ToString() + " Win !!");
-            GUI.Box(new Rect(Screen.width / 2 - rectWidth / 2, Screen.height / 2 - rectHeight / 2 + 50, rectWidth, rectHeight+20), "Start to Restart\nB to Menu");
+            GUI.Box(new Rect(Screen.width/2 - 300.0f/2, Screen.height/2 - 60.0f/2, 300.0f, 60.0f), "Player " + GameObject.Find("PlayersManager").GetComponent<PlayerManager>().m_playerWinner.GetComponent<PlayerID>().GetPlayerID().ToString() + " Win !!");
+            GUI.Box(new Rect(Screen.width / 2 - 300.0f / 2, Screen.height / 2 - 100.0f / 2 + 100.0f, 300.0f, 100.0f), "Start to Restart\nB to Menu");
         
         }
         

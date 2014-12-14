@@ -8,6 +8,8 @@ public class MenuPause : MonoBehaviour {
 
     bool m_paused = false;
 
+    public GUISkin mySkin;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -59,10 +61,14 @@ public class MenuPause : MonoBehaviour {
 
     void OnGUI()
     {
+         GUI.skin = mySkin;
+
          if (m_paused)
          {
-             GUI.Box(new Rect(Screen.width / 2.0f - 200.0f / 2.0f, Screen.height/2.0f - 100.0f/2.0f, 200, 100), "Press Start to Continue\nPress B to Quit");
+             GUI.Box(new Rect(Screen.width / 2.0f - 500.0f / 2.0f, Screen.height/2.0f - 200.0f/2.0f, 500, 200), "Press Start to Continue\nPress B to Quit");
          }
+
+
     }
 
     void OnDestroy()
