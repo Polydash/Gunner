@@ -13,10 +13,18 @@ public class SoundManager : MonoBehaviour {
     //Game Sounds
     public AudioClip SoundStartGame;
     public AudioClip SoundStartRound;
+    public AudioClip[] SoundsStartRoundArbitre;
 
     //FeedbackSounds
+    public AudioClip[] SuccessPunchSounds;
+    public bool m_playSoundHitSuccess { get; set; }
 
-   
+    public AudioClip[] WallPunchSounds;
+    public bool m_playSoundHitWall { get; set; }
+
+    public AudioClip[] SoundGuard;
+    public bool m_playSoundGuard { get; set; }
+
 
 
     private bool m_soundPlayed = false;
@@ -27,11 +35,16 @@ public class SoundManager : MonoBehaviour {
     public bool m_playSoundStartGame {get; set;}
     public bool m_playSoundStartRound { get; set; }
 
+    //
+
 	// Use this for initialization
 	void Start () 
     {
         m_playSoundStartGame = false;
         m_playSoundStartRound = false;
+
+        m_playSoundHitSuccess = false;
+        m_playSoundHitWall = false;
 	}
 	
 	// Update is called once per frame
@@ -47,13 +60,27 @@ public class SoundManager : MonoBehaviour {
         if (m_playSoundStartRound)
         {
             audio.PlayOneShot(SoundStartRound);
+            audio.PlayOneShot(SoundsStartRoundArbitre[Random.Range(0, SoundsStartRoundArbitre.Length)]); 
             m_playSoundStartRound = false;
         }
 
+        if (m_playSoundHitSuccess)
+        {
+            audio.PlayOneShot(SuccessPunchSounds[Random.Range(0, SuccessPunchSounds.Length)]);
+            m_playSoundHitSuccess = false;
+        }
 
+        if (m_playSoundHitWall)
+        {
+            audio.PlayOneShot(WallPunchSounds[Random.Range(0, WallPunchSounds.Length)]);
+            m_playSoundHitWall = false;
+        }
 
-
-
+        if (m_playSoundGuard)
+        {
+            audio.PlayOneShot(SoundGuard[Random.Range(0, SoundGuard.Length)]);
+            m_playSoundGuard = false;
+        }
 
         //Play Ambiance Sounds
         if (m_nextSoundTime == -1)

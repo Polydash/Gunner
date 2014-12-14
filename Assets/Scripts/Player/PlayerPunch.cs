@@ -57,6 +57,7 @@ public class PlayerPunch : MonoBehaviour
             //Added by Guillaume. Reset the score Timer and set the last player punched
             m_PlayerScore.m_Time = 0.0f;
             m_PlayerScore.LastPlayerTouched = collision.transform.gameObject;
+           
 
 			//Get opponent PlayerControl script
 			PlayerControl opponentScript = collision.transform.GetComponent<PlayerControl>();
@@ -71,6 +72,7 @@ public class PlayerPunch : MonoBehaviour
 			{
 				//Blocked
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce / 4.0f, ForceMode2D.Impulse);
+                GameObject.Find("Camera").GetComponent<SoundManager>().m_playSoundGuard = true;
 			}
 			else
 			{
@@ -84,6 +86,10 @@ public class PlayerPunch : MonoBehaviour
 				collision.collider.rigidbody2D.AddForce(direction * m_punchForce, ForceMode2D.Impulse);
 				Camera.main.GetComponent<CameraMgr>().Translate(direction);
 				StartCoroutine(Freeze(0.075f));
+
+                //Play SOund
+                //play sounds
+                GameObject.Find("Camera").GetComponent<SoundManager>().m_playSoundHitSuccess = true;
 			}
 
 			script.m_punchLaunched = false;

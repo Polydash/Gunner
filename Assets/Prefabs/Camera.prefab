@@ -81,7 +81,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: b08048d794543d245bfaf377137f57e7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cee7ba50b766bb04183d5c30ddfe4c38, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .100000001
   m_Pitch: 1
@@ -164,13 +164,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmbianceSounds:
-  - {fileID: 8300000, guid: 0b4bda875c3059b42a18123a8a563481, type: 3}
-  - {fileID: 8300000, guid: c873293b53edeb54182fa0d09dfeea3e, type: 3}
-  - {fileID: 8300000, guid: d23bc680dfdb0794aa45425bc84a1371, type: 3}
-  min: 5
-  max: 20
-  SoundStartGame: {fileID: 8300000, guid: 7f9ebd676412e7e499de51840c035e4a, type: 3}
-  SoundStartRound: {fileID: 8300000, guid: e0a2ab1d50d83db4b812af1b657ea1bc, type: 3}
+  - {fileID: 8300000, guid: 9358230bd5d34324aa9cd9f8356fe442, type: 3}
+  - {fileID: 8300000, guid: 0df5374ce8c66724f870c9af21e1b7b8, type: 3}
+  - {fileID: 8300000, guid: 14fea79c27827a148897c18c4e9859e4, type: 3}
+  - {fileID: 8300000, guid: bd5533a2ebd017c40a863807a0e04975, type: 3}
+  - {fileID: 8300000, guid: 0a66cb23e1a507e4ebedaee28b11c523, type: 3}
+  - {fileID: 8300000, guid: c4e3671cd2a25764ba3b8a924edf89cd, type: 3}
+  - {fileID: 8300000, guid: 3a08a8cd1f51f8342823192e29d741b6, type: 3}
+  - {fileID: 8300000, guid: e70caae588611f541828e5d73b482b3b, type: 3}
+  - {fileID: 8300000, guid: 2479b21de08b4484899675f4fabfa8e8, type: 3}
+  - {fileID: 8300000, guid: dfeb961215dd45f448f80c20f8c61129, type: 3}
+  - {fileID: 8300000, guid: e82891bb8e251414590070fffbf71409, type: 3}
+  - {fileID: 8300000, guid: 05f1afff01d83af49b130af2db79b75a, type: 3}
+  - {fileID: 8300000, guid: b241e71265463db44870135155a78dbd, type: 3}
+  - {fileID: 8300000, guid: df289b0d965634446931195347e37b44, type: 3}
+  - {fileID: 8300000, guid: b407cd1f7b0a42442a1ca87ddfa3ad1f, type: 3}
+  - {fileID: 8300000, guid: 4db97a112facaf74aaea5b48576b26fb, type: 3}
+  - {fileID: 8300000, guid: e8c3643376f2f454ebd5ac78243a447b, type: 3}
+  min: 4
+  max: 8
+  SoundStartGame: {fileID: 8300000, guid: b92dfeeb8a330334c94635ae389dda7b, type: 3}
+  SoundStartRound: {fileID: 8300000, guid: b92dfeeb8a330334c94635ae389dda7b, type: 3}
+  SoundsStartRoundArbitre:
+  - {fileID: 8300000, guid: f1e4b2cae1f3d3f43906ca3d9cf84120, type: 3}
+  - {fileID: 8300000, guid: 3ee6ee9a706b7ce41b098daa8da6d717, type: 3}
+  - {fileID: 8300000, guid: fb47d74668ddef1428c7ad063f831583, type: 3}
+  - {fileID: 8300000, guid: a51f25670eb117c4a8d32b800b361d61, type: 3}
+  - {fileID: 8300000, guid: 9748b5a538e175b44b336a84ded7b31e, type: 3}
+  - {fileID: 8300000, guid: 2f75cc5add2e5d84a8ae2af42ca9a5f0, type: 3}
+  - {fileID: 8300000, guid: 3c7504489e9177b49866d8cafe0a3ea0, type: 3}
+  - {fileID: 8300000, guid: 07ef9d333af180540a2a4859a9950cf6, type: 3}
+  - {fileID: 8300000, guid: b22bad8f117f4ee44ba795364baa2acd, type: 3}
+  SuccessPunchSounds:
+  - {fileID: 8300000, guid: 9a27dbab3f6d0e34db52ebba89fc1523, type: 3}
+  - {fileID: 8300000, guid: 5dcca2ee6dde3aa4aa24c85fbec6cdb2, type: 3}
+  - {fileID: 8300000, guid: 9ebf6b48bc7e703409aa2e248c454d0a, type: 3}
+  - {fileID: 8300000, guid: 781d47de0b102014c898d9c5744e6920, type: 3}
+  - {fileID: 8300000, guid: b456de1ef93866f4b9f7a59dd3fbf809, type: 3}
+  - {fileID: 8300000, guid: 112a414dcc903b542a60af06510ba748, type: 3}
+  WallPunchSounds: []
+  SoundGuard:
+  - {fileID: 8300000, guid: 286d5153bc5f7da4f921e79528e06d02, type: 3}
+  - {fileID: 8300000, guid: c1fde83f0fcf2d746bcd9968fed63885, type: 3}
+  - {fileID: 8300000, guid: 66b4a7f1ba70f2445aae4c1602c89807, type: 3}
+  - {fileID: 8300000, guid: cd496688ca4ad9842a113d9ad43433e0, type: 3}
+  - {fileID: 8300000, guid: 237ad859cb8f5ac479bf82bb8d628733, type: 3}
+  - {fileID: 8300000, guid: f1f4be26ea65f02418bd7665e6a2efa0, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
