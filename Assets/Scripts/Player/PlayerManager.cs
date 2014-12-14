@@ -99,6 +99,7 @@ public class PlayerManager : MonoBehaviour
                     m_players[i].GetComponent<PlayerScore>().m_playerScore = m_PointCount;
                     m_playerVictory = true;
                     m_playerWinner = m_players[i];
+                    break;
                 }
             }
         }
