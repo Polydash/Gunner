@@ -587,7 +587,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				if(Mathf.Abs(m_horizontalVelocity) > m_maxVelX/4.0f)
 				{
-					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity/3.0f, rigidbody2D.velocity.y);
+					rigidbody2D.velocity = new Vector2(-m_horizontalVelocity/2.0f, rigidbody2D.velocity.y);
 				}
 			}
 		}
