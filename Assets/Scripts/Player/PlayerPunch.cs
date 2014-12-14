@@ -49,6 +49,11 @@ public class PlayerPunch : MonoBehaviour
 			script.m_punchReturning = true;
 			rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 			collider2D.enabled = false;
+
+			//Add kickback
+			Vector2 direction = script.m_punchDirection;
+			direction.Normalize();
+			transform.parent.rigidbody2D.velocity -= direction * 12.0f;
 		}
 
 		//If glove punches a player
