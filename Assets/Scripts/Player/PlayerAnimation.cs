@@ -31,6 +31,13 @@ public class PlayerAnimation : MonoBehaviour
 			 		   (!m_playerControl.m_facingRight && rigidbody2D.velocity.x < -0.01f));
 
 		m_animator.SetBool("Running", running);
+	
+		bool punching = m_playerControl.m_punchRequested ||
+						m_playerControl.m_punchLaunched  ||
+						m_playerControl.m_punchReturning;
+
+		m_animator.SetBool("Punching", punching);
+
 		m_animator.SetBool("Guarding", m_playerControl.m_isGuarding);
 	}
 }

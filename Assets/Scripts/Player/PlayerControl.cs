@@ -69,6 +69,7 @@ public class PlayerControl : MonoBehaviour
 	private float   m_punchElapsed = 0.0f;
 	private float   m_punchInertia;
 	public  Vector2 m_punchDirection {get; set;}
+	public  bool    m_punchRequested {get; set;}
 	public  bool    m_punchLaunched  {get; set;}
 	public  bool    m_punchReturning {get; set;}
 	
@@ -85,24 +86,28 @@ public class PlayerControl : MonoBehaviour
 
 	IEnumerator PunchRight(float waitTime)
 	{
+		m_punchRequested = true;
 		yield return new WaitForSeconds(waitTime);
 		m_rightPunchPressed = true;
 	}
 	
 	IEnumerator PunchLeft(float waitTime)
 	{
+		m_punchRequested = true;
 		yield return new WaitForSeconds(waitTime);
 		m_leftPunchPressed = true;
 	}
 	
 	IEnumerator PunchUp(float waitTime)
 	{
+		m_punchRequested = true;
 		yield return new WaitForSeconds(waitTime);
 		m_upPunchPressed = true;
 	}
 	
 	IEnumerator PunchDown(float waitTime)
 	{
+		m_punchRequested = true;
 		yield return new WaitForSeconds(waitTime);
 		m_downPunchPressed = true;
 	}
@@ -135,8 +140,8 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputFourButtons()
 	{
-		//If player is not guarding
-		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
+		//If player is not guarding and not punching
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
@@ -190,7 +195,7 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputX()
 	{
-		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
@@ -264,7 +269,7 @@ public class PlayerControl : MonoBehaviour
 	
 	private void CheckInputRightStick()
 	{ 
-		if(!m_isGuarding && !m_punchLaunched && !m_punchReturning)
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
 			//Check guard bumper
 			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
@@ -599,6 +604,9 @@ public class PlayerControl : MonoBehaviour
 		//If punch is launched
 		if(m_punchLaunched)
 		{
+			//Reset punch request
+			m_punchRequested = false;
+
 			//Update its speed if it is not done
 			if(m_punchElapsed < m_punchTime)
 			{
@@ -651,12 +659,12 @@ public class PlayerControl : MonoBehaviour
 			break;
 			
 		case ePunchDirection.RIGHT :
-			m_glove.transform.localPosition = new Vector2(1.0f, 0.0f);
+			m_glove.transform.localPosition = new Vector2(1.0f, -0.3f);
 			speedDirection = new Vector2(1.0f, 0.0f);
 			break;
 			
 		case ePunchDirection.LEFT :
-			m_glove.transform.localPosition = new Vector2(-1.0f, 0.0f);
+			m_glove.transform.localPosition = new Vector2(-1.0f, -0.3f);
 			speedDirection = new Vector2(-1.0f, 0.0f);
 			break;
 			
