@@ -257,9 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d78424ca0a8d749a34871803275303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchScore: 2
-  TouchGuardScore: 1
-  KillScore: 5
+  KillScore: 1
   DeathTimer: 5
 --- !u!212 &21200000
 SpriteRenderer:

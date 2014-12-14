@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12001, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: New GUISkin
+  m_Name: myGUISkin
   m_EditorClassIdentifier: 
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 05a67860e93a98344b8d734bc1994dfa, type: 3}
   m_box:
     m_Name: box
     m_Normal:
@@ -58,8 +58,8 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: e0a5eefb11e2b214ba5d8a4adfd64cae, type: 3}
+    m_FontSize: 11
     m_FontStyle: 0
     m_Alignment: 1
     m_WordWrap: 0

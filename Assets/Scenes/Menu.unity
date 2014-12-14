@@ -272,8 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d02a604593b4b4ba0156275b861d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointCountMin: 10
-  pointCountMax: 1000
+  pointCountMin: 5
+  pointCountMax: 30
+  fontRatio: 5
+  mySkin: {fileID: 11400000, guid: 35916ea79e2fd4e46bdd1498e7517bb1, type: 2}
 --- !u!4 &1116190249
 Transform:
   m_ObjectHideFlags: 0
@@ -325,6 +327,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 37f06e12749538a49aadbdc63bc063ef, type: 2}
+      propertyPath: pointCountMax
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 37f06e12749538a49aadbdc63bc063ef, type: 2}
+      propertyPath: pointCountMin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 37f06e12749538a49aadbdc63bc063ef, type: 2}
+      propertyPath: mySkin
+      value: 
+      objectReference: {fileID: 11400000, guid: 35916ea79e2fd4e46bdd1498e7517bb1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37f06e12749538a49aadbdc63bc063ef, type: 2}
   m_RootGameObject: {fileID: 1116190247}

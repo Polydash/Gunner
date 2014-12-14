@@ -79,19 +79,19 @@ public class InGameInterface : MonoBehaviour {
             if (m_players.Length >= 2)
             {
                 GUI.color = Color.red;
-                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, 0, rectWidth * ratioX, rectHeight * ratioY), "Player 2 : " + m_players[1].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, 0, rectWidth * ratioX, rectHeight * ratioY), "Player 2 \n " + m_players[1].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
 
             if (m_players.Length >= 3)
             {
                 GUI.color = Color.yellow;
-                GUI.Box(new Rect(0, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 3 : " + m_players[2].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.Box(new Rect(0, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 3 \n " + m_players[2].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
 
             if (m_players.Length >= 4)
             {
                 GUI.color = Color.green;
-                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 4 : " + m_players[3].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 4 \n " + m_players[3].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
         }
         else
