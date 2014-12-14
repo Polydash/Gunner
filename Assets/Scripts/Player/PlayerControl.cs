@@ -125,7 +125,7 @@ public class PlayerControl : MonoBehaviour
 		m_brokenGuardElapsed = m_brokenGuardTime;
 
 		//Give control to the player
-		m_hasControl  = true;
+		m_hasControl  = false;
 		m_isGuarding  = false;
 		m_facingRight = true;
 

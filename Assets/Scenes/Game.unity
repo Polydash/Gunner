@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
+  timeBeforeRespawn: 4
 --- !u!4 &313308425
 Transform:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2507ff771996cb642ab61414c8c754e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_players: []
+  _debug: 0
+  mySkin: {fileID: 11400000, guid: b5acdaec6b94f9443bce5bb9fb4a7146, type: 2}
 --- !u!4 &1053673953
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,7 +1083,7 @@ GameObject:
   - 114: {fileID: 1213282433}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,6 +1810,10 @@ Prefab:
     - target: {fileID: 11400000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}
+      propertyPath: timeBeforeRespawn
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: babc1595f15a6fe4083efd4aa5deb9ae, type: 2}

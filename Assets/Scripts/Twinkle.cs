@@ -9,12 +9,12 @@ public class Twinkle : MonoBehaviour {
 
     float time = 0.0f;
 
-
 	// Use this for initialization
     void OnEnable() 
     {
         twinkleTime = 0.0f;
         time = 0.0f;
+        this.GetComponent<PlayerControl>().m_hasControl = false;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +36,7 @@ public class Twinkle : MonoBehaviour {
 
         if (time >= twinkleDuration)
         {
+            this.GetComponent<PlayerControl>().m_hasControl = true;
             renderer.enabled = true;
             enabled = false;
         }

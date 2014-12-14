@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
                     GameObject player = Object.Instantiate(playerPrefab, m_SpawnerTab[i].transform.position, Quaternion.identity) as GameObject;//Instanciate the player at a spawner
                     player.GetComponent<PlayerID>().SetID(i + 1);//Set his ID
                     player.GetComponent<Twinkle>().enabled = true;
-
+                    //player.GetComponent<PlayerControl>().m_hasControl = false;
                    
                     //return i + 1;//Return the id of the player
                 }
@@ -95,7 +95,6 @@ public class PlayerManager : MonoBehaviour
                     m_players[i].GetComponent<PlayerScore>().m_playerScore = m_PointCount;
                     m_playerVictory = true;
                     m_playerWinner = m_players[i];
-                    print("Winner player " + (m_playerWinner.GetComponent<PlayerID>().GetPlayerID()).ToString());
                 }
             }
         }
