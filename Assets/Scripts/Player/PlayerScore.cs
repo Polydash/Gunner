@@ -6,11 +6,11 @@ public class PlayerScore : MonoBehaviour {
 
     public int m_playerScore { get; set; }
 
-    public int TouchScore = 2;
-    public int TouchGuardScore = 1;
-    public int KillScore = 5;
+    //public int TouchScore = 0;
+    //public int TouchGuardScore = 0;
+    public int KillScore = 1;
 
-    public bool m_AddTouchScore { get; set; }
+    bool m_AddTouchScore { get; set; }
     public bool m_AddTouchGuardScore { get; set; }
 
     public float DeathTimer = 5.0f;
@@ -38,17 +38,17 @@ public class PlayerScore : MonoBehaviour {
             LastPlayerTouched = null;
         }
 
-        if (m_AddTouchScore)
-        {
-            m_playerScore += TouchScore;
-            m_AddTouchScore = false;
-        }
+        //if (m_AddTouchScore)
+        //{
+        //    m_playerScore += TouchScore;
+        //    m_AddTouchScore = false;
+        //}
 
-        if (m_AddTouchGuardScore)
-        {
-            m_playerScore += TouchGuardScore;
-            m_AddTouchGuardScore = false;
-        }
+        //if (m_AddTouchGuardScore)
+        //{
+        //    m_playerScore += TouchGuardScore;
+        //    m_AddTouchGuardScore = false;
+        //}
 
         m_Time += Time.deltaTime;
 

@@ -5,12 +5,17 @@ public class InGameInterface : MonoBehaviour {
 
     private GameObject[] m_players;
 
-    private int rectWidth = 100;
-    private int rectHeight = 20;
+    private int rectWidth = 150;
+    private int rectHeight = 30;
 
     PlayerManager PM;
 
     public bool _debug = false;
+
+    public GUISkin mySkin;
+
+    private float ratioX = 1366.0f / Screen.width;
+    private float ratioY = 768.0f / Screen.height;
 
 	// Use this for initialization
 	void OnEnable ()
@@ -36,6 +41,10 @@ public class InGameInterface : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+
+        ratioX = Screen.width / 1366.0f;
+        ratioY = Screen.width / 768.0f;
+
         if (PM.m_playerVictory)
         {
             for (int i = 0; i < PM.GetMaxPlayer() ; ++i)
@@ -57,27 +66,32 @@ public class InGameInterface : MonoBehaviour {
 
     void OnGUI()
     {
-
+        GUI.skin = mySkin;
+        Color oldColor = GUI.color;
         if (!PM.m_playerVictory)
         {
             if (m_players.Length >= 1)
             {
-                GUI.Box(new Rect(0, 0, rectWidth, rectHeight), "Player 1 : " + m_players[0].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.color = Color.cyan;
+                GUI.Box(new Rect(0, 0, rectWidth * ratioX, rectHeight * ratioY), "Player 1 \n " + m_players[0].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
 
             if (m_players.Length >= 2)
             {
-                GUI.Box(new Rect(Screen.width - rectWidth, 0, rectWidth, rectHeight), "Player 2 : " + m_players[1].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.color = Color.red;
+                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, 0, rectWidth * ratioX, rectHeight * ratioY), "Player 2 : " + m_players[1].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
 
             if (m_players.Length >= 3)
             {
-                GUI.Box(new Rect(0, Screen.height - rectHeight, rectWidth, rectHeight), "Player 3 : " + m_players[2].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.color = Color.yellow;
+                GUI.Box(new Rect(0, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 3 : " + m_players[2].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
 
             if (m_players.Length >= 4)
             {
-                GUI.Box(new Rect(Screen.width - rectWidth, Screen.height - rectHeight, rectWidth, rectHeight), "Player 4 : " + m_players[3].GetComponent<PlayerScore>().m_playerScore.ToString());
+                GUI.color = Color.green;
+                GUI.Box(new Rect(Screen.width - rectWidth * ratioX, Screen.height - rectHeight * ratioY, rectWidth * ratioX, rectHeight * ratioY), "Player 4 : " + m_players[3].GetComponent<PlayerScore>().m_playerScore.ToString());
             }
         }
         else
