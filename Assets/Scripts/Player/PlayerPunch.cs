@@ -70,7 +70,7 @@ public class PlayerPunch : MonoBehaviour
 			                                   (direction.x < -0.5f && opponentScript.m_facingRight)))
 			{
 				//Blocked
-				collision.collider.rigidbody2D.AddForce(direction * m_punchForce / 4.0f);
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce / 4.0f, ForceMode2D.Impulse);
                 m_PlayerScore.m_AddTouchGuardScore = true;
 			}
 			else
@@ -82,7 +82,7 @@ public class PlayerPunch : MonoBehaviour
 				}
 
 				//Hit him with full force
-				collision.collider.rigidbody2D.AddForce(direction * m_punchForce);
+				collision.collider.rigidbody2D.AddForce(direction * m_punchForce, ForceMode2D.Impulse);
                 m_PlayerScore.m_AddTouchScore = true;
 				Camera.main.GetComponent<CameraMgr>().Translate(direction);
 				StartCoroutine(Freeze(0.075f));

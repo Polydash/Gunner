@@ -85,6 +85,9 @@ public class PlayerControl : MonoBehaviour
 	private float m_punchDelay 		  = 0.1f;
 	private Vector2 m_moveInput;
 
+	//REMOVE ASAP
+	private float maxSpeed = 0.0f;
+
 	IEnumerator PunchRight(float waitTime)
 	{
 		m_punchRequested = true;
@@ -336,6 +339,12 @@ public class PlayerControl : MonoBehaviour
 	{
 		//Check inputs (for some reason, GetButtonDown does not
 		//respond properly in FixedUpdate())
+
+		if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
+		{
+			maxSpeed = Mathf.Abs(rigidbody2D.velocity.x);
+			Debug.Log(maxSpeed);
+		}
 
 		//Increase broken guard time
 		if(m_brokenGuardElapsed <= m_brokenGuardTime)
