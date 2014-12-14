@@ -7,8 +7,6 @@ public class ChainControl : MonoBehaviour
 
 	private void Start()
 	{
-		Time.timeScale = 0.3f;
-
 		m_chains = new Transform[3];
 
 		m_chains[0] = transform.GetChild(0);
