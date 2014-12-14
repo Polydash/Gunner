@@ -127,7 +127,7 @@ GameObject:
   - 61: {fileID: 82568515}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,6 +210,50 @@ Prefab:
     - target: {fileID: 100018, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
+      propertyPath: m_TagString
+      value: Tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1ac08881c7ed9b49835c409edb46260, type: 2}
@@ -638,7 +682,7 @@ GameObject:
   - 4: {fileID: 358311487}
   m_Layer: 0
   m_Name: Platforms_01
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,7 +713,7 @@ GameObject:
   - 114: {fileID: 360835205}
   m_Layer: 0
   m_Name: mesh_[00]_[00]
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1119,7 +1163,7 @@ GameObject:
   - 61: {fileID: 773845891}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1534,7 +1578,7 @@ GameObject:
   - 4: {fileID: 1159774681}
   m_Layer: 0
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1863,7 +1907,7 @@ GameObject:
   - 61: {fileID: 1434606791}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1946,7 +1990,7 @@ GameObject:
   - 4: {fileID: 1454791501}
   m_Layer: 0
   m_Name: Calque_2_00
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2019,7 +2063,7 @@ GameObject:
   - 61: {fileID: 1587666648}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2382,7 +2426,7 @@ GameObject:
   - 114: {fileID: 1816237893}
   m_Layer: 0
   m_Name: mesh_[01]_[00]
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2492,7 +2536,7 @@ GameObject:
   - 61: {fileID: 1881182132}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2559,7 +2603,7 @@ GameObject:
   - 114: {fileID: 1973060350}
   m_Layer: 0
   m_Name: tets
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
