@@ -62,14 +62,16 @@ public class MenuPlayerSelection : MonoBehaviour {
 
                 if (m_playerManager.GetCurrentPlayerNumber() == 2)
                 {
-                    levelNumber = Random.Range(2, 6);
+                    levelNumber = Random.Range(2, 7);
                 }
                 else
                 {
-                    levelNumber = Random.Range(2, 5);
+                    levelNumber = Random.Range(2, 6);
                 }
                 m_playerManager.currentLevel = levelNumber;
                 Application.LoadLevel(levelNumber);
+                //Application.LoadLevel("Mini Cuvette");
+                
             }
         }
 

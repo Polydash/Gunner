@@ -50,7 +50,29 @@ public class InGameInterface : MonoBehaviour {
             {
                 if (Input.GetButtonDown("P" + (i + 1).ToString() + " Start") && PM.GetPlayerTab()[i])
                 {
+                    int newlevel = 0;
+                    if (PM.GetCurrentPlayerNumber() == 2)
+                    {
+                        newlevel = Random.Range(2, 7);
+                        while (newlevel == PM.currentLevel)
+                        {
+                            newlevel = Random.Range(2, 7);
+                        }
+
+
+                    }
+                    else
+                    {
+                        newlevel = Random.Range(2, 6);
+                        while (newlevel == PM.currentLevel)
+                        {
+                            newlevel = Random.Range(2, 6);
+                        }
+                    }
+                    PM.currentLevel = newlevel;
                     PM.Reset();
+                    Application.LoadLevel(newlevel);
+                    
                 }
 
                 if (Input.GetButtonDown("P" + (i + 1).ToString() + " B") && PM.GetPlayerTab()[i])

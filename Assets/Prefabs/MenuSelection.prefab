@@ -39,6 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d02a604593b4b4ba0156275b861d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCountMin: 1
+  pointCountMax: 30
+  fontRatio: 5
+  mySkin: {fileID: 11400000, guid: 35916ea79e2fd4e46bdd1498e7517bb1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
