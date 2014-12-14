@@ -20,7 +20,7 @@ public class PlayerPunch : MonoBehaviour
 	{
 		float scale = Time.timeScale;
 		Time.timeScale = 0.0f;
-		yield return StartCoroutine(WaitForSecondsUnscaled(waitTime * (1.0f / scale));
+		yield return StartCoroutine(WaitForSecondsUnscaled(waitTime * (1.0f / scale)));
 		Time.timeScale = scale;
 	}
 
