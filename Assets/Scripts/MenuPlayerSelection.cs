@@ -56,21 +56,20 @@ public class MenuPlayerSelection : MonoBehaviour {
 
             if (Input.GetButton("P" + (i + 1).ToString() + " Start") && m_playerManager.GetPlayerTab()[i])
             {
+                int levelNumber = 0;
                 m_playerManager.m_PointCount = pointCount;
                 m_playerManager.SetInGame(true);
 
-                int levelNumber = 0;
-
-                for (int j = 0; j < 100; ++j)
+                if (m_playerManager.GetCurrentPlayerNumber() == 2)
                 {
-                    levelNumber = Random.Range(1, 3);
-                    print(levelNumber);
+                    levelNumber = Random.Range(2, 6);
                 }
-                
+                else
+                {
+                    levelNumber = Random.Range(2, 5);
+                }
                 m_playerManager.currentLevel = levelNumber;
-                string level = "Level " + levelNumber.ToString();
-                
-                Application.LoadLevel("Level 1");
+                Application.LoadLevel(levelNumber);
             }
         }
 
