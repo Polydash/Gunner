@@ -31,7 +31,19 @@ public class PlayerAnimation : MonoBehaviour
 			 		   (!m_playerControl.m_facingRight && rigidbody2D.velocity.x < -0.01f));
 
 		m_animator.SetBool("Running", running);
-	
+
+		if(running)
+		{
+			if(m_playerControl.m_facingRight)
+			{
+				GetComponent<PlayerFXData>().InstantiateBottom(PlayerFXData.eFXType.RUN, Quaternion.identity);
+			}
+			else
+			{
+				GetComponent<PlayerFXData>().InstantiateBottom(PlayerFXData.eFXType.RUN, Quaternion.Euler(new Vector3(0.0f, 180.0f)));
+			}
+		}
+
 		bool punching = m_playerControl.m_punchRequested ||
 						m_playerControl.m_punchLaunched  ||
 						m_playerControl.m_punchReturning;

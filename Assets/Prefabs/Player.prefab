@@ -443,7 +443,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ada71dcc5365ba4db574efe9a0811da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fxSettings:
+  - prefab: {fileID: 400000, guid: eecb2db0fff30fa41b37165c9f362ef6, type: 2}
+    elapsed: 0
+    interval: 0
+  - prefab: {fileID: 400000, guid: 25d6180f4e1530848b1669e75d7eb6b6, type: 2}
+    elapsed: 0
+    interval: .300000012
   m_FXJumpSmoke: {fileID: 400000, guid: eecb2db0fff30fa41b37165c9f362ef6, type: 2}
+  m_FXRunSmoke: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

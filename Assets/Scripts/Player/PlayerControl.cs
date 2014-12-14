@@ -49,10 +49,11 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchReturnVel = 50.0f;
 	public float m_punchForce	  = 2000.0f;
 	
-	//Reference to player glove and player name
+	//Reference to player glove, player name and FX component
 	private Transform m_glove = null;
 	private Transform m_playerName = null;
-	
+	private PlayerFXData m_fxComponent = null;
+
 	//Player ID
 	private int m_playerID = 0;
 	
@@ -141,6 +142,7 @@ public class PlayerControl : MonoBehaviour
 		//Init reference to player glove
 		m_glove = transform.GetChild(0);
 		m_playerName = transform.GetChild(1);
+		m_fxComponent = GetComponent<PlayerFXData>();
 		
 		//Init player ID
 		m_playerID = GetComponent<PlayerID>().GetPlayerID();
@@ -491,7 +493,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			if(m_isGrounded)
 			{
-				Instantiate(GetComponent<PlayerFXData>().m_FXJumpSmoke, transform.position + new Vector3(0.0f, -1.0f), Quaternion.identity);
+				m_fxComponent.InstantiateBottom(PlayerFXData.eFXType.JUMP, Quaternion.identity);
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_jump);
 				m_isGrounded = false;
 				m_analogJump = true;
