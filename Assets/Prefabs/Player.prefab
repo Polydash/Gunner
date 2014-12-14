@@ -19,7 +19,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - 231: {fileID: 23100000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400006}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Glove
   m_TagString: Bullet
   m_Icon: {fileID: 0}

@@ -556,7 +556,7 @@ GameObject:
   - 114: {fileID: 422597491}
   - 114: {fileID: 422597493}
   - 114: {fileID: 422597494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   - 231: {fileID: 554142382}
   - 61: {fileID: 554142381}
   - 114: {fileID: 554142380}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Glove
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -1407,7 +1407,7 @@ GameObject:
   - 114: {fileID: 1495137086}
   - 114: {fileID: 1495137094}
   - 114: {fileID: 1495137095}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1802,7 +1802,7 @@ GameObject:
   - 231: {fileID: 1785083291}
   - 61: {fileID: 1785083290}
   - 114: {fileID: 1785083289}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Glove
   m_TagString: Bullet
   m_Icon: {fileID: 0}

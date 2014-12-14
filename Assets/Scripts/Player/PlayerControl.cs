@@ -136,6 +136,10 @@ public class PlayerControl : MonoBehaviour
 		
 		//Init player ID
 		m_playerID = GetComponent<PlayerID>().GetPlayerID();
+
+		//Set collision layer
+		gameObject.layer = LayerMask.NameToLayer("P" + m_playerID.ToString());
+		m_glove.gameObject.layer = LayerMask.NameToLayer("P" + m_playerID.ToString() + " Glove");
 	}
 	
 	private void CheckInputFourButtons()
