@@ -18,9 +18,10 @@ public class PlayerPunch : MonoBehaviour
 
 	private IEnumerator Freeze(float waitTime)
 	{
+		float scale = Time.timeScale;
 		Time.timeScale = 0.0f;
-		yield return StartCoroutine(WaitForSecondsUnscaled(waitTime));
-		Time.timeScale = 1.0f;
+		yield return StartCoroutine(WaitForSecondsUnscaled(waitTime * (1.0f / scale));
+		Time.timeScale = scale;
 	}
 
 	private void Start()
