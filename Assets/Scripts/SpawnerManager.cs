@@ -104,7 +104,6 @@ public class SpawnerManager : MonoBehaviour {
 
         if (!needRespawn && m_currentPlayerNumber != 1 && m_deathCounter >= (m_currentPlayerNumber - 1) && !m_playerManager.m_playerVictory)
         {
-            print("Deaaaaath");
             time += Time.deltaTime;
             if (time >= timeBeforeRespawn)
             {
