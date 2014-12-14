@@ -11,6 +11,8 @@ public class Twinkle : MonoBehaviour {
 
     public bool _debug = false;
 
+    GameObject PlayerName;
+
 	// Use this for initialization
     void OnEnable() 
     {
@@ -20,6 +22,16 @@ public class Twinkle : MonoBehaviour {
             this.GetComponent<PlayerControl>().m_hasControl = false;
         else
             this.GetComponent<PlayerControl>().m_hasControl = true;
+
+        foreach (Transform t in transform)
+         {
+             if(t.name == "PlayerName")
+             {
+                 PlayerName = t.gameObject;
+             }
+         }
+
+        PlayerName.renderer.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -42,14 +54,12 @@ public class Twinkle : MonoBehaviour {
         if (time >= twinkleDuration)
         {
             this.GetComponent<PlayerControl>().m_hasControl = true;
+            PlayerName.renderer.enabled = false;
             renderer.enabled = true;
             enabled = false;
         }
 	
 	}
 
-    void OnGUI()
-    {
-      
-    }
+    
 }
