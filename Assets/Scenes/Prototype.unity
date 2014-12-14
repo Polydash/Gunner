@@ -617,7 +617,7 @@ MonoBehaviour:
   m_deaccelX: 75
   m_kickBackX: 15
   m_maxVelX: 12
-  m_punchTime: .119999997
+  m_punchTime: .159999996
   m_punchMinVel: 500
   m_punchMaxVel: 2000
   m_punchReturnVel: 50
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_deaccelX: 75
   m_kickBackX: 15
   m_maxVelX: 12
-  m_punchTime: .119999997
+  m_punchTime: .159999996
   m_punchMinVel: 500
   m_punchMaxVel: 2000
   m_punchReturnVel: 50

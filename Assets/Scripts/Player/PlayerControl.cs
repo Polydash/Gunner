@@ -513,7 +513,11 @@ public class PlayerControl : MonoBehaviour
 				m_punchDirection = LaunchPunch(ePunchDirection.DOWN);
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, m_kickbackScale * m_kickBackY);
 			}
-			
+			else
+			{
+				m_punchRequested = false;
+			}
+
 			m_downPunchPressed = false;
 		}
 		
@@ -608,9 +612,6 @@ public class PlayerControl : MonoBehaviour
 		//If punch is launched
 		if(m_punchLaunched)
 		{
-			//Reset punch request
-			m_punchRequested = false;
-
 			//Update its speed if it is not done
 			if(m_punchElapsed < m_punchTime)
 			{
@@ -648,27 +649,30 @@ public class PlayerControl : MonoBehaviour
 	private Vector2 LaunchPunch(ePunchDirection direction)
 	{
 		Vector2 speedDirection = new Vector2();
-		
+
+		//Reset punch request
+		m_punchRequested = false;
+
 		//Determine punch direction and local position
 		switch(direction)
 		{
 		case ePunchDirection.DOWN :
-			m_glove.transform.localPosition = new Vector3(0.0f, -1.5f);
+			m_glove.transform.localPosition = new Vector3(0.0f, -0.5f);
 			speedDirection = new Vector2(0.0f, -1.0f);
 			break;
 			
 		case ePunchDirection.UP :
-			m_glove.transform.localPosition = new Vector2(0.0f, 1.0f);
+			m_glove.transform.localPosition = new Vector2(0.0f, 0.0f);
 			speedDirection = new Vector2(0.0f, 1.0f);
 			break;
 			
 		case ePunchDirection.RIGHT :
-			m_glove.transform.localPosition = new Vector2(1.0f, -0.3f);
+			m_glove.transform.localPosition = new Vector2(0.0f, -0.3f);
 			speedDirection = new Vector2(1.0f, 0.0f);
 			break;
 			
 		case ePunchDirection.LEFT :
-			m_glove.transform.localPosition = new Vector2(-1.0f, -0.3f);
+			m_glove.transform.localPosition = new Vector2(0.0f, -0.3f);
 			speedDirection = new Vector2(-1.0f, 0.0f);
 			break;
 			
