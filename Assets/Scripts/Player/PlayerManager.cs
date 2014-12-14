@@ -90,7 +90,7 @@ public class PlayerManager : MonoBehaviour
         
 
         //Check every frame if there is a winner
-        if (m_inGame && m_needIDGeneration == false)
+        if (m_inGame && m_needIDGeneration == false && !m_playerVictory)
         {
             for (int i = 0; i < m_players.Length; ++i)
             {
