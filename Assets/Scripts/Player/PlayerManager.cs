@@ -99,6 +99,15 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        if (_debug)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject p in players)
+            {
+                p.GetComponent<PlayerControl>().m_hasControl = true;
+            }
+        }
+
     }
 
    
