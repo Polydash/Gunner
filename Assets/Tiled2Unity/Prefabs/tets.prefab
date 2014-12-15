@@ -74,7 +74,7 @@ GameObject:
   - 4: {fileID: 400008}
   m_Layer: 0
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - 4: {fileID: 400012}
   m_Layer: 0
   m_Name: Platforms_01
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   - 4: {fileID: 400016}
   m_Layer: 0
   m_Name: Calque_2_00
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ GameObject:
   - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: tets
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
