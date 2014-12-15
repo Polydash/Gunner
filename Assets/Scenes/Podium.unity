@@ -127,7 +127,7 @@ GameObject:
   - 61: {fileID: 102498844}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   - 61: {fileID: 273646167}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,7 +694,7 @@ GameObject:
   - 61: {fileID: 840622327}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -790,7 +790,7 @@ GameObject:
   - 61: {fileID: 934560726}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -830,7 +830,7 @@ GameObject:
   - 61: {fileID: 939979822}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,7 +870,7 @@ GameObject:
   - 61: {fileID: 941025495}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -953,7 +953,7 @@ GameObject:
   - 61: {fileID: 1100421923}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1049,7 +1049,7 @@ GameObject:
   - 61: {fileID: 1214129271}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3858,7 +3858,7 @@ GameObject:
   - 61: {fileID: 1715632323}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3940,7 +3940,7 @@ GameObject:
   - 61: {fileID: 1779164177}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4008,7 +4008,7 @@ GameObject:
   - 61: {fileID: 1780179015}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4182,7 +4182,7 @@ GameObject:
   - 61: {fileID: 1946793090}
   m_Layer: 0
   m_Name: RectangleObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4541,6 +4541,54 @@ Prefab:
     - target: {fileID: 400042, guid: 067d5da733c4d3e45880064160af842a, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 067d5da733c4d3e45880064160af842a, type: 2}
+      propertyPath: m_TagString
+      value: Tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 067d5da733c4d3e45880064160af842a, type: 2}
