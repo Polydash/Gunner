@@ -39,14 +39,16 @@ public class PlayerControlEditor : Editor
 		{
 			//In air settings
 			EditorGUILayout.LabelField("In Air", EditorStyles.boldLabel);
-			script.m_inAirAccelX   = EditorGUILayout.FloatField("Acceleration", script.m_inAirAccelX);
+			script.m_inAirAccelX = EditorGUILayout.FloatField("Acceleration", script.m_inAirAccelX);
 			script.m_inAirDeaccelX = EditorGUILayout.FloatField("Deacceleration", script.m_inAirDeaccelX);
+            script.m_guardInAirDeaccelX = EditorGUILayout.FloatField("Guarding Deacceleration", script.m_guardInAirDeaccelX);
 			EditorGUILayout.Separator();
 
 			//On ground settings
 			EditorGUILayout.LabelField("On Ground", EditorStyles.boldLabel);
-			script.m_accelX   = EditorGUILayout.FloatField("Acceleration", script.m_accelX);
+			script.m_accelX = EditorGUILayout.FloatField("Acceleration", script.m_accelX);
 			script.m_deaccelX = EditorGUILayout.FloatField("Deacceleration", script.m_deaccelX);
+            script.m_guardDeaccelX = EditorGUILayout.FloatField("Guarding Deacceleration", script.m_guardDeaccelX);
 			EditorGUILayout.Separator();
 
 			//Other settings
@@ -58,11 +60,12 @@ public class PlayerControlEditor : Editor
 		m_punch = EditorGUILayout.Foldout(m_punch, "Punch");
 		if(m_punch)
 		{
-			script.m_punchTime   	= EditorGUILayout.FloatField("Punch Time", script.m_punchTime);
-			script.m_punchMinVel 	= EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
-			script.m_punchMaxVel    = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
+			script.m_punchTime = EditorGUILayout.FloatField("Punch Time", script.m_punchTime);
+			script.m_punchMinVel = EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
+			script.m_punchMaxVel = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
 			script.m_punchReturnVel = EditorGUILayout.FloatField("Return Speed", script.m_punchReturnVel);
-			script.m_punchForce 	= EditorGUILayout.FloatField("Punch Force", script.m_punchForce);
+			script.m_punchForce = EditorGUILayout.FloatField("Punch Force", script.m_punchForce);
+            script.m_brokenGuardTime = EditorGUILayout.FloatField("Broken Guard Time", script.m_brokenGuardTime);
 		}
 
 		//Save button
@@ -80,16 +83,19 @@ public class PlayerControlEditor : Editor
 				content += script.m_kickBackY.ToString() + " ";
 				content += script.m_maxGravity.ToString() + " ";
 				content += script.m_inAirAccelX.ToString() + " ";
-				content += script.m_inAirDeaccelX.ToString() + " ";
+                content += script.m_inAirDeaccelX.ToString() + " ";
+                content += script.m_guardInAirDeaccelX.ToString() + " ";
 				content += script.m_accelX.ToString() + " ";
 				content += script.m_deaccelX.ToString() + " ";
+                content += script.m_guardDeaccelX.ToString() + " ";
 				content += script.m_kickBackX.ToString() + " ";
 				content += script.m_maxVelX.ToString() + " ";
 				content += script.m_punchTime.ToString() + " ";
 				content += script.m_punchMinVel.ToString() + " ";
 				content += script.m_punchMaxVel.ToString() + " ";
 				content += script.m_punchReturnVel.ToString() + " ";
-				content += script.m_punchForce.ToString();
+				content += script.m_punchForce.ToString() + " ";
+                content += script.m_brokenGuardTime.ToString();
 
 				File.WriteAllText(path, content);
 				AssetDatabase.Refresh();
@@ -106,22 +112,25 @@ public class PlayerControlEditor : Editor
 				string[] content = File.ReadAllLines(path);
 				content = content[0].Split(' ');
 
-				script.m_gravity       	  = float.Parse(content[0]);
-				script.m_jump          	  = float.Parse(content[1]);
-				script.m_analog        	  = float.Parse(content[2]);
-				script.m_kickBackY     	  = float.Parse(content[3]);
-				script.m_maxGravity    	  = float.Parse(content[4]);
-				script.m_inAirAccelX   	  = float.Parse(content[5]);
-				script.m_inAirDeaccelX 	  = float.Parse(content[6]);
-				script.m_accelX		   	  = float.Parse(content[7]);
-				script.m_deaccelX	   	  = float.Parse(content[8]);
-				script.m_kickBackX	   	  = float.Parse(content[9]);
-				script.m_maxVelX	   	  = float.Parse(content[10]);
-				script.m_punchTime		  = float.Parse(content[11]);
-				script.m_punchMinVel	  = float.Parse(content[12]);
-				script.m_punchMaxVel	  = float.Parse(content[13]);
-				script.m_punchReturnVel	  = float.Parse(content[14]);
-				script.m_punchForce		  = float.Parse(content[15]);
+                script.m_gravity = float.Parse(content[0]);
+                script.m_jump = float.Parse(content[1]);
+                script.m_analog = float.Parse(content[2]);
+                script.m_kickBackY = float.Parse(content[3]);
+                script.m_maxGravity = float.Parse(content[4]);
+                script.m_inAirAccelX = float.Parse(content[5]);
+                script.m_inAirDeaccelX = float.Parse(content[6]);
+                script.m_guardInAirDeaccelX = float.Parse(content[7]);
+                script.m_accelX = float.Parse(content[8]);
+                script.m_deaccelX = float.Parse(content[9]);
+                script.m_guardDeaccelX = float.Parse(content[10]);
+                script.m_kickBackX = float.Parse(content[11]);
+                script.m_maxVelX = float.Parse(content[12]);
+                script.m_punchTime = float.Parse(content[13]);
+                script.m_punchMinVel = float.Parse(content[14]);
+                script.m_punchMaxVel = float.Parse(content[15]);
+                script.m_punchReturnVel = float.Parse(content[16]);
+                script.m_punchForce = float.Parse(content[17]);
+                script.m_brokenGuardTime = float.Parse(content[18]);
 			}
 		}
 

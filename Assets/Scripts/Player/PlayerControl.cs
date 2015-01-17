@@ -28,32 +28,29 @@ public class PlayerControl : MonoBehaviour
 	private float m_kickbackScale = 1.0f;
 	
 	//Vertical velocity
-	public float m_gravity	     = 100.0f;
-	public float m_jump		     = 25.0f;
-	public float m_analog		 = 20.0f;
-	public float m_kickBackY	 = 17.0f;
-	public float m_maxGravity    = 20.0f;
+	public float m_gravity = 100.0f;
+	public float m_jump = 25.0f;
+	public float m_analog = 20.0f;
+	public float m_kickBackY = 17.0f;
+	public float m_maxGravity = 20.0f;
 	
 	//Horizontal velocity
-	public float m_inAirAccelX   = 75.0f;
+	public float m_inAirAccelX = 75.0f;
 	public float m_inAirDeaccelX = 20.0f;
-	public float m_accelX	     = 100.0f;
-	public float m_deaccelX      = 75.0f;
-	public float m_kickBackX	 = 12.0f;
-	public float m_maxVelX       = 12.0f;
+    public float m_guardInAirDeaccelX = 80.0f;
+	public float m_accelX = 100.0f;
+	public float m_deaccelX = 75.0f;
+    public float m_guardDeaccelX = 150.0f;
+	public float m_kickBackX = 12.0f;
+	public float m_maxVelX = 12.0f;
 	
 	//Punch velocity
-	public float m_punchTime   	  = 0.12f;
-	public float m_punchMinVel 	  = 500.0f;
-	public float m_punchMaxVel    = 2000.0f;
+	public float m_punchTime = 0.12f;
+	public float m_punchMinVel = 500.0f;
+	public float m_punchMaxVel = 2000.0f;
 	public float m_punchReturnVel = 50.0f;
-	public float m_punchForce	  = 2000.0f;
-
-	//Guard parameters
-	//TODO : Update editor scripts with these three variables
+	public float m_punchForce = 2000.0f;
 	public float m_brokenGuardTime = 0.5f;
-	public float m_guardDeaccelX = 150.0f;
-	public float m_guardInAirDeaccelX = 80.0f;
 
 	//Reference to player glove, player name and FX component
 	private Transform m_glove = null;
