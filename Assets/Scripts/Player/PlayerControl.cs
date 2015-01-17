@@ -48,7 +48,13 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchMaxVel    = 2000.0f;
 	public float m_punchReturnVel = 50.0f;
 	public float m_punchForce	  = 2000.0f;
-	
+
+	//Guard parameters
+	//TODO : Update editor scripts with these three variables
+	public float m_brokenGuardTime = 0.5f;
+	public float m_guardDeaccelX = 150.0f;
+	public float m_guardInAirDeaccelX = 80.0f;
+
 	//Reference to player glove, player name and FX component
 	private Transform m_glove = null;
 	private Transform m_playerName = null;
@@ -64,7 +70,6 @@ public class PlayerControl : MonoBehaviour
 	public  bool m_isGuarding  {get; set;}
 	private bool m_analogJump = false;
 	private float m_brokenGuardElapsed;
-	private float m_brokenGuardTime = 0.5f;
 	private float m_horizontalVelocity;
 	
 	//Punch State
@@ -87,38 +92,6 @@ public class PlayerControl : MonoBehaviour
 	private float m_bumperThreshold   = -0.3f;
 	private float m_punchDelay 		  = 0.1f;
 	private Vector2 m_moveInput;
-	
-	IEnumerator PunchRight(float waitTime)
-	{
-		m_punchRequested = true;
-		m_requestedDirection = ePunchDirection.RIGHT;
-		yield return new WaitForSeconds(waitTime);
-		m_rightPunchPressed = true;
-	}
-	
-	IEnumerator PunchLeft(float waitTime)
-	{
-		m_punchRequested = true;
-		m_requestedDirection = ePunchDirection.LEFT;
-		yield return new WaitForSeconds(waitTime);
-		m_leftPunchPressed = true;
-	}
-	
-	IEnumerator PunchUp(float waitTime)
-	{
-		m_punchRequested = true;
-		m_requestedDirection = ePunchDirection.UP;
-		yield return new WaitForSeconds(waitTime);
-		m_upPunchPressed = true;
-	}
-	
-	IEnumerator PunchDown(float waitTime)
-	{
-		m_punchRequested = true;
-		m_requestedDirection = ePunchDirection.DOWN;
-		yield return new WaitForSeconds(waitTime);
-		m_downPunchPressed = true;
-	}
 
 	private void Start()
 	{
@@ -150,195 +123,6 @@ public class PlayerControl : MonoBehaviour
 		//Set collision layer
 		gameObject.layer = LayerMask.NameToLayer("P" + m_playerID.ToString());
 		m_glove.gameObject.layer = LayerMask.NameToLayer("P" + m_playerID.ToString() + " Glove");
-	}
-	
-	private void CheckInputFourButtons()
-	{
-		//If player is not guarding and not punching
-		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
-		{
-			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
-			{
-				m_isGuarding = true;
-			}
-
-			//Check jump button
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
-			{
-				if(m_isGrounded)
-				{
-					m_jumpPressed = true;
-				}
-				else if(!m_isGrounded)
-				{
-					StartCoroutine(PunchDown(m_punchDelay));
-				}
-			}
-			
-			//Check left button
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
-			{
-				StartCoroutine(PunchLeft(m_punchDelay));
-			}
-			
-			//Check right button
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
-			{
-				StartCoroutine(PunchRight(m_punchDelay));
-			}
-			
-			//Check up button
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
-			{
-				StartCoroutine(PunchUp(m_punchDelay));
-			}
-		}
-
-		//Check input release
-		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
-		{
-			m_jumpReleased = true;
-		}
-
-		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
-		{
-			m_isGuarding = false;
-		}
-	}
-	
-	private void CheckInputX()
-	{
-		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
-		{
-			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
-			{
-				m_isGuarding = true;
-			}
-
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
-			{
-				m_jumpPressed = true;
-			}
-			
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
-			{
-				Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
-				                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
-				
-				if(direction.sqrMagnitude > 0.5f)
-				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
-					{
-						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-						{
-							StartCoroutine(PunchRight(m_punchDelay));
-						}
-						else if(!m_isGrounded)
-						{
-							StartCoroutine(PunchDown(m_punchDelay));
-						}
-					}
-					else
-					{
-						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-						{
-							StartCoroutine(PunchUp(m_punchDelay));
-						}
-						else
-						{
-							StartCoroutine(PunchLeft(m_punchDelay));
-						}
-					}
-				}
-				else if(m_facingRight)
-				{
-					StartCoroutine(PunchRight(m_punchDelay));
-				}
-				else
-				{
-					StartCoroutine(PunchLeft(m_punchDelay));
-				}
-			}
-		}
-
-		//Check input release
-		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
-		{
-			m_jumpReleased = true;
-		}
-
-		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
-		{
-			m_isGuarding = false;
-		}
-	}
-	
-	private void CheckInputRightStick()
-	{ 
-		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
-		{
-			//Check guard bumper
-			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
-			{
-				m_isGuarding = true;
-			}
-
-			if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
-			{
-				m_jumpPressed = true;
-			}
-			
-			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
-			                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
-			
-			if(direction.sqrMagnitude > 0.75f)
-			{
-				if(m_rightStickCenter)
-				{
-					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
-					{
-						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-						{
-							StartCoroutine(PunchRight(m_punchDelay));
-						}
-						else if(!m_isGrounded)
-						{
-							StartCoroutine(PunchDown(m_punchDelay));
-						}
-					}
-					else
-					{
-						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
-						{
-							StartCoroutine(PunchUp(m_punchDelay));
-						}
-						else
-						{
-							StartCoroutine(PunchLeft(m_punchDelay));
-						}
-					}
-					
-					m_rightStickCenter = false;
-				}
-			}
-			else
-			{
-				m_rightStickCenter = true;
-			}
-		}
-
-		//Check input release
-		if(Input.GetButtonUp("P" + m_playerID.ToString() + " R1"))
-		{
-			m_jumpReleased = true;
-		}
-
-		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
-		{
-			m_isGuarding = false;
-		}
 	}
 	
 	private void Update()
@@ -387,23 +171,27 @@ public class PlayerControl : MonoBehaviour
 		float deaccelX, accelX;
 		if(m_isGrounded)
 		{
-			deaccelX = m_deaccelX;
-			accelX	 = m_accelX;
+			if(m_isGuarding)
+			{
+				deaccelX = m_guardDeaccelX;
+			}
+			else
+			{
+				deaccelX = m_deaccelX;
+			}
+			accelX = m_accelX;
 		}
 		else
 		{
-			deaccelX = m_inAirDeaccelX;
+			if(m_isGuarding)
+			{
+				deaccelX = m_guardInAirDeaccelX;
+			}
+			else
+			{
+				deaccelX = m_inAirDeaccelX;
+			}
 			accelX	 = m_inAirAccelX;
-		}
-
-		//Raise deacceleration while guarding
-		if(m_isGuarding && m_isGrounded)
-		{
-			deaccelX *= 2.0f;
-		}
-		else if(m_isGuarding && !m_isGrounded)
-		{
-			deaccelX *= 4.0f;
 		}
 
 		if(m_hasControl && !m_isGuarding)
@@ -730,5 +518,227 @@ public class PlayerControl : MonoBehaviour
 	{
 		m_isGuarding = false;
 		m_brokenGuardElapsed = 0.0f;
+	}
+
+	//Coroutine needed to delay punch launch
+	IEnumerator RequestPunch(ePunchDirection direction)
+	{
+		m_punchRequested = true;
+		m_requestedDirection = direction;
+		
+		//Wait
+		yield return new WaitForSeconds(m_punchDelay);
+		
+		//Then launch delayed punch
+		switch(direction)
+		{
+		case ePunchDirection.DOWN:
+			m_downPunchPressed = true;
+			break;
+			
+		case ePunchDirection.RIGHT:
+			m_rightPunchPressed = true;
+			break;
+			
+		case ePunchDirection.UP:
+			m_upPunchPressed = true;
+			break;
+			
+		case ePunchDirection.LEFT:
+			m_leftPunchPressed = true;
+			break;
+		}
+	}
+
+	//Input method : We use A B X Y to match punch directions
+	private void CheckInputFourButtons()
+	{
+		//If player is not guarding and not punching
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
+		{
+			//Check guard bumper
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
+			{
+				m_isGuarding = true;
+			}
+			
+			//Check jump button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+			{
+				if(m_isGrounded)
+				{
+					m_jumpPressed = true;
+				}
+				else if(!m_isGrounded)
+				{
+					StartCoroutine(RequestPunch(ePunchDirection.DOWN));
+				}
+			}
+			
+			//Check left button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+			{
+				StartCoroutine(RequestPunch(ePunchDirection.LEFT));
+			}
+			
+			//Check right button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " B"))
+			{
+				StartCoroutine(RequestPunch(ePunchDirection.RIGHT));
+			}
+			
+			//Check up button
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " Y"))
+			{
+				StartCoroutine(RequestPunch(ePunchDirection.UP));
+			}
+		}
+		
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
+		{
+			m_jumpReleased = true;
+		}
+		
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
+		{
+			m_isGuarding = false;
+		}
+	}
+
+	//Input method : We use X to launch the punch, considering left stick direction
+	private void CheckInputX()
+	{
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
+		{
+			//Check guard bumper
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
+			{
+				m_isGuarding = true;
+			}
+			
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " A"))
+			{
+				m_jumpPressed = true;
+			}
+			
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " X"))
+			{
+				Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " LHorizontal"),
+				                                Input.GetAxis("P" + m_playerID.ToString() + " LVertical"));
+				
+				if(direction.sqrMagnitude > 0.5f)
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.RIGHT));
+						}
+						else if(!m_isGrounded)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.DOWN));
+						}
+					}
+					else
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.UP));
+						}
+						else
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.LEFT));
+						}
+					}
+				}
+				else if(m_facingRight)
+				{
+					StartCoroutine(RequestPunch(ePunchDirection.RIGHT));
+				}
+				else
+				{
+					StartCoroutine(RequestPunch(ePunchDirection.LEFT));
+				}
+			}
+		}
+		
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " A"))
+		{
+			m_jumpReleased = true;
+		}
+		
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
+		{
+			m_isGuarding = false;
+		}
+	}
+
+	//Input method : We use the right stick to launch the punch, RT to jump
+	private void CheckInputRightStick()
+	{ 
+		if(!m_isGuarding && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
+		{
+			//Check guard bumper
+			if(Input.GetAxis("P" + m_playerID.ToString() + " R2") < m_bumperThreshold && m_brokenGuardElapsed > m_brokenGuardTime)
+			{
+				m_isGuarding = true;
+			}
+			
+			if(Input.GetButtonDown("P" + m_playerID.ToString() + " R1"))
+			{
+				m_jumpPressed = true;
+			}
+			
+			Vector2 direction = new Vector2(Input.GetAxis("P" + m_playerID.ToString() + " RHorizontal"),
+			                                Input.GetAxis("P" + m_playerID.ToString() + " RVertical"));
+			
+			if(direction.sqrMagnitude > 0.75f)
+			{
+				if(m_rightStickCenter)
+				{
+					if(Vector2.Dot(direction, new Vector2(1.0f, -1.0f)) >= 0.0f)
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.RIGHT));
+						}
+						else if(!m_isGrounded)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.DOWN));
+						}
+					}
+					else
+					{
+						if(Vector2.Dot(direction, new Vector2(1.0f, 1.0f)) >= 0.0f)
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.UP));
+						}
+						else
+						{
+							StartCoroutine(RequestPunch(ePunchDirection.LEFT));
+						}
+					}
+					
+					m_rightStickCenter = false;
+				}
+			}
+			else
+			{
+				m_rightStickCenter = true;
+			}
+		}
+		
+		//Check input release
+		if(Input.GetButtonUp("P" + m_playerID.ToString() + " R1"))
+		{
+			m_jumpReleased = true;
+		}
+		
+		if(Input.GetAxis("P" + m_playerID.ToString() + " R2") > m_bumperThreshold)
+		{
+			m_isGuarding = false;
+		}
 	}
 }
