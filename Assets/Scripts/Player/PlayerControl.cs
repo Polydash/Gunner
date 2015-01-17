@@ -208,39 +208,11 @@ public class PlayerControl : MonoBehaviour
 		//Revert player
 		if(m_moveInput.x > 0.1f && !m_facingRight && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
-			//Face right direction
-			m_facingRight = true;
-			transform.localScale = new Vector2(1.0f, transform.localScale.y);
-			
-			//Set glove local scale accordingly
-			float scale = Mathf.Abs(m_glove.transform.localScale.x);
-			m_glove.transform.localScale = new Vector2(scale, m_glove.transform.localScale.y);
-
-			//Set playerName local scale accordingly
-			scale = Mathf.Abs(m_playerName.transform.localScale.x);
-			m_playerName.transform.localScale = new Vector2(scale, m_playerName.transform.localScale.y);
-
-			//And revert horizontal position
-			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
-			m_playerName.transform.localPosition = new Vector2(-m_playerName.transform.localPosition.x, m_playerName.transform.localPosition.y);
+            RevertFacing();
 		}
 		else if(m_moveInput.x < -0.1f && m_facingRight && !m_punchRequested && !m_punchLaunched && !m_punchReturning)
 		{
-			//Face left direction
-			m_facingRight = false;
-			transform.localScale = new Vector2(-1.0f, transform.localScale.y);
-			
-			//Set glove local scale accordingly
-			float scale = Mathf.Abs(m_glove.transform.localScale.x);
-			m_glove.transform.localScale = new Vector2(-scale, m_glove.transform.localScale.y);
-
-			//Set playerName local scale accordingly
-			scale = Mathf.Abs(m_playerName.transform.localScale.x);
-			m_playerName.transform.localScale = new Vector2(-scale, m_playerName.transform.localScale.y);
-
-			//And revert horizontal position
-			m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
-			m_playerName.transform.localPosition = new Vector2(-m_playerName.transform.localPosition.x, m_playerName.transform.localPosition.y);
+            RevertFacing();
 		}
 		
 		//Multiply by acceleration value
@@ -422,7 +394,22 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 	}
-	
+
+    private void RevertFacing()
+    {
+        //Face right direction
+        m_facingRight = !m_facingRight;
+        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+
+        //Revert glove local scale and horizontal local position
+        m_glove.transform.localScale = new Vector2(-m_glove.transform.localScale.x, m_glove.transform.localScale.y);
+        m_glove.transform.localPosition = new Vector2(-m_glove.transform.localPosition.x, m_glove.transform.localPosition.y);
+
+        //Revert playerName local scale and horizontal local position
+        m_playerName.transform.localScale = new Vector2(-m_playerName.transform.localScale.x, m_playerName.transform.localScale.y);
+        m_playerName.transform.localPosition = new Vector2(-m_playerName.transform.localPosition.x, m_playerName.transform.localPosition.y);
+    }
+
 	//This method updates the punch velocity, and should only be used in FixedUpdate
 	private void UpdatePunch()
 	{
