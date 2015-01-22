@@ -160,7 +160,7 @@ public class PlayerControl : MonoBehaviour
 	private void FixedUpdate()
 	{
 		//Check if player is grounded
-		if(Mathf.Abs(rigidbody2D.velocity.y) > 0.001f)
+		if(Mathf.Abs(rigidbody2D.velocity.y) > 3.0f)
 		{
 			m_isGrounded = false;
 		}
