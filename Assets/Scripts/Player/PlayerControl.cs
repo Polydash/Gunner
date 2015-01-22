@@ -50,6 +50,7 @@ public class PlayerControl : MonoBehaviour
 	public float m_punchMaxVel = 2000.0f;
 	public float m_punchReturnVel = 50.0f;
 	public float m_punchForce = 2000.0f;
+    public float m_punchForceGuarded = 500.0f;
 	public float m_brokenGuardTime = 0.5f;
 
 	//Reference to player glove, player name and FX component

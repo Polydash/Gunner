@@ -64,7 +64,8 @@ public class PlayerControlEditor : Editor
 			script.m_punchMinVel = EditorGUILayout.FloatField("Min Speed", script.m_punchMinVel);
 			script.m_punchMaxVel = EditorGUILayout.FloatField("Max Speed", script.m_punchMaxVel);
 			script.m_punchReturnVel = EditorGUILayout.FloatField("Return Speed", script.m_punchReturnVel);
-			script.m_punchForce = EditorGUILayout.FloatField("Punch Force", script.m_punchForce);
+            script.m_punchForce = EditorGUILayout.FloatField("Punch Force", script.m_punchForce);
+            script.m_punchForceGuarded = EditorGUILayout.FloatField("Punch Force Guarded", script.m_punchForceGuarded);
             script.m_brokenGuardTime = EditorGUILayout.FloatField("Broken Guard Time", script.m_brokenGuardTime);
 		}
 
@@ -95,6 +96,7 @@ public class PlayerControlEditor : Editor
 				content += script.m_punchMaxVel.ToString() + " ";
 				content += script.m_punchReturnVel.ToString() + " ";
 				content += script.m_punchForce.ToString() + " ";
+                content += script.m_punchForceGuarded.ToString() + " ";
                 content += script.m_brokenGuardTime.ToString();
 
 				File.WriteAllText(path, content);
@@ -130,7 +132,8 @@ public class PlayerControlEditor : Editor
                 script.m_punchMaxVel = float.Parse(content[15]);
                 script.m_punchReturnVel = float.Parse(content[16]);
                 script.m_punchForce = float.Parse(content[17]);
-                script.m_brokenGuardTime = float.Parse(content[18]);
+                script.m_punchForceGuarded = float.Parse(content[18]);
+                script.m_brokenGuardTime = float.Parse(content[19]);
 			}
 		}
 

@@ -926,8 +926,10 @@ MonoBehaviour:
   m_maxGravity: 20
   m_inAirAccelX: 75
   m_inAirDeaccelX: 20
+  m_guardInAirDeaccelX: 80
   m_accelX: 100
   m_deaccelX: 75
+  m_guardDeaccelX: 150
   m_kickBackX: 15
   m_maxVelX: 12
   m_punchTime: .159999996
@@ -935,6 +937,8 @@ MonoBehaviour:
   m_punchMaxVel: 2000
   m_punchReturnVel: 50
   m_punchForce: 50
+  m_punchForceGuarded: 500
+  m_brokenGuardTime: .5
 --- !u!114 &422597491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,8 +1732,10 @@ MonoBehaviour:
   m_maxGravity: 20
   m_inAirAccelX: 75
   m_inAirDeaccelX: 20
+  m_guardInAirDeaccelX: 80
   m_accelX: 100
   m_deaccelX: 75
+  m_guardDeaccelX: 150
   m_kickBackX: 15
   m_maxVelX: 12
   m_punchTime: .159999996
@@ -1737,6 +1743,8 @@ MonoBehaviour:
   m_punchMaxVel: 2000
   m_punchReturnVel: 50
   m_punchForce: 50
+  m_punchForceGuarded: 500
+  m_brokenGuardTime: .5
 --- !u!114 &1375791425
 MonoBehaviour:
   m_ObjectHideFlags: 0

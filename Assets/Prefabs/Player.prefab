@@ -336,6 +336,7 @@ MonoBehaviour:
   m_punchMaxVel: 2000
   m_punchReturnVel: 50
   m_punchForce: 50
+  m_punchForceGuarded: 500
   m_brokenGuardTime: .5
 --- !u!114 &11400002
 MonoBehaviour:
